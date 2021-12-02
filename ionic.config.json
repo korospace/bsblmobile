@@ -1,0 +1,7 @@
+{
+  "name": "bsblmobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
