@@ -7,7 +7,8 @@
         </ion-card-header>
         <ion-item>
             <ion-label position="floating">Email</ion-label>
-            <ion-input type="email" name="email"></ion-input>
+            <ion-input type="email" name="email" v-on:click="checkAgain()"></ion-input>
+            <small style="color:red;">{{err}}</small>
         </ion-item>
         <ion-item>
             <ion-label position="floating">Password</ion-label>
@@ -36,31 +37,43 @@ export default defineComponent({
       router
     };
   },
+  data(){
+     return{
+      err : ""
+    }
+  },
   methods : {
-    async logIn(event: any) {
-      const loading = await loadingController
-        .create({
-          spinner: null,
-          message: 'Click the backdrop to dismiss early...',
-          translucent: true,
-          cssClass: 'custom-class custom-loading',
-          backdropDismiss: false
-        });
-
-      await loading.present();
-      console.log(event.target);
+    createSpinner: function () {
+      return loadingController
+      .create({
+        spinner: null,
+        message: 'Silahkan tunggu...',
+        translucent: true,
+        // cssClass: 'custom-class custom-loading',
+        backdropDismiss: false
+      });
+    },
+    logIn: async function(event: any) {
+      const loading = await this.createSpinner();
+    
       const formLogin = new FormData(event.target);
 
+      loading.present();
       axios.post(`${getApiURL}/login/nasabah`, formLogin)
       .then((response) => {
         TokenService.saveToken(response.data.token);
         console.log(response);
         this.router.push("/tabs/dashboard");
-      loading.dismiss();
+        loading.dismiss();
       })
       .catch((error) => {
+        this.err = error;
         console.log(error);
+        loading.dismiss();
       })
+    },
+    checkAgain: function () {
+      this.err = "";
     }
   },
 })

@@ -1,8 +1,16 @@
 /* Ionic Variables and Theming. For more info, please see:
 http://ionicframework.com/docs/theming/ */
 
+@font-face {
+  font-family: Quicksand;
+  src: url("../../public/assets/fonts/Quicksand-Medium.ttf"); 
+}
+
 /** Ionic CSS Variables **/
 :root {
+  /** fonts **/
+  --ion-font-family: 'Quicksand';
+
   /** primary **/
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;

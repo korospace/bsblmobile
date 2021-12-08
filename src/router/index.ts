@@ -1,40 +1,29 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router'
-import { TokenService } from '../services/token.service'
 import Home from '../views/Home.vue'
 import Tabs from '../views/Tabs.vue'
 import Login from '../views/Login/Login.vue'
 import Article from '../views/Main/Article.vue'
 import Dashboard from '../views/Main/Dashboard.vue'
 import Profile from '../views/Main/Profile.vue'
-
-const privateRoute = function(to: any, from: any, next: any) {
-  const isAuthenticated = TokenService.getToken() !== null;
-
-  if (to.name !== 'Login' && !isAuthenticated) {
-    next({ path: '/login' });
-  } else if(to.name == 'Login' && isAuthenticated) {
-    next({path: '/tabs/dashboard'} );
-  } else {
-    next();
-  }
-};
+import { checkAuth, privateRoute } from '@/services/auth.service';
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     redirect: '/home',
-    beforeEnter: privateRoute
+    beforeEnter: checkAuth
   },{
     path: '/tabs',
     redirect: '/tabs/dashboard',
-    beforeEnter: privateRoute
+    beforeEnter: checkAuth
   },
   {
     path: '/home',
     name: 'Home',
     component: Home,
-    beforeEnter: privateRoute
+    beforeEnter: checkAuth
+    
   },
   {
     path: '/login',
@@ -45,7 +34,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/tabs/',
     component: Tabs,
-    beforeEnter: privateRoute,
+    beforeEnter: checkAuth,
     children: [
       {
         path: '',
