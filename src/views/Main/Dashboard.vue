@@ -7,6 +7,9 @@
     </ion-header>
     
     <ion-content :fullscreen="true">
+      <ion-refresher slot="fixed" pull-factor="0.5" pull-min="100" pull-max="200" @ionRefresh="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
       <ion-header collapse="condense">
         <ion-toolbar>
           <ion-title size="large">Dashboard</ion-title>
@@ -32,8 +35,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { useRouter } from 'vue-router';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonLabel , IonItem} from '@ionic/vue';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonLabel , IonItem, IonRefresher, IonRefresherContent} from '@ionic/vue';
+import { chevronDownCircleOutline } from 'ionicons/icons';
 import { TokenService } from '../../services/token.service';
 
 export default defineComponent({
@@ -46,13 +49,17 @@ export default defineComponent({
         IonToolbar,
         IonLabel,
         IonList,
-        IonItem
+        IonItem,
+        IonRefresher, 
+        IonRefresherContent
     },
     setup() {
-      const router = useRouter();
-      return {
-        router
+      const doRefresh = (event: any) => {
+        // console.log('Begin async operation');
+        window.location.reload()
+        event.target.complete();
       };
+      return { chevronDownCircleOutline, doRefresh };
     },
     methods : {
       clickMe() {

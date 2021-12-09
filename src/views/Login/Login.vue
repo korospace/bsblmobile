@@ -7,12 +7,12 @@
         </ion-card-header>
         <ion-item>
             <ion-label position="floating">Email</ion-label>
-            <ion-input type="email" name="email" v-on:click="checkAgain()"></ion-input>
+            <ion-input type="email" name="email" v-on:click="checkAgain()" required></ion-input>
             <small style="color:red;">{{err}}</small>
         </ion-item>
         <ion-item>
             <ion-label position="floating">Password</ion-label>
-            <ion-input type="password" name="password"></ion-input>
+            <ion-input type="password" name="password" required></ion-input>
         </ion-item>
         <ion-button expand="block" fill="outline" type="submit">Login</ion-button>
       </ion-card>
@@ -23,9 +23,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useRouter } from 'vue-router';
-import { loadingController } from '@ionic/vue';
 import axios from 'axios';
-import { IonPage, IonButton, IonCard, IonCardTitle, IonLabel, IonInput, IonItem, IonCardHeader } from '@ionic/vue';
+import { IonPage, IonButton, IonCard, IonCardTitle, IonLabel, IonInput, IonItem, IonCardHeader, loadingController } from '@ionic/vue';
 import { TokenService, getApiURL } from '../../services/token.service';
 
 export default defineComponent({
@@ -46,7 +45,7 @@ export default defineComponent({
     createSpinner: function () {
       return loadingController
       .create({
-        spinner: null,
+        spinner: "crescent",
         message: 'Silahkan tunggu...',
         translucent: true,
         // cssClass: 'custom-class custom-loading',

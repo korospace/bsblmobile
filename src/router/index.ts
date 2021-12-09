@@ -42,15 +42,15 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: 'dashboard',
-        component: Dashboard
+        component: Dashboard,
       },
       {
         path: 'profile',
-        component: Profile
+        component: Profile,
       },
       {
         path: 'artikel',
-        component: Article
+        component: Article,
       }
     ]
   }

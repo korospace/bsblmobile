@@ -5,7 +5,6 @@
         <ion-title>Blank</ion-title>
       </ion-toolbar>
     </ion-header>
-    
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
@@ -28,6 +27,6 @@ export default defineComponent({
     IonPage,
     IonTitle,
     IonToolbar
-  }
+  },
 });
 </script>
