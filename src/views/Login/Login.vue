@@ -1,9 +1,12 @@
 <template>
   <ion-page>
     <form action="" v-on:submit.prevent="logIn($event)">
-      <ion-card>
+      <ion-card class="center">
         <ion-card-header>
-            <ion-card-title>Masuk ke Akun Bank Sampah</ion-card-title>
+            <center>
+              <img src="../../../public/assets/images/banksampah-logo.png" alt="" class="logo">
+              <h3>Selamat Datang</h3>
+            </center>
         </ion-card-header>
         <ion-item>
             <ion-label position="floating">Email</ion-label>
@@ -15,21 +18,27 @@
             <ion-input type="password" name="password" required></ion-input>
         </ion-item>
         <ion-button expand="block" fill="outline" type="submit">Login</ion-button>
+        <center>
+          <small class="signup">tydac punya akun? yhahaha... 
+            <br>
+            <a href="/signup">daftar sekarang</a></small>
+            <br><br>
+        </center>
       </ion-card>
     </form>
   </ion-page>
 </template>
 
 <script lang="ts">
+import axios from 'axios';
 import { defineComponent } from 'vue'
 import { useRouter } from 'vue-router';
-import axios from 'axios';
-import { IonPage, IonButton, IonCard, IonCardTitle, IonLabel, IonInput, IonItem, IonCardHeader, loadingController } from '@ionic/vue';
+import { IonPage, IonButton, IonCard, IonLabel, IonInput, IonItem, IonCardHeader, loadingController } from '@ionic/vue';
 import { TokenService, getApiURL } from '../../services/token.service';
 
 export default defineComponent({
   name: 'Login',
-  components: { IonPage, IonButton, IonCard, IonCardTitle, IonCardHeader, IonLabel, IonInput, IonItem },
+  components: { IonPage, IonButton, IonCard, IonCardHeader, IonLabel, IonInput, IonItem },
   setup() {
     const router = useRouter();
     return {
@@ -77,3 +86,27 @@ export default defineComponent({
   },
 })
 </script>
+<style>
+  body {
+    background: url('../../../public/assets/images/Login.jpg') no-repeat center center fixed !important;
+    background-size: cover !important;
+  }
+  ion-item {
+    margin-bottom: 5px;
+  }
+  .logo {
+    width: 100px;
+  }
+  .center {
+    max-width: 300px;
+    min-width: 250px;
+    margin: 0;
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    border-radius: 14px;
+  }
+</style>

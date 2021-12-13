@@ -63,7 +63,6 @@ export default defineComponent({
     },
     methods : {
       clickMe() {
-
         console.log(TokenService.getToken());
       }
     }

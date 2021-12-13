@@ -19,6 +19,7 @@ const checkAuth = function() {
         router.push('/login');
       } 
       else if(error.response.status == 500) {
+        TokenService.removeToken();
         router.push('/login');
       }
     })
