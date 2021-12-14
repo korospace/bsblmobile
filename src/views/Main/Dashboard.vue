@@ -5,37 +5,42 @@
         <ion-refresher-content></ion-refresher-content>
       </ion-refresher>
 
-      <div class="tab">
-        <div class="centers">
-          <button class="tablinks" v-on:click="mainSwitch(event, 'myReport')">Laporan Saya</button>
-          <button class="tablinks" v-on:click="mainSwitch(event, 'myMoney')">Uang Saya</button>
+      <div class="main-wrapper">
+        <div class="top-page centers">
+          Bank Sampah Budi Luhur
         </div>
-      </div>
-      
-      <div id="myReport" class="tabcontent">
-        <div class="centers">
-          <div class="infocard">
-            <img src="assets/images/Person-Logo.png" style="width:28px;" alt="">
-            <br>
-            {{userid}}
-            <table class="detailcard">
-              <tr>
-                <th style="padding-right: 24px;">Username</th>
-                <th>Tanggal Bergabung</th>
-              </tr>
-              <tr>
-                <td>{{name}}</td>
-                <td>{{createdDay}} {{createdMonth}} {{createdYear}}</td>
-              </tr>
-            </table>
-            <img src="assets/images/banksampah-logo.png" alt="" class="logo">
+        <div class="tab">
+          <div class="centers">
+            <button class="tablinks" v-on:click="mainSwitch(event, 'myReport')">Laporan Saya</button>
+            <button class="tablinks" v-on:click="mainSwitch(event, 'myMoney')">Uang Saya</button>
           </div>
         </div>
-      </div>
+        
+        <div id="myReport" class="tabcontent">
+          <div class="centers">
+            <div class="infocard">
+              <img src="assets/images/Person-Logo.png" style="width:28px;" alt="">
+              <br>
+              {{userid}}
+              <table class="detailcard">
+                <tr>
+                  <th style="padding-right: 24px;">Username</th>
+                  <th>Tanggal Bergabung</th>
+                </tr>
+                <tr>
+                  <td>{{name}}</td>
+                  <td>{{createdDay}} {{createdMonth}} {{createdYear}}</td>
+                </tr>
+              </table>
+              <img src="assets/images/banksampah-logo.png" alt="" class="logo">
+            </div>
+          </div>
+        </div>
 
-      <div id="myMoney" class="tabcontent">
-        <h3>Duid Ngab</h3>
-        <p>E for Error</p> 
+        <div id="myMoney" class="tabcontent">
+          <h3>Duid Ngab</h3>
+          <p>E for Error</p> 
+        </div>
       </div>
     </ion-content>
   </ion-page>
@@ -130,6 +135,9 @@ export default defineComponent({
 });
 </script>
 <style>
+  .main-wrapper {
+    color: white !important;
+  }
   /* Style the tab */
   .tab {
     overflow: hidden;
@@ -187,8 +195,11 @@ export default defineComponent({
     margin-top: 18px;
     font-size: 14px;
   }
-  .logo {
+  .logo, 
+  .top-logo {
     width: 44px;
-    float: right;
+  }
+  .top-page {
+    margin: 20px 0 ;
   }
 </style>
