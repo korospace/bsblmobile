@@ -4,7 +4,7 @@
       <ion-card class="center">
         <ion-card-header>
             <center>
-              <img src="../../../public/assets/images/banksampah-logo.png" alt="" class="logo">
+              <img src="assets/images/banksampah-logo.png" alt="" class="loginLogo">
               <h3>Selamat Datang</h3>
             </center>
         </ion-card-header>
@@ -94,7 +94,7 @@ export default defineComponent({
   ion-item {
     margin-bottom: 5px;
   }
-  .logo {
+  .loginLogo {
     width: 100px;
   }
   .center {

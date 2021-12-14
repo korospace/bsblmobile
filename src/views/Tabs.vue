@@ -4,12 +4,12 @@
       <ion-router-outlet></ion-router-outlet>
       <ion-tab-bar slot="bottom">
         <ion-tab-button tab="tab1" href="/tabs/dashboard">
-          <font-awesome-icon :icon="faChartLine" size="2x"/>
+          <font-awesome-icon :icon="faHouseUser" size="2x"/>
           <ion-label>Dashboard</ion-label>
         </ion-tab-button>
           
         <ion-tab-button tab="tab2" href="/tabs/artikel">
-          <font-awesome-icon :icon="faNewspaper" size="2x"/>
+          <font-awesome-icon :icon="faPencilAlt" size="2x"/>
           <ion-label>Artikel</ion-label>
         </ion-tab-button>
         
@@ -26,7 +26,7 @@
 import { defineComponent } from 'vue';
 import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonPage, IonRouterOutlet } from '@ionic/vue';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faUserTie, faNewspaper, faChartLine } from '@fortawesome/free-solid-svg-icons'
+import { faUserTie, faPencilAlt, faHouseUser } from '@fortawesome/free-solid-svg-icons'
 
 export default defineComponent({
   name: 'Tabs',
@@ -34,14 +34,12 @@ export default defineComponent({
   setup() {
     return {
       faUserTie,
-      faNewspaper,
-      faChartLine
+      faPencilAlt,
+      faHouseUser
     }
   },
 })
 </script>
 <style scoped>
-    .svg-inline--fa {
-        width: 48px !important;
-    }
+
 </style>

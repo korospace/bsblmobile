@@ -11,7 +11,7 @@ import { checkAuth, privateRoute } from '@/services/auth.service';
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect: '/home',
+    redirect: '/tabs',
     beforeEnter: checkAuth
   },{
     path: '/tabs',
