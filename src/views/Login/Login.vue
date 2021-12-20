@@ -18,9 +18,8 @@
             <ion-input type="password" name="password" required></ion-input>
         </ion-item>
         <ion-button expand="block" fill="outline" type="submit">Login</ion-button>
-        <button class="bg-red-700">Test</button>
         <center>
-          <small class="signup bg-red-900">tydac punya akun? yhahaha... 
+          <small class="signup">tidak memiliki akun?
             <br>
             <a href="/signup">daftar sekarang</a></small>
             <br><br>
@@ -87,8 +86,8 @@ export default defineComponent({
   },
 })
 </script>
-<style>
-  body {
+<style scoped>
+  .ion-page {
     background: url('../../../public/assets/images/Login.jpg') no-repeat center center fixed !important;
     background-size: cover !important;
   }

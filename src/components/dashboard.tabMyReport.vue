@@ -2,20 +2,19 @@
   <div id="myReport" class="tabcontent">
     <div class="centers">
         <div class="infocard">
-        <img :src="'./assets/images/Person-Logo.png'" style="width:28px;" alt="">
-        <br>
-        {{userid}}
-        <table class="detailcard">
-            <tr>
-            <th style="padding-right: 24px;">Username</th>
-            <th>Tanggal Bergabung</th>
-            </tr>
-            <tr>
-            <td>{{name}}</td>
-            <td>{{createdDay}} {{createdMonth}} {{createdYear}}</td>
-            </tr>
-        </table>
-        <img :src="'assets/images/banksampah-logo.png'" alt="" class="logo">
+          <img :src="'./assets/images/Person-Logo.png'" class="w-8" alt="">
+          {{userid}}
+          <table class="detailcard">
+              <tr>
+              <th style="padding-right: 24px;">Username</th>
+              <th>Tanggal Bergabung</th>
+              </tr>
+              <tr>
+              <td>{{name}}</td>
+              <td>{{createdDay}} {{createdMonth}} {{createdYear}}</td>
+              </tr>
+          </table>
+          <img :src="'assets/images/banksampah-logo.png'" alt="" class="logo">
         </div>
     </div>
   </div>
@@ -92,7 +91,6 @@ export default defineComponent({
   .tabcontent {
     padding: 6px 12px;
   }
-
   /* Center Div */
   .centers {
     display: flex;
@@ -109,8 +107,6 @@ export default defineComponent({
     border-radius: 10px;
   }
   .detailcard {
-    /* Doesn't Work.. Idk why
-    border-spacing: 14px; */
     margin-top: 18px;
     font-size: 14px;
   }
