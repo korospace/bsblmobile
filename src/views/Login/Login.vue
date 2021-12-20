@@ -20,7 +20,7 @@
         <ion-button expand="block" fill="outline" type="submit">Login</ion-button>
         <button class="bg-red-700">Test</button>
         <center>
-          <small class="signup">tydac punya akun? yhahaha... 
+          <small class="signup bg-red-900">tydac punya akun? yhahaha... 
             <br>
             <a href="/signup">daftar sekarang</a></small>
             <br><br>
