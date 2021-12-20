@@ -39,8 +39,7 @@
 
 <script lang="ts">
 import { getApiURL, TokenService } from '@/services/token.service';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonLabel, IonItem, IonRefresher, IonRefresherContent  } from '@ionic/vue';
-import { loadingController } from '@ionic/vue';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonLabel, IonItem, IonRefresher, IonRefresherContent, loadingController  } from '@ionic/vue';
 import { chevronDownCircleOutline } from 'ionicons/icons';
 import axios from 'axios';
 import { defineComponent } from 'vue';

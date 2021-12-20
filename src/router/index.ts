@@ -6,6 +6,8 @@ import Login from '../views/Login/Login.vue'
 import Article from '../views/Main/Article.vue'
 import Dashboard from '../views/Main/Dashboard.vue'
 import Profile from '../views/Main/Profile.vue'
+import tabMyReport from '../components/dashboard.tabMyReport.vue'
+import tabMyMoney from '../components/dashboard.tabMyMoney.vue'
 import { checkAuth, privateRoute } from '@/services/auth.service';
 
 const routes: Array<RouteRecordRaw> = [
@@ -30,6 +32,14 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Login',
     component: Login,
     beforeEnter: privateRoute
+  },
+  {
+    path: '/tabmyreport',
+    component: tabMyReport
+  },
+  {
+    path: '/tabmymoney',
+    component: tabMyMoney
   },
   {
     path: '/tabs/',

@@ -20,6 +20,11 @@ import '@ionic/vue/css/text-transformation.css';
 import '@ionic/vue/css/flex-utils.css';
 import '@ionic/vue/css/display.css';
 
+/* Tailwind 3.0.0 */
+// import 'tailwindcss/base.css';
+// import 'tailwindcss/components.css';
+// import 'tailwindcss/utilities.css';
+
 /* Theme variables */
 import './theme/variables.css';
 

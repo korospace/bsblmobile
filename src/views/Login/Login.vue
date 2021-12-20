@@ -18,6 +18,7 @@
             <ion-input type="password" name="password" required></ion-input>
         </ion-item>
         <ion-button expand="block" fill="outline" type="submit">Login</ion-button>
+        <button class="bg-red-700">Test</button>
         <center>
           <small class="signup">tydac punya akun? yhahaha... 
             <br>
