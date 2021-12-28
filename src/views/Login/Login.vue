@@ -70,8 +70,8 @@ export default defineComponent({
       axios.post(`${getApiURL}/login/nasabah`, formLogin)
       .then((response) => {
         TokenService.saveToken(response.data.token);
-        console.log(response);
         this.router.push("/tabs/dashboard");
+        window.location.reload();
         loading.dismiss();
       })
       .catch((error) => {

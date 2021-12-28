@@ -1,8 +1,8 @@
 <template>
-  <div id="myReport" class="tabcontent">
+  <div id="myReport" class="tabcontent text-white">
     <div class="centers">
         <div class="infocard">
-          <img :src="'./assets/images/Person-Logo.png'" class="w-8" alt="">
+          <img :src="'./assets/images/Person-Logo.png'" class="w-8" alt=""> 
           {{userid}}
           <table class="detailcard">
               <tr>

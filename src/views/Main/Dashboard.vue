@@ -1,13 +1,13 @@
 <template>
   <ion-page>    
     <ion-content :fullscreen="true">
-      <ion-refresher slot="fixed" pull-factor="0.5" pull-min="100" pull-max="200" @ionRefresh="doRefresh($event)">
+      <ion-refresher slot="fixed" pull-factor="0.5" pull-min="100" pull-max="200" @ionRefresh="doRefresh($event)" class="-z-50">
         <ion-refresher-content></ion-refresher-content>
       </ion-refresher>
-      <div class="top-page centers">
+      <div class="top-page centers rounded-b-3xl pt-4 pb-8 bg-green-400 text-white">
         Bank Sampah Budi Luhur
       </div>
-      <div class="tab">
+      <div class="tab text-white">
         <div class="centers">
           <button class="button" @click="mainSwitch('myReport')" v-on:click="mainSwitch('myReport')">Laporan Saya</button>
           <button class="button" @click="mainSwitch('myMoney')" v-on:click="mainSwitch('myMoney')">Uang Saya</button>
@@ -38,7 +38,7 @@ export default defineComponent({
   },
   setup() {
     const doRefresh = (event: any) => {
-      window.location.reload()
+      window.location.reload();
       event.target.complete();
     };
     return { chevronDownCircleOutline, doRefresh };
@@ -79,7 +79,8 @@ export default defineComponent({
 });
 </script>
 
-<style> /* Style the tab */
+<style> 
+  /* Style the tab */
   .tab {
     overflow: hidden;
     background-color: #3D5D1E;

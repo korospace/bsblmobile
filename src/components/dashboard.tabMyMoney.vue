@@ -1,10 +1,25 @@
 <template>
-<transition name="fade">
-    <div id="myMoney" class="tabcontent">
-        <h3 style="color:white;">Duid Ngab</h3>
-        <p>E for Error</p> 
+    <div class="flex justify-center">
+        <div id="myMoney" class="tabcontent w-1/2 h-48 my-6 bg-red-100">
+            
+        </div>
     </div>
-</transition>
+    <div class="flex justify-center">
+        <div class="grid grid-cols-2 gap-4 place-content-center h-48">
+            <div class="flex justify-center bg-red-500">
+                01
+            </div>
+            <div class="flex justify-center bg-green-500">
+                02
+            </div>
+            <div class="flex justify-center bg-blue-500">
+                03
+            </div>
+            <div class="flex justify-center bg-yellow-500">
+                04
+            </div>
+        </div>
+    </div>
 </template>
 
 <script lang="ts">
