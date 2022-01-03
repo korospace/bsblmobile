@@ -2,7 +2,8 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router'
 import Home from '../views/Home.vue'
 import Tabs from '../views/Tabs.vue'
-import Login from '../views/Login/Login.vue'
+import Login from '../views/Login.vue'
+import Register from '../views/Register.vue'
 import Article from '../views/Main/Article.vue'
 import Dashboard from '../views/Main/Dashboard.vue'
 import Profile from '../views/Main/Profile.vue'
@@ -31,6 +32,12 @@ const routes: Array<RouteRecordRaw> = [
     path: '/login',
     name: 'Login',
     component: Login,
+    beforeEnter: privateRoute
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register,
     beforeEnter: privateRoute
   },
   {

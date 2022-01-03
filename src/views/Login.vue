@@ -1,28 +1,26 @@
 <template>
   <ion-page>
-    <form action="" v-on:submit.prevent="logIn($event)">
-      <ion-card class="center">
+    <form class="" v-on:submit.prevent="logIn($event)">
+      <ion-card class="center w-11/12">
         <ion-card-header>
             <center>
-              <img src="assets/images/banksampah-logo.png" alt="" class="loginLogo">
+              <img src="../assets/images/banksampah-logo.png" alt="" class="loginLogo w-28">
               <h3>Selamat Datang</h3>
             </center>
         </ion-card-header>
-        <ion-item>
+        <ion-item class="mt-2">
             <ion-label position="floating">Email</ion-label>
             <ion-input type="email" name="email" v-on:click="checkAgain()" required></ion-input>
             <small style="color:red;">{{err}}</small>
         </ion-item>
-        <ion-item>
+        <ion-item class="mt-4">
             <ion-label position="floating">Password</ion-label>
             <ion-input type="password" name="password" required></ion-input>
         </ion-item>
-        <ion-button expand="block" fill="outline" type="submit">Login</ion-button>
-        <center>
-          <small class="signup">tidak memiliki akun?
-            <br>
-            <a href="/signup">daftar sekarang</a></small>
-            <br><br>
+        <ion-button class="mt-8" expand="block" fill="outline" type="submit">Login</ion-button>
+        <center class="mt-8 pb-4">
+          <p class="text-md">tidak memiliki akun?</p>
+          <router-link class="text-xs" to="/register">daftar sekarang</router-link>
         </center>
       </ion-card>
     </form>
@@ -34,7 +32,7 @@ import axios from 'axios';
 import { defineComponent } from 'vue'
 import { useRouter } from 'vue-router';
 import { IonPage, IonButton, IonCard, IonLabel, IonInput, IonItem, IonCardHeader, loadingController } from '@ionic/vue';
-import { TokenService, getApiURL } from '../../services/token.service';
+import { TokenService, getApiURL } from '@/services/token.service';
 
 export default defineComponent({
   name: 'Login',
@@ -57,7 +55,7 @@ export default defineComponent({
         spinner: "crescent",
         message: 'Silahkan tunggu...',
         translucent: true,
-        // cssClass: 'custom-class custom-loading',
+        // cssClass: 'rounded-xl',
         backdropDismiss: false
       });
     },
@@ -88,18 +86,10 @@ export default defineComponent({
 </script>
 <style scoped>
   .ion-page {
-    background: url('../../../public/assets/images/Login.jpg') no-repeat center center fixed !important;
+    background: url('../assets/images/Login.jpg') no-repeat center center fixed !important;
     background-size: cover !important;
   }
-  ion-item {
-    margin-bottom: 5px;
-  }
-  .loginLogo {
-    width: 100px;
-  }
   .center {
-    max-width: 300px;
-    min-width: 250px;
     margin: 0;
     padding: 10px;
     position: absolute;

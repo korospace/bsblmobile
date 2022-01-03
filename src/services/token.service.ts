@@ -1,6 +1,5 @@
 const TOKEN_KEY = "token";
-
-const getApiURL = "https://t-gadgetcors.herokuapp.com/https://bsblbackend.herokuapp.com";
+const getApiURL = "https://t-gadgetcors.herokuapp.com/https://bsbl.herokuapp.com";
 
 const TokenService = {
     getToken() {

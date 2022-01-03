@@ -1,6 +1,8 @@
 <template>
   <ion-app>
-    <ion-router-outlet />
+    <transition name="fade" mode="out-in">
+      <ion-router-outlet />
+    </transition>
   </ion-app>
 </template>
 
@@ -17,3 +19,17 @@ export default defineComponent({
   }
 });
 </script>
+
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition-duration: 0.3s;
+  transition-property: opacity;
+  transition-timing-function: ease;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0
+}
+</style>

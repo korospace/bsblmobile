@@ -2,7 +2,7 @@
   <div id="myReport" class="tabcontent text-white">
     <div class="centers">
         <div class="infocard">
-          <img :src="'./assets/images/Person-Logo.png'" class="w-8" alt=""> 
+          <img :src="'../assets/images/Person-Logo.png'" class="w-8" alt=""> 
           {{userid}}
           <table class="detailcard">
               <tr>
@@ -14,7 +14,7 @@
               <td>{{createdDay}} {{createdMonth}} {{createdYear}}</td>
               </tr>
           </table>
-          <img :src="'assets/images/banksampah-logo.png'" alt="" class="logo">
+          <img :src="'../assets/images/banksampah-logo.png'" alt="" class="logo">
         </div>
     </div>
   </div>
@@ -102,7 +102,7 @@ export default defineComponent({
     width: 95%;
     height: 180px;
     padding: 18px 28px;
-    background: url('../../public/assets/images/Card Member.jpg') no-repeat center center fixed !important;
+    background: url('../assets/images/Card Member.jpg') no-repeat center center fixed !important;
     background-size: cover !important;
     border-radius: 10px;
   }
