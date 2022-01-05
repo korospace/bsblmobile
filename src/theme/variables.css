@@ -10,7 +10,7 @@ http://ionicframework.com/docs/theming/ */
 
 @font-face {
   font-family: Quicksand;
-  src: url("../../public/assets/fonts/Quicksand-Medium.ttf"); 
+  src: url("../assets/fonts/Quicksand-Medium.ttf"); 
 }
 
 /** Ionic CSS Variables **/

@@ -1,45 +1,52 @@
 import router from "@/router";
 import axios from "axios";
 import { getApiURL, TokenService } from "./token.service";
+import { alertController  } from '@ionic/vue';
 
 const checkAuth = function() {
-    const TOKEN           = TokenService.getToken();
+    const TOKEN = TokenService.getToken();
+
     axios.get(`${getApiURL}/nasabah/sessioncheck`,{
       headers: {
         token: TOKEN!
       }
     })
-    .then(response => {
+    .then(async (response) => {
       console.log(response);
+      const alert = await alertController
+      .create({
+        cssClass: 'my-custom-class',
+        header: 'Alert',
+        subHeader: 'Subtitle',
+        message: 'This is an alert message.',
+        buttons: ['OK'],
+      });
+
+      await alert.present();
     })
     .catch(error => {
       if(error.response.status == 401) {
-        console.log('lho kok iso');
         TokenService.removeToken();
         router.push('/login');
       } 
       else if(error.response.status == 500) {
         TokenService.removeToken();
-        router.push('/login');
       }
     })
 }
 
 const privateRoute = function(to: any, from: any, next: any) {
     const isAuthenticated = TokenService.getToken() !== null;
-    
-    // if (!['Login','Register'].includes(to.name) && !isAuthenticated) {
-    //     next({ path: '/login' });
-    // } 
-    // else if(to.name == 'Login' && isAuthenticated) {
-    //     next({path: '/tabs/dashboard'} );
-    // } 
-    // else if(to.name == 'Register' && isAuthenticated) {
-    //     next({path: '/tabs/dashboard'} );
-    // }
-    // else {
-    // }
-    next();
+
+    if (!['Login','Register'].includes(to.name) && !isAuthenticated) {
+        next({ path: '/login' });
+    } 
+    else if(['Login','Register'].includes(to.name) && isAuthenticated) {
+        next({path: '/tabs/dashboard'} );
+    } 
+    else {
+        next();
+    }
 };
 
 export {privateRoute, checkAuth}
