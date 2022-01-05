@@ -78,6 +78,9 @@ export default defineComponent({
         loading.dismiss();
       })
     },
+    goToRegister: function () {
+      this.router.push("/register");
+    },
     checkAgain: function () {
       this.err = "";
     }

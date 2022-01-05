@@ -16,7 +16,8 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     redirect: '/tabs',
     beforeEnter: checkAuth
-  },{
+  },
+  {
     path: '/tabs',
     redirect: '/tabs/dashboard',
     beforeEnter: checkAuth
