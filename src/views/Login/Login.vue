@@ -19,10 +19,11 @@
         </ion-item>
         <ion-button expand="block" fill="outline" type="submit">Login</ion-button>
         <center>
-          <small class="signup">tidak memiliki akun?
-            <br>
-            <a href="/signup">daftar sekarang</a></small>
-            <br><br>
+            <small class="signup">
+              <p>tidak memiliki akun?</p>
+              <!-- <router-link to="/register" @click="goToRegister">daftar akun</router-link> -->
+              <ion-button routerLink="/register">Click Me</ion-button>
+            </small>
         </center>
       </ion-card>
     </form>
@@ -79,6 +80,9 @@ export default defineComponent({
         console.log(error);
         loading.dismiss();
       })
+    },
+    goToRegister: function () {
+      this.router.push("/register");
     },
     checkAgain: function () {
       this.err = "";

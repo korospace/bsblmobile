@@ -3,6 +3,7 @@ import { RouteRecordRaw } from 'vue-router'
 import Home from '../views/Home.vue'
 import Tabs from '../views/Tabs.vue'
 import Login from '../views/Login/Login.vue'
+import Register from '../views/Register/Register.vue'
 import Article from '../views/Main/Article.vue'
 import Dashboard from '../views/Main/Dashboard.vue'
 import Profile from '../views/Main/Profile.vue'
@@ -15,7 +16,8 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     redirect: '/tabs',
     beforeEnter: checkAuth
-  },{
+  },
+  {
     path: '/tabs',
     redirect: '/tabs/dashboard',
     beforeEnter: checkAuth
@@ -31,6 +33,12 @@ const routes: Array<RouteRecordRaw> = [
     path: '/login',
     name: 'Login',
     component: Login,
+    beforeEnter: privateRoute
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register,
     beforeEnter: privateRoute
   },
   {
