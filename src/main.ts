@@ -1,8 +1,7 @@
 import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router';
-
-import { IonicVue } from '@ionic/vue';
+import App           from './App.vue'
+import router        from './router';
+import { IonicVue }  from '@ionic/vue';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/vue/css/core.css';
@@ -20,19 +19,20 @@ import '@ionic/vue/css/text-transformation.css';
 import '@ionic/vue/css/flex-utils.css';
 import '@ionic/vue/css/display.css';
 
-/* Tailwind 3.0.0 */
-// import 'tailwindcss/base.css';
-// import 'tailwindcss/components.css';
-// import 'tailwindcss/utilities.css';
-
 /* Theme variables */
 import './theme/variables.css';
 
+/* Global component */
+import Alert from "@/components/alert.vue";
+
 import store from './store'
 
-const app = createApp(App).use(store)
+const app = createApp(App)
+  .use(store)
   .use(IonicVue)
   .use(router);
+
+app.component('x-alert',Alert);
 
 router.isReady().then(() => {
   app.mount('#app');
