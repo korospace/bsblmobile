@@ -60,7 +60,7 @@ export default defineComponent({
       });
     },
     logIn: async function(event: any) {
-      const loading = await this.createSpinner();
+      const loading   = await this.createSpinner();
     
       const formLogin = new FormData(event.target);
 
