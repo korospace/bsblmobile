@@ -9,8 +9,8 @@
             </center>
         </ion-card-header>
         <ion-item class="mt-2">
-            <ion-label position="floating">Email</ion-label>
-            <ion-input type="email" name="email" v-on:click="checkAgain()" required></ion-input>
+            <ion-label position="floating">Username or Email</ion-label>
+            <ion-input type="text" name="username_email" v-on:click="checkAgain()" required></ion-input>
             <small style="color:red;">{{err}}</small>
         </ion-item>
         <ion-item class="mt-4">
@@ -21,6 +21,8 @@
         <center class="mt-8 pb-4">
           <p class="text-md">tidak memiliki akun?</p>
           <router-link class="text-xs" to="/register">daftar sekarang</router-link>
+          <br>
+          <router-link class="text-xs" to="/otp">otp</router-link>
         </center>
       </ion-card>
     </form>
@@ -53,10 +55,10 @@ export default defineComponent({
       return loadingController
       .create({
         spinner: "crescent",
-        message: 'Silahkan tunggu...',
-        translucent: true,
-        // cssClass: 'rounded-xl',
-        backdropDismiss: false
+          message: '',
+          translucent: true,
+          cssClass: 'rounded-xl',
+          backdropDismiss: false
       });
     },
     logIn: async function(event: any) {

@@ -4,12 +4,13 @@ import Home from '../views/Home.vue'
 import Tabs from '../views/Tabs.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
+import Otp from '../views/Otp.vue'
 import Article from '../views/Main/Article.vue'
 import Dashboard from '../views/Main/Dashboard.vue'
 import Profile from '../views/Main/Profile.vue'
 import tabMyReport from '../components/dashboard.tabMyReport.vue'
 import tabMyMoney from '../components/dashboard.tabMyMoney.vue'
-import { checkAuth, privateRoute } from '@/services/auth.service';
+import { privateRoute,checkAuth} from '@/services/auth.service';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -39,6 +40,12 @@ const routes: Array<RouteRecordRaw> = [
     path: '/register',
     name: 'Register',
     component: Register,
+    beforeEnter: privateRoute
+  },
+  {
+    path: '/otp',
+    name: 'Otp',
+    component: Otp,
     beforeEnter: privateRoute
   },
   {

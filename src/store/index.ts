@@ -7,12 +7,16 @@ export default createStore({
       dataAlert: {
         show   : false,
         type   : '',
-        message: ''
+        message: '',
+      },
+      dataLogin: {
+        username_or_email: '',
+        password: ''
       }
     }
   },
   mutations: {
-    setDataAlert: function(state, value) {
+    setDataAlert: function(state: any, value) {
       state.dataAlert.show    = value.show;
       state.dataAlert.type    = value.type;
       state.dataAlert.message = value.message;

@@ -124,9 +124,9 @@
                 <div class="relative">
                     <div
                       class="outline relative rounded border-2 focus-within:border-lime-500 mt-10"
-                      :class="{'border-red-500':errors.nik||nikIsExist}">
+                      :class="{'border-red-500':errors.nik||nikIsExist||nikIsValid == false}">
                         <Field
-                        type="text" name="nik" placeholder="NIK" autocomplete="off" 
+                        type="text" name="nik" placeholder="NIK" autocomplete="off" v-model="nikVal"
                         @keyup="clearErrorExist" 
                         class="block p-4 w-full text-lg appearance-none focus:outline-none bg-white text-lime-500" />
                         <label 
@@ -140,6 +140,9 @@
                     </small>
                     <small v-if="nikIsExist" class="absolute mt-1 tracking-wide text-red-500">
                         NIK sudah dipakai
+                    </small>
+                    <small v-if="nikIsValid == false" class="absolute mt-1 tracking-wide text-red-500">
+                        NIK tidak valid
                     </small>
                 </div>
                 
@@ -273,7 +276,7 @@
                         </svg>
                         <input
                           type="text" placeholder="masukan nama wilayah" v-model="searchKey"
-                          @keyup="searchKodePos"
+                          @input="searchKodePos"
                           class="w-full py-1.5 pl-7 pr-1.5 text-xs text-gray-700 tracking-wide focus:outline-none">
                     </div>
 
@@ -311,9 +314,10 @@ import { IonPage, IonContent, loadingController } from '@ionic/vue';
 import axios                         from 'axios';
 import { computed, defineComponent } from 'vue'
 import { Field, Form }               from "vee-validate";
+import { registerSchema }            from "@/mixins/validationSchemas.js"
+import { nikParser }                 from 'nik-parser'
 import { FontAwesomeIcon }           from '@fortawesome/vue-fontawesome'
 import { faSearch }                  from '@fortawesome/free-solid-svg-icons'
-import * as Yup                      from 'yup';
 import { ref,reactive }              from "vue";
 import { useStore }                  from "vuex"
 
@@ -334,6 +338,7 @@ export default defineComponent({
         const allKodePos    = reactive({
             list: []
         });
+        const nikVal       = ref("");
         const kodePosVal   = ref("");
         const kelurahanVal = ref("");
         const kecamatanVal = ref("");
@@ -343,6 +348,7 @@ export default defineComponent({
         const usernameIsExist = ref(false);
         const notelplIsExist  = ref(false);
         const nikIsExist      = ref(false);
+        const nikIsValid      = ref(true);
 
         const isTglLahirEmpty = computed(() => {
             return tglLahir.value !== "";
@@ -364,53 +370,9 @@ export default defineComponent({
             }
             else{
                 nikIsExist.value = false;
+                nikIsValid.value = true;
             }
         }
-
-        // -- form validation rules --
-        const registerSchema = Yup.object().shape({
-            nama_lengkap: Yup.string()
-                .required(' ')
-                .max(40, 'maksimal 40 karakter'),
-            username: Yup.string()
-                .required(' ')
-                .min(8, 'minimal 8 karakter')
-                .max(20, 'maksimal 20 karakter'),
-            email: Yup.string()
-                .required(' ')
-                .email('email tidak valid'),
-            password: Yup.string()
-                .required(' ')
-                .min(8, 'minimal 8 karakter')
-                .max(20, 'maksimal 20 karakter'),
-            notelp: Yup.string()
-                .required(' ')
-                .max(14, 'maksimal 14 character')
-                .matches(/^\d+$/, 'nomor tidak valid'),
-            nik: Yup.string()
-                .required(' ')
-                .max(16, 'masukan nik yang valid')
-                .min(16, 'masukan nik yang valid')
-                .matches(/^\d+$/, 'nik tidak valid'),
-            tgl_lahir: Yup.string()
-                .required(' '),
-            kelamin: Yup.string()
-                .required(' '),
-            rt: Yup.string()
-                .required(' ')
-                .max(2, 'maksimal 2 character')
-                .min(2, 'minimal 2 character')
-                .matches(/^\d+$/, 'hanya boleh angka'),
-            rw: Yup.string()
-                .required(' ')
-                .max(2, 'maksimal 2 character')
-                .min(2, 'minimal 2 character')
-                .matches(/^\d+$/, 'hanya boleh angka'),
-            alamat: Yup.string()
-                .required(' ')
-                .max(255, 'maksimal 255 karakter'),
-            kodepos: Yup.string().required(' ')
-        });
 
         // -- search kodepos --
         const searchKodePos = () => {
@@ -462,6 +424,12 @@ export default defineComponent({
             usernameIsExist.value = false;
             notelplIsExist.value  = false;
             nikIsExist.value      = false;
+            nikIsValid.value      = true;
+            nikIsValid.value      = nikParser(nikVal.value).isValid();
+
+            if (!nikIsValid.value) {
+                return 0;
+            }
             
             for ( const key in event ) {
                 if (key !== 'tgl_lahir') {
@@ -526,6 +494,8 @@ export default defineComponent({
             loadingSearch,
             allKodePos,
             inputKodePos,
+            nikVal,
+            nikIsValid,
             kodePosVal,
             kelurahanVal,
             kecamatanVal,

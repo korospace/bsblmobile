@@ -22,7 +22,7 @@ import '@ionic/vue/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
-/* Global component */
+/* Global component */ 
 import Alert from "@/components/alert.vue";
 
 import store from './store'

@@ -36,17 +36,17 @@ const checkAuth = function() {
 }
 
 const privateRoute = function(to: any, from: any, next: any) {
-    const isAuthenticated = TokenService.getToken() !== null;
+  const isAuthenticated = TokenService.getToken() !== null;
 
-    if (!['Login','Register'].includes(to.name) && !isAuthenticated) {
-        next({ path: '/login' });
-    } 
-    else if(['Login','Register'].includes(to.name) && isAuthenticated) {
-        next({path: '/tabs/dashboard'} );
-    } 
-    else {
-        next();
-    }
+  if (!['Login','Register','Otp'].includes(to.name) && !isAuthenticated) {
+      next({ path: '/login' });
+  } 
+  else if(['Login','Register','Otp'].includes(to.name) && isAuthenticated) {
+      next({path: '/tabs/dashboard'} );
+  } 
+  else {
+      next();
+  }
 };
 
-export {privateRoute, checkAuth}
+export { checkAuth,privateRoute };
