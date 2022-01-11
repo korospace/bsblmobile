@@ -10,7 +10,7 @@ module.exports = {
       md: '768px',
       lg: '1024px',
       xl: '1280px',
-      'sm320': '320px',
+      'sm360': '360px',
       '2xl': '1536px',
     },
     colors: {

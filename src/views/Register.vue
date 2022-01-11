@@ -2,7 +2,7 @@
     <ion-page>
         <ion-content>
             <h1
-              class="font-black text-center uppercase mt-12"
+              class="font-black text-center uppercase mt-12 text-3xl"
               style="background: linear-gradient(to right, #BFD765, #81A257);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
                 register
             </h1>
@@ -263,9 +263,10 @@
                 </div>
 
                 <!-- search kodepos -->
-                <div
-                  class="mt-4 p-2 rounded border-2 relative overflow-y-visible">
-                    <div class="p-0.5 rounded border relative flex items-center">
+                <form
+                  class="mt-4 p-2 rounded border-2 relative overflow-y-visible flex"
+                  @submit.prevent="searchKodePos">
+                    <div class="p-0.5 rounded border relative flex items-center flex-1">
                         <font-awesome-icon
                           :icon="faSearch" size="1x" v-if="loadingSearch == false"
                           class="absolute text-gray-400 left-1.5"/>
@@ -280,11 +281,15 @@
                           class="w-full py-1.5 pl-7 pr-1.5 text-xs text-gray-700 tracking-wide focus:outline-none">
                     </div>
 
+                    <button class="bg-gray-400 active:bg-gray-500 px-2 rounded-sm ml-2 text-gray-100 tracking-wide">
+                        cari
+                    </button>
+
                     <!-- list kodepos -->
                     <div v-if="searchKey !== ''">
                         <div
                           v-if="allKodePos.list.length != 0"
-                          class="max-h-28 mt-1 border rounded overflow-auto bg-white absolute left-2 right-2">
+                          class="max-h-28 mt-10 border rounded overflow-auto bg-white absolute left-2 right-2">
                             <div
                               v-for="(data,index) in allKodePos.list" :key="index"
                               @click="inputKodePos(data)"
@@ -295,7 +300,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
 
                 <button class="w-full bg-lime-500 active:bg-lime-600 text-white mt-10 py-3 rounded">
                     DAFTAR
@@ -319,6 +324,7 @@ import { nikParser }                 from 'nik-parser'
 import { FontAwesomeIcon }           from '@fortawesome/vue-fontawesome'
 import { faSearch }                  from '@fortawesome/free-solid-svg-icons'
 import { ref,reactive }              from "vue";
+import { useRouter }                 from 'vue-router';
 import { useStore }                  from "vuex"
 
 export default defineComponent({
@@ -330,6 +336,7 @@ export default defineComponent({
         Form,
     },
     setup(){
+        const router        = useRouter();
         const store         = useStore();
         const tglLahir      = ref("");
         const kelamin       = ref("");
@@ -447,11 +454,17 @@ export default defineComponent({
               .post(`${store.state.APIURL}/register/nasabah`, formRegister)
               .then((response) => {
                 loading.dismiss();
+
                 store.commit('setDataAlert',{show:true,type:'success',message:`<b>berhasil!</b> cek email anda`});
+                store.commit('setDataLogin',{username_or_email:formRegister.get('username'),password:formRegister.get('password')});
 
                 setTimeout(() => {
                     store.commit('setDataAlert',{show:false,type:'',message:``});
-                }, 5000);
+                    
+                    setTimeout(() => {
+                        router.push('/otp');
+                    }, 500);
+                }, 3000);
               })
               .catch((error) => {
                 loading.dismiss();
