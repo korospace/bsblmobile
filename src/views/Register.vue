@@ -2,7 +2,7 @@
     <ion-page>
         <ion-content>
             <h1
-              class="font-black text-center uppercase mt-12"
+              class="font-black text-center uppercase mt-12 text-3xl"
               style="background: linear-gradient(to right, #BFD765, #81A257);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
                 register
             </h1>
@@ -263,9 +263,10 @@
                 </div>
 
                 <!-- search kodepos -->
-                <div
-                  class="mt-4 p-2 rounded border-2 relative overflow-y-visible">
-                    <div class="p-0.5 rounded border relative flex items-center">
+                <form
+                  class="mt-4 p-2 rounded border-2 relative overflow-y-visible flex"
+                  @submit.prevent="searchKodePos">
+                    <div class="p-0.5 rounded border relative flex items-center flex-1">
                         <font-awesome-icon
                           :icon="faSearch" size="1x" v-if="loadingSearch == false"
                           class="absolute text-gray-400 left-1.5"/>
@@ -280,11 +281,15 @@
                           class="w-full py-1.5 pl-7 pr-1.5 text-xs text-gray-700 tracking-wide focus:outline-none">
                     </div>
 
+                    <button class="bg-gray-400 active:bg-gray-500 px-2 rounded-sm ml-2 text-gray-100 tracking-wide">
+                        cari
+                    </button>
+
                     <!-- list kodepos -->
                     <div v-if="searchKey !== ''">
                         <div
                           v-if="allKodePos.list.length != 0"
-                          class="max-h-28 mt-1 border rounded overflow-auto bg-white absolute left-2 right-2">
+                          class="max-h-28 mt-10 border rounded overflow-auto bg-white absolute left-2 right-2">
                             <div
                               v-for="(data,index) in allKodePos.list" :key="index"
                               @click="inputKodePos(data)"
@@ -295,7 +300,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
 
                 <button class="w-full bg-lime-500 active:bg-lime-600 text-white mt-10 py-3 rounded">
                     DAFTAR
