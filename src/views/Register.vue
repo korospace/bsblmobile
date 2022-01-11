@@ -324,6 +324,7 @@ import { nikParser }                 from 'nik-parser'
 import { FontAwesomeIcon }           from '@fortawesome/vue-fontawesome'
 import { faSearch }                  from '@fortawesome/free-solid-svg-icons'
 import { ref,reactive }              from "vue";
+import { useRouter }                 from 'vue-router';
 import { useStore }                  from "vuex"
 
 export default defineComponent({
@@ -335,6 +336,7 @@ export default defineComponent({
         Form,
     },
     setup(){
+        const router        = useRouter();
         const store         = useStore();
         const tglLahir      = ref("");
         const kelamin       = ref("");
@@ -452,11 +454,17 @@ export default defineComponent({
               .post(`${store.state.APIURL}/register/nasabah`, formRegister)
               .then((response) => {
                 loading.dismiss();
+
                 store.commit('setDataAlert',{show:true,type:'success',message:`<b>berhasil!</b> cek email anda`});
+                store.commit('setDataLogin',{username_or_email:formRegister.get('username'),password:formRegister.get('password')});
 
                 setTimeout(() => {
                     store.commit('setDataAlert',{show:false,type:'',message:``});
-                }, 5000);
+                    
+                    setTimeout(() => {
+                        router.push('/otp');
+                    }, 500);
+                }, 3000);
               })
               .catch((error) => {
                 loading.dismiss();
