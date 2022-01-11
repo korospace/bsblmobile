@@ -20,7 +20,11 @@ export default createStore({
       state.dataAlert.show    = value.show;
       state.dataAlert.type    = value.type;
       state.dataAlert.message = value.message;
-    }
+    },
+    setDataLogin: function(state: any, value) {
+      state.dataLogin.username_or_email = value.username_or_email;
+      state.dataLogin.password = value.password;
+    },
   },
   actions: {
   },
