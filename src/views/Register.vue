@@ -3,7 +3,7 @@
         <ion-content>
             <h1
               class="font-black text-center uppercase mt-12 text-3xl"
-              style="background: linear-gradient(to right, #BFD765, #81A257);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
+              style="font-family:QuicksandSemiBold;background: linear-gradient(to right, #BFD765, #81A257);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
                 register
             </h1>
 
@@ -246,25 +246,10 @@
                         {{ errors.alamat }}
                     </small>
                 </div>
-                
-                <!-- kodepos -->
-                <div
-                  class="outline relative rounded border-2 focus-within:border-lime-500 mt-10"
-                  :class="{'border-red-500':errors.kodepos}">
-                    <Field
-                      type="text" name="kodepos" placeholder="pilih kodepos dibawah" 
-                      v-model="kodePosVal"
-                      autocomplete="off" 
-                      class="block p-4 w-full text-lg focus:outline-none bg-gray-200 text-lime-500" disabled/>
-                    <Field type="hidden" v-model="kelurahanVal" name="kelurahan" />
-                    <Field type="hidden" v-model="kecamatanVal" name="kecamatan" />
-                    <Field type="hidden" v-model="kotaVal" name="kota" />
-                    <Field type="hidden" v-model="provinsiVal" name="provinsi" />
-                </div>
 
                 <!-- search kodepos -->
                 <form
-                  class="mt-4 p-2 rounded border-2 relative overflow-y-visible flex"
+                  class="mt-10 p-2 rounded border-2 relative overflow-y-visible flex"
                   @submit.prevent="searchKodePos">
                     <div class="p-0.5 rounded border relative flex items-center flex-1">
                         <font-awesome-icon
@@ -289,7 +274,7 @@
                     <div v-if="searchKey !== ''">
                         <div
                           v-if="allKodePos.list.length != 0"
-                          class="max-h-28 mt-10 border rounded overflow-auto bg-white absolute left-2 right-2">
+                          class="max-h-28 mt-10 border rounded overflow-auto bg-white absolute left-2 right-2 z-20">
                             <div
                               v-for="(data,index) in allKodePos.list" :key="index"
                               @click="inputKodePos(data)"
@@ -301,8 +286,23 @@
                         </div>
                     </div>
                 </form>
+                
+                <!-- kodepos -->
+                <div
+                  class="outline relative z-0 rounded border-2 focus-within:border-lime-500 mt-4"
+                  :class="{'border-red-500':errors.kodepos}">
+                    <Field
+                      type="text" name="kodepos" placeholder="pilih kodepos diatas" 
+                      v-model="kodePosVal"
+                      autocomplete="off" 
+                      class="block p-4 w-full text-lg focus:outline-none bg-gray-200 text-lime-500" disabled/>
+                    <Field type="hidden" v-model="kelurahanVal" name="kelurahan" />
+                    <Field type="hidden" v-model="kecamatanVal" name="kecamatan" />
+                    <Field type="hidden" v-model="kotaVal" name="kota" />
+                    <Field type="hidden" v-model="provinsiVal" name="provinsi" />
+                </div>
 
-                <button class="w-full bg-lime-500 active:bg-lime-600 text-white mt-10 py-3 rounded">
+                <button class="w-full bg-gradient-to-r from-lime-600 to-lime-400 active:from-lime-500 active:to-lime-400 text-white mt-10 py-3 rounded">
                     DAFTAR
                 </button>
                 <center class="mt-8 pb-4 tracking-wide">

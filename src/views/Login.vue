@@ -10,7 +10,7 @@
           
           <ion-item class="mt-2">
               <ion-label position="floating">Username or Email</ion-label>
-              <ion-input type="text" name="username_or_email"></ion-input>
+              <ion-input type="text" name="username_or_email" autocomplete="off"></ion-input>
           </ion-item>
           <small v-if="usernameOrEmailWrong" class="mt-1 tracking-wide text-red-500">
             Username/email tidak terdaftar
@@ -18,21 +18,31 @@
 
           <ion-item class="mt-4">
               <ion-label position="floating">Password</ion-label>
-              <ion-input type="password" name="password"></ion-input>
+              <ion-input type="password" name="password" autocomplete="off"></ion-input>
           </ion-item>
           <small v-if="passwordWrong" class="mt-1 tracking-wide text-red-500">
             Password salah
           </small>
 
-          <ion-button class="mt-8" expand="block" fill="outline" type="submit">Login</ion-button>
+          <button class="w-full mt-8 py-3 text-center text-white text-xl tracking-widest bg-gradient-to-r from-lime-600 to-lime-400 active:from-lime-500 active:to-lime-400 rounded-md">
+            LOGIN
+          </button>
           
-          <center class="mt-4 pb-4">
-            <router-link to="/register" class="text-xs text-lime-500 border-b border-lime-500">
-              daftar sekarang
+          <center class="mt-8 pb-8">
+            <span class="">belum punya akun? </span>
+            <router-link to="/register" class="text-lime-500 active:text-lime-600">
+              daftar disini
             </router-link>
+            <p
+             @click="showPopupForgotPass"
+             class="mt-2 text-xs max-w-max underline underline-offset-8 opacity-80">
+              lupa password
+            </p>
           </center>
         </ion-card>
     </form>
+
+    <pop-up-forgot-pass />
   </ion-page>
 </template>
 
@@ -44,9 +54,10 @@ import { ref,reactive }    from "vue";
 import { useRouter }       from 'vue-router';
 import { useStore }        from "vuex"
 import { TokenService }    from '@/services/token.service';
+import PopUpForgotPass     from "@/components/popUpForgotPass.vue";
 
 export default defineComponent({
-  components: { IonPage, IonButton, IonCard, IonCardHeader, IonLabel, IonInput, IonItem },
+  components: { IonPage, IonButton, IonCard, IonCardHeader, IonLabel, IonInput, IonItem, PopUpForgotPass },
   setup() {
     const router = useRouter();
     const store  = useStore();
@@ -120,12 +131,18 @@ export default defineComponent({
               }, 5000);
           }
         })
-      }
+    }
+
+    // -- Forgot Password --
+    const showPopupForgotPass = () => {
+      store.commit('setShowForgotPass',true);
+    }
 
     return {
       usernameOrEmailWrong,
       passwordWrong,
       doLogin,
+      showPopupForgotPass,
     };
   },
 })
