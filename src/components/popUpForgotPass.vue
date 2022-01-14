@@ -10,7 +10,7 @@
                   class="w-full rounded-md bg-white shadow-2xl">
                     <!-- body -->
                     <div class="px-4">
-                        <h1 class="text-center opacity-70 text-lg sm360:text-xl" style="font-family:QuicksandSemiBold;">
+                        <h1 class="text-center opacity-70 text-lg sm360:text-xl pt-8" style="font-family:QuicksandSemiBold;">
                             LUPA PASSWORD?
                         </h1>
                         <p class="mt-2.5 text-xs sm360:text-sm text-center opacity-70">
@@ -96,6 +96,7 @@ export default defineComponent({
                 loadingSendPass.value = false;
 
                 store.commit('setDataAlert',{show:true,type:'success',message:`<b>Berhasil!</b> silahkan check email anda`});
+                closeForgotPass();
 
                 setTimeout(() => {
                     store.commit('setDataAlert',{show:false,type:'',message:``});
