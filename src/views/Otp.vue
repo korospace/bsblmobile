@@ -4,14 +4,15 @@
             <div class="flex h-full bg-gradient-to-r from-lime-600 to-lime-400 px-5">
                 <div class="m-auto text-center">
                     <h3 class="text-center text-white text-2xl sm360:text-3xl mb-3" style="font-family:QuicksandSemiBold;">VERIFIKASI AKUN</h3>
-                    <p class="text-center text-white mb-8 text-xs sm360:text-lg">masukan kode OTP yang anda terima <br> dari email</p>
+                    <p class="text-center text-white mb-10 text-xs sm360:text-lg">masukan kode OTP yang anda terima <br> dari email</p>
                     <form
-                      class="text-center px-10 mb-5"
+                      class="text-center px-10 mb-10"
                       @submit.prevent="sendOtp">
                         <input class="text-center text-gray-600 text-xl sm360:text-3xl tracking-widest border-solid border-b-4 focus:outline-none border-lime-400 bg-transparent py-2 w-3/4 sm360:w-44 placeholder-gray-300" type="text" name="otp" placeholder="your OTP" autocomplete="off" v-model="otpVal"
                         @input="sendOtp"/>
                     </form>
-                    <a href="https://wa.me/6281287200602?text=Hallo%20Admin,%20saya%20ada%20kendala%20mengenai%20password" class="text-center text-white mb-8 text-xs sm360:text-lg underline underline-offset-8">Hubungi Admin</a>
+                    <p class="text-white text-xs sm360:text-md opacity-90">Belum menerima kode OTP?</p>
+                    <a :href="linkAdmin" class="text-center text-white mb-8 text-xs sm360:text-md underline underline-offset-8 opacity-90">Hubungi Admin</a>
                 </div>
             </div>
         </ion-content>
@@ -38,6 +39,7 @@ export default defineComponent({
         const otpVal = ref("");
         const username_or_email = ref("");
         const password = ref("");
+        const linkAdmin= ref("");
 
         onBeforeMount(() => {
             if (store.state.dataLogin.username_or_email == '' || store.state.dataLogin.password == '') {
@@ -48,6 +50,7 @@ export default defineComponent({
         onMounted(() => {
             username_or_email.value = store.state.dataLogin.username_or_email;
             password.value = store.state.dataLogin.password;
+            linkAdmin.value= store.state.linkAdmin;
         });
 
         // -- loading spinner --
@@ -82,6 +85,7 @@ export default defineComponent({
                     .post(`${store.state.APIURL}/otp/verify`, formOtp)
                     .then((response) => {
                         loading.dismiss();
+                        otpVal.value = '';
 
                         store.commit('setDataAlert',{show:true,type:'success',message:`<b>berhasil!</b> akun anda sudah aktif`});
                         store.commit('setDataLogin',{username_or_email:'',password:''});
@@ -136,7 +140,8 @@ export default defineComponent({
             router,
             store,
             otpVal,
-            sendOtp
+            sendOtp,
+            linkAdmin
         }
     }
 })
