@@ -64,7 +64,7 @@ export default defineComponent({
 
         // -- send OTP
         const sendOtp = async () => {
-            let loading = await createSpinner();
+            const loading = await createSpinner();
 
             if (otpVal.value.length < 6) {
                 return 0;
@@ -90,7 +90,7 @@ export default defineComponent({
                             store.commit('setDataAlert',{show:false,type:'',message:``});
 
                             setTimeout( async () => {
-                                let loading = await createSpinner('Log In');
+                                const loading = await createSpinner('Log In');
                                 loading.present();
     
                                 axios
