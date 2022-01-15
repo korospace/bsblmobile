@@ -1,31 +1,72 @@
 <template>
   <ion-page>    
     <ion-content :fullscreen="true">
-      <ion-refresher slot="fixed" pull-factor="0.5" pull-min="100" pull-max="200" @ionRefresh="doRefresh($event)" class="-z-50">
-        <ion-refresher-content></ion-refresher-content>
-      </ion-refresher>
-      <div class="top-page centers rounded-b-3xl pt-4 pb-8 bg-green-400 text-white">
-        Bank Sampah Budi Luhur
+      <div
+        id="container"
+        class="min-h-full bg-gradient-to-t from-lime-600 to-lime-400">
+          
+          <!-- // header // -->
+          <div class="bg-white px-6 pt-6 pb-12 mb-14 rounded-b-3xl relative">
+            
+            <!-- Icon -->
+            <div class="flex items-center">
+              <img src="@/assets/images/banksampah-logo.png" alt="" class="loginLogo w-20">
+              <p
+                class="text-lime-500 flex-1 capitalize text-center"
+                :class="{'opacity-0': !username}">
+                  <span
+                    class="text-sm">
+                      Hi, {{ username }}
+                  </span> 
+                  <br>
+                  <span class="text-lg">
+                    Selamat datang !
+                  </span>
+              </p>
+            </div>
+
+            <!-- Toggle Switch -->
+            <div class="absolute -bottom-5 left-0 right-0 px-6">
+              <div
+                id="toggle-wraper"
+                class="w-full bg-gray-300 flex rounded-md relative px-1"
+                style="box-shadow: inset 0 0 4px 0px rgba(0, 0, 0, 0.3);">
+                  <button
+                    id="toggle"
+                    class="absolute left-0 transform h-full w-1/2 text-white capitalize tracking-widest bg-lime-600 transition duration-200 rounded-md"
+                    :class="{'translate-x-full':currentTab == 'transaksi'}">
+                      {{ currentTab }}
+                  </button>
+                  
+                  <button
+                    class="flex-1 py-3.5 text-gray-500 capitalize text-center outline-none"
+                    @click="switchTab('saldo saya')">
+                      saldo saya
+                  </button>
+                  <button
+                    class="flex-1 py-3.5 text-gray-500 capitalize text-center outline-none"
+                    @click="switchTab('transaksi')">
+                      transaksi
+                  </button>
+              </div>
+            </div>
+          </div>
+          
+        
+          <saldo />
+          <transaksi />
+
       </div>
-      <div class="tab text-white">
-        <div class="centers">
-          <button class="button" @click="mainSwitch('myReport')" v-on:click="mainSwitch('myReport')">Laporan Saya</button>
-          <button class="button" @click="mainSwitch('myMoney')" v-on:click="mainSwitch('myMoney')">Uang Saya</button>
-        </div>
-      </div>
-      
-      <dashboard-tab-my-report v-if="myReportisShow"/>
-      <dashboard-tab-my-money v-if="myMoneyisShow"/>
     </ion-content>
   </ion-page>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import {IonPage, IonRefresher, IonRefresherContent, loadingController} from '@ionic/vue';
-import { chevronDownCircleOutline } from 'ionicons/icons';
-import DashboardTabMyReport from '../../components/dashboard.tabMyReport.vue';
-import DashboardTabMyMoney from '../../components/dashboard.tabMyMoney.vue';
+<script>
+import { defineComponent, ref, computed, onBeforeMount } from 'vue';
+import {IonPage, IonRefresher, IonRefresherContent} from '@ionic/vue';
+import { useStore } from 'vuex'
+import Saldo        from '@/components/dashboard.Saldo.vue'
+import Transaksi    from '@/components/dashboard.Transaksi.vue'
 
 export default defineComponent({
   name: 'Dashboard',
@@ -33,86 +74,33 @@ export default defineComponent({
     IonPage,
     IonRefresher, 
     IonRefresherContent,
-    DashboardTabMyReport,
-    DashboardTabMyMoney
+    Saldo,
+    Transaksi
   },
   setup() {
-    const doRefresh = (event: any) => {
-      window.location.reload();
-      event.target.complete();
+    const store    = useStore();
+    
+    const currentTab = computed(() => {
+      return store.state.currentDashboardTab;
+    });
+
+    const switchTab  = (text) => {
+      store.commit('setDashboardTab',text);
+    }
+
+    const username = computed(() => {
+      return store.state.dataNasabah.username;
+    });
+
+    return { 
+      currentTab,
+      switchTab,
+      username, 
     };
-    return { chevronDownCircleOutline, doRefresh };
   },
-  data(){
-     return{
-      tabLinkActive : "myReport",
-      myReportisShow: true,
-      myMoneyisShow : false
-    }
-  },
-  methods : {
-    createSpinner: function (messages: string) {
-      return loadingController
-      .create({
-        spinner: 'crescent',  
-        message: messages,
-        translucent: true,
-        // cssClass: 'custom-class custom-loading',
-        backdropDismiss: false
-      });
-    },
-    tabCheck : function (params: string) {
-      return params == this.tabLinkActive;
-    },
-    mainSwitch : function(tabName: any) {
-      this.tabLinkActive = tabName;
-      if (tabName == 'myReport') {
-        this.myReportisShow = true;
-        this.myMoneyisShow  = false;
-      } else {
-        this.myReportisShow = false;
-        this.myMoneyisShow  = true;
-      }
-      
-    }
-  }
 });
 </script>
 
-<style> 
-  /* Style the tab */
-  .tab {
-    overflow: hidden;
-    background-color: #3D5D1E;
-    border-radius: 10px;
-    margin: 0 20px;
-  }
-
-  /* Style the buttons inside the tab */
-  .tab .button {
-    min-width: 50%;
-    border-radius: 10px;
-    background-color: #3D5D1E;
-    float: left;
-    padding: 14px 16px;
-    transition: 0.3s;
-    font-size: 12px;
-    text-decoration: none;
-    text-align: center;
-  }
-
-  /* Change background color of .buttons on hover */
-  .tab .button:hover, 
-  .tab .button.active {
-    background-color: #54762A;
-  }
-
-  /* Center Div */
-  .centers {
-    display: flex;
-    justify-content: center;
-  }
-  .top-page {
-    margin: 20px 0 ;
-  }
+<style>
+  
 </style>

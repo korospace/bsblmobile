@@ -1,36 +1,33 @@
-import router from "@/router";
-import axios from "axios";
 import { getApiURL, TokenService } from "./token.service";
-import { alertController  } from '@ionic/vue';
+import router      from "@/router";
+import createStore from "@/store";
+import axios       from "axios";
 
 const checkAuth = function() {
-    const TOKEN = TokenService.getToken();
-
     axios.get(`${getApiURL}/nasabah/sessioncheck`,{
       headers: {
-        token: TOKEN!
+        token: TokenService.getToken()!
       }
     })
-    .then(async (response) => {
-      console.log(response);
-      const alert = await alertController
-      .create({
-        cssClass: 'my-custom-class',
-        header: 'Alert',
-        subHeader: 'Subtitle',
-        message: 'This is an alert message.',
-        buttons: ['OK'],
-      });
-
-      await alert.present();
-    })
+    .then(response => {})
     .catch(error => {
       if(error.response.status == 401) {
+        if (error.response.data.messages == 'token expired') {
+          createStore.commit("setDataAlert",{
+            show   :true,
+            type   :'warning',
+            message:'waktu login sudah habis, silahkan login ulang'}
+          );
+        }
         TokenService.removeToken();
         router.push('/login');
       } 
       else if(error.response.status == 500) {
-        TokenService.removeToken();
+        createStore.commit("setDataAlert",{
+          show   :true,
+          type   :'danger',
+          message:'<b>Ups..</>, terjadi kesalahan. silahkan refresh halaman!'}
+        );
       }
     })
 }
@@ -42,7 +39,7 @@ const privateRoute = function(to: any, from: any, next: any) {
       next({ path: '/login' });
   } 
   else if(['Login','Register','Otp'].includes(to.name) && isAuthenticated) {
-      next({path: '/tabs/dashboard'} );
+      next({path: '/dashboard'} );
   } 
   else {
       next();

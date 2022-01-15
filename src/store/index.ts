@@ -1,4 +1,7 @@
-import { createStore } from 'vuex'
+import axios            from 'axios';
+import { createStore }  from 'vuex'
+import { TokenService } from "@/services/token.service";
+import router           from "@/router";
 
 export default createStore({
   state() {
@@ -14,7 +17,11 @@ export default createStore({
         username_or_email: '',
         password: ''
       },
-      showForgotPass: false,
+      dataSaldo : "",
+      dataNasabah : "",
+      dataSampahMasuk: "",
+      showForgotPass : false,
+      currentDashboardTab : "saldo saya",
     }
   },
   mutations: {
@@ -30,8 +37,74 @@ export default createStore({
     setShowForgotPass: function(state: any, value) {
       state.showForgotPass = value;
     },
+    setDashboardTab: function(state: any, value) {
+      state.currentDashboardTab = value;
+    },
+    setDataSaldo:  function(state: any, value) {
+      state.dataSaldo = value;
+    }, 
+    setDataNasabah:  function(state: any, value) {
+      state.dataNasabah = value;
+    }, 
+    setDataSampahMasuk:  function(state: any, value) {
+      state.dataSampahMasuk = value;
+    }, 
   },
   actions: {
+    getProfileNasabah: function ({ commit },refresher = "") {
+      axios.get(`${this.state.APIURL}/nasabah/getprofile`,{
+        headers: {
+            token: TokenService.getToken()!
+          }
+      })
+      .then(response => {
+        commit("setDataNasabah",response.data.data);
+        
+        if (refresher) {
+          refresher.complete();
+        }
+      })
+      .catch(error => {
+        // Unauthorize
+        if (error.response.status == 401) {
+          if (error.response.data.messages == 'token expired') {
+            commit("setDataAlert",{
+              show   :true,
+              type   :'warning',
+              message:'waktu login sudah habis, silahkan login ulang'}
+            );
+          }
+
+          router.push("/login");
+        }
+      })
+    },
+    getSaldo: function ({ commit }) {
+      axios.get(`${this.state.APIURL}/transaksi/getsaldo`,{
+        headers: {
+            token: TokenService.getToken()!
+          }
+      })
+      .then(response => {
+        commit("setDataSaldo",response.data.data);
+      })
+      .catch(error => {
+        
+      })
+    },
+    getSampahMasuk: function ({ commit }) {
+      axios.get(`${this.state.APIURL}/transaksi/sampahmasuk`,{
+        headers: {
+            token: TokenService.getToken()!
+          }
+      })
+      .then(response => {
+        commit("setDataSampahMasuk",response.data.data);
+      })
+      .catch(error => {
+        
+      })
+    },
   },
   modules: {
   }
