@@ -262,7 +262,6 @@
                         </svg>
                         <input
                           type="text" placeholder="masukan nama wilayah" v-model="searchKey"
-                          @input="searchKodePos"
                           class="w-full py-1.5 pl-7 pr-1.5 text-xs text-gray-700 tracking-wide focus:outline-none">
                     </div>
 

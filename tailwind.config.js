@@ -10,6 +10,7 @@ module.exports = {
       md: '768px',
       lg: '1024px',
       xl: '1280px',
+      'sm320': '320px',
       'sm360': '360px',
       '2xl': '1536px',
     },
@@ -271,6 +272,7 @@ module.exports = {
       ],
     },
     fontSize: {
+      xxs: ['0.55rem', { lineHeight: '0.8rem' }],
       xs: ['0.75rem', { lineHeight: '1rem' }],
       sm: ['0.875rem', { lineHeight: '1.25rem' }],
       base: ['1rem', { lineHeight: '1.5rem' }],

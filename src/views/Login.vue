@@ -10,7 +10,7 @@
           
           <ion-item class="mt-2">
               <ion-label position="floating">Username or Email</ion-label>
-              <ion-input type="text" name="username_or_email" autocomplete="off"></ion-input>
+              <ion-input type="text" name="username_or_email" v-model="usernameOrEmail" autocomplete="off"></ion-input>
           </ion-item>
           <small v-if="usernameOrEmailWrong" class="mt-1 tracking-wide text-red-500">
             Username/email tidak terdaftar
@@ -18,7 +18,7 @@
 
           <ion-item class="mt-4">
               <ion-label position="floating">Password</ion-label>
-              <ion-input type="password" name="password" autocomplete="off"></ion-input>
+              <ion-input type="password" name="password" v-model="password" autocomplete="off"></ion-input>
           </ion-item>
           <small v-if="passwordWrong" class="mt-1 tracking-wide text-red-500">
             Password salah
@@ -61,6 +61,8 @@ export default defineComponent({
   setup() {
     const router = useRouter();
     const store  = useStore();
+    const usernameOrEmail = ref("");
+    const password = ref("");
     const usernameOrEmailWrong = ref(false);
     const passwordWrong = ref(false);
 
@@ -79,6 +81,7 @@ export default defineComponent({
     const doLogin = async (event) => {
       const loading   = await createSpinner();
       const formLogin = new FormData(event.target); 
+
       usernameOrEmailWrong.value = false;
       passwordWrong.value = false;
             
@@ -91,9 +94,17 @@ export default defineComponent({
       axios
         .post(`${store.state.APIURL}/login/nasabah`, formLogin)
         .then((response) => {
-          loading.dismiss();
+          usernameOrEmail.value = "";
+          password.value = "";
           TokenService.saveToken(response.data.token);
-          router.push("/tabs/dashboard");
+          
+          store.commit("setDataNasabah","");
+          store.dispatch("getProfileNasabah");
+          store.dispatch("getSampahMasuk");
+          store.dispatch("getSaldo");
+
+          loading.dismiss();
+          router.push("/dashboard");
         })
         .catch((error) => {
           loading.dismiss();
@@ -139,6 +150,8 @@ export default defineComponent({
     }
 
     return {
+      usernameOrEmail,
+      password,
       usernameOrEmailWrong,
       passwordWrong,
       doLogin,

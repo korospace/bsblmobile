@@ -1,41 +1,74 @@
 <template>
   <ion-page>
-    <ion-tabs>
-      <ion-router-outlet></ion-router-outlet>
-      <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="tab1" href="/tabs/dashboard">
-          <font-awesome-icon :icon="faHouseUser" size="2x"/>
-          <ion-label>Dashboard</ion-label>
-        </ion-tab-button>
+    <ion-content>
+      <ion-tabs>
+        <!-- // Refresher // -->
+        <ion-refresher
+          slot="fixed" pull-factor="0.5" pull-min="100" pull-max="200" 
+          @ionRefresh="doRefresh">
+            <ion-refresher-content>
+            </ion-refresher-content>
+        </ion-refresher>
+
+        <ion-router-outlet></ion-router-outlet>
+
+        <!-- // Tabs // -->
+        <ion-tab-bar slot="bottom">
+          <ion-tab-button tab="tab1" href="/dashboard">
+            <font-awesome-icon :icon="faHome" size="2x"/>
+          </ion-tab-button>
+            
+          <ion-tab-button tab="tab2" href="/artikel">
+            <font-awesome-icon :icon="faNewspaper" size="2x"/>
+          </ion-tab-button>
           
-        <ion-tab-button tab="tab2" href="/tabs/artikel">
-          <font-awesome-icon :icon="faPencilAlt" size="2x"/>
-          <ion-label>Artikel</ion-label>
-        </ion-tab-button>
+          <ion-tab-button tab="tab3" href="/profile">
+            <font-awesome-icon :icon="faUser" size="2x"/>
+          </ion-tab-button>
+        </ion-tab-bar>
         
-        <ion-tab-button tab="tab3" href="/tabs/profile">
-          <font-awesome-icon :icon="faUserTie" size="2x"/>
-          <ion-label>Profile</ion-label>
-        </ion-tab-button>
-      </ion-tab-bar>
-    </ion-tabs>
+      </ion-tabs>
+    </ion-content>
   </ion-page>
 </template>
 
-<script lang="ts">
+<script>
+import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonPage, IonRouterOutlet, IonContent } from '@ionic/vue';
 import { defineComponent } from 'vue';
-import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonPage, IonRouterOutlet } from '@ionic/vue';
+import { useStore }        from 'vuex'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faUserTie, faPencilAlt, faHouseUser } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faNewspaper, faUser, } from '@fortawesome/free-solid-svg-icons'
 
 export default defineComponent({
   name: 'Tabs',
-  components: { IonLabel, IonTabs, IonTabBar, IonTabButton, IonPage, IonRouterOutlet, FontAwesomeIcon },
+  components: { 
+    IonLabel, 
+    IonTabs, 
+    IonTabBar, 
+    IonTabButton, 
+    IonPage, 
+    IonRouterOutlet, 
+    FontAwesomeIcon,
+    IonContent },
   setup() {
+    const store = useStore();
+
+    const doRefresh = (event) => {
+      store.commit("setDataNasabah","");
+      store.dispatch("getProfileNasabah",event.target);
+      
+      store.commit("setDataSaldo","");
+      store.dispatch("getSaldo");
+
+      store.commit("setDataSampahMasuk","");
+      store.dispatch("getSampahMasuk");
+    };
+
     return {
-      faUserTie,
-      faPencilAlt,
-      faHouseUser
+      faHome,
+      faNewspaper,
+      faUser,
+      doRefresh
     }
   },
 })

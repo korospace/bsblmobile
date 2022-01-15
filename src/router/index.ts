@@ -1,35 +1,15 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
+import { privateRoute,checkAuth}          from '@/services/auth.service';
 import { RouteRecordRaw } from 'vue-router'
-import Home from '../views/Home.vue'
-import Tabs from '../views/Tabs.vue'
-import Login from '../views/Login.vue'
-import Register from '../views/Register.vue'
-import Otp from '../views/Otp.vue'
-import Article from '../views/Main/Article.vue'
-import Dashboard from '../views/Main/Dashboard.vue'
-import Profile from '../views/Main/Profile.vue'
-import tabMyReport from '../components/dashboard.tabMyReport.vue'
-import tabMyMoney from '../components/dashboard.tabMyMoney.vue'
-import { privateRoute,checkAuth} from '@/services/auth.service';
+import Tabs               from '../views/Tabs.vue'
+import Login              from '../views/Login.vue'
+import Register           from '../views/Register.vue'
+import Otp                from '../views/Otp.vue'
+import Article            from '../views/Main/Article.vue'
+import Dashboard          from '../views/Main/Dashboard.vue'
+import Profile            from '../views/Main/Profile.vue'
 
 const routes: Array<RouteRecordRaw> = [
-  {
-    path: '/',
-    redirect: '/tabs',
-    beforeEnter: checkAuth
-  },
-  {
-    path: '/tabs',
-    redirect: '/tabs/dashboard',
-    beforeEnter: checkAuth
-  },
-  {
-    path: '/home',
-    name: 'Home',
-    component: Home,
-    beforeEnter: checkAuth
-    
-  },
   {
     path: '/login',
     name: 'Login',
@@ -49,22 +29,11 @@ const routes: Array<RouteRecordRaw> = [
     beforeEnter: privateRoute
   },
   {
-    path: '/tabmyreport',
-    component: tabMyReport
-  },
-  {
-    path: '/tabmymoney',
-    component: tabMyMoney
-  },
-  {
-    path: '/tabs/',
-    component: Tabs,
+    path: '/',
+    component  : Tabs,
+    redirect   : "/dashboard",
     beforeEnter: checkAuth,
-    children: [
-      {
-        path: '',
-        redirect: '/tabs/dashboard'
-      },
+    children   : [
       {
         path: 'dashboard',
         component: Dashboard,
