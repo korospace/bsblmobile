@@ -20,6 +20,10 @@ export default createStore({
       dataSaldo : "",
       dataNasabah : "",
       dataSampahMasuk: "",
+      dataDetilSampahMasuk: {
+        show     : false,
+        kategori : '',
+      },
       showForgotPass : false,
       currentDashboardTab : "saldo saya",
     }
@@ -49,6 +53,10 @@ export default createStore({
     setDataSampahMasuk:  function(state: any, value) {
       state.dataSampahMasuk = value;
     }, 
+    setDetilSampahMasuk: function(state: any, value) {
+      state.dataDetilSampahMasuk.show     = value.show;
+      state.dataDetilSampahMasuk.kategori = value.kategori;
+    },
   },
   actions: {
     getProfileNasabah: function ({ commit },refresher = "") {

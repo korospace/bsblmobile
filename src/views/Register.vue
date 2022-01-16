@@ -248,7 +248,7 @@
                 </div>
 
                 <!-- search kodepos -->
-                <form
+                <div
                   class="mt-10 p-2 rounded border-2 relative overflow-y-visible flex"
                   @submit.prevent="searchKodePos">
                     <div class="p-0.5 rounded border relative flex items-center flex-1">
@@ -265,9 +265,11 @@
                           class="w-full py-1.5 pl-7 pr-1.5 text-xs text-gray-700 tracking-wide focus:outline-none">
                     </div>
 
-                    <button class="bg-gray-400 active:bg-gray-500 px-2 rounded-sm ml-2 text-gray-100 tracking-wide">
+                    <div
+                      @click="searchKodePos"
+                      class="bg-gray-400 active:bg-gray-500 px-2 rounded-sm ml-2 text-gray-100 tracking-wide flex items-center">
                         cari
-                    </button>
+                    </div>
 
                     <!-- list kodepos -->
                     <div v-if="searchKey !== ''">
@@ -284,7 +286,7 @@
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
                 
                 <!-- kodepos -->
                 <div
