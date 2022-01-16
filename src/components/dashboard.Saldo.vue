@@ -4,6 +4,8 @@
       v-if="currentTab == 'saldo saya'"
       class="tabcontent text-white pb-6">
 
+        <pop-up-detil-sampah-masuk />
+
         <!-- ID Card -->
         <div id="idcard-container" class="px-6 relative" :class="{'animate-pulse':!username}">
             <div 
@@ -19,7 +21,7 @@
                     :icon="faWifi" size="1x"
                     class=""/>
 
-                    <img src="@/assets/images/banksampah-logo.png" alt="" class="loginLogo w-12 opacity-80">
+                    <img src="@/assets/images/banksampah-logo.png" alt="" class="loginLogo w-10 opacity-80">
                   </div>
 
                   <p class="mt-4" v-html="idNasabah"></p>
@@ -82,6 +84,7 @@
         <!-- Sampah masuk -->
         <div
           v-if="!sampahMasuk"
+          id="sampahMasukSkeleton"
           class="grid grid-cols-4 gap-2 place-content-center px-6 mt-6 text-white animate-pulse">
             <div
               v-for="data in [1,2,3,4]" :key="data"
@@ -92,18 +95,60 @@
           v-if="sampahMasuk"
           class="grid grid-cols-4 gap-2 place-content-center px-6 mt-6 text-white">
             <div
-              v-for="data in sampahMasuk" :key="data"
-              class="text-center rounded-lg py-1.5 sm320:py-3 bg-gradient-to-t from-lime-700 to-lime-400">
+              @click="detilSampahMasuk(sampahMasuk.kertas.kategori);"
+              class="text-center rounded-lg py-1.5 sm320:py-3 bg-gradient-to-t from-lime-700 to-lime-400 transition transform active:scale-95">
+                <div class="px-5">
+                  <font-awesome-icon
+                    :icon="faScroll" size="1x"
+                    class=""/>
+                </div>
+                <p class="mt-2 text-xxs sm320:text-xs">
+                  {{ sampahMasuk.kertas.kategori }}
+                </p>
+                <p class="mt-2 border-b border-white opacity-40"></p>
+                <p class="mt-2 text-xxs sm320:text-xs">{{ sampahMasuk.kertas.total }} kg</p>
+            </div>
+            <div
+              @click="detilSampahMasuk(sampahMasuk.plastik.kategori);"
+              class="text-center rounded-lg py-1.5 sm320:py-3 bg-gradient-to-t from-lime-700 to-lime-400 transition transform active:scale-95">
+                <div class="px-5">
+                  <font-awesome-icon
+                    :icon="faWineBottle" size="1x"
+                    class=""/>
+                </div>
+                <p class="mt-2 text-xxs sm320:text-xs">
+                  {{ sampahMasuk.plastik.kategori }}
+                </p>
+                <p class="mt-2 border-b border-white opacity-40"></p>
+                <p class="mt-2 text-xxs sm320:text-xs">{{ sampahMasuk.plastik.total }} kg</p>
+            </div>
+            <div
+              @click="detilSampahMasuk(sampahMasuk.logam.kategori);"
+              class="text-center rounded-lg py-1.5 sm320:py-3 bg-gradient-to-t from-lime-700 to-lime-400 transition transform active:scale-95">
+                <div class="px-5">
+                  <font-awesome-icon
+                    :icon="faTrophy" size="1x"
+                    class=""/>
+                </div>
+                <p class="mt-2 text-xxs sm320:text-xs">
+                  {{ sampahMasuk.logam.kategori }}
+                </p>
+                <p class="mt-2 border-b border-white opacity-40"></p>
+                <p class="mt-2 text-xxs sm320:text-xs">{{ sampahMasuk.logam.total }} kg</p>
+            </div>
+            <div
+              @click="detilSampahMasuk(sampahMasuk['lain-lain'].kategori);"
+              class="text-center rounded-lg py-1.5 sm320:py-3 bg-gradient-to-t from-lime-700 to-lime-400 transition transform active:scale-95">
                 <div class="px-5">
                   <font-awesome-icon
                     :icon="faRecycle" size="1x"
                     class=""/>
                 </div>
                 <p class="mt-2 text-xxs sm320:text-xs">
-                  {{ data.kategori }}
+                  {{ sampahMasuk['lain-lain'].kategori }}
                 </p>
                 <p class="mt-2 border-b border-white opacity-40"></p>
-                <p class="mt-2 text-xxs sm320:text-xs">{{ data.total }} kg</p>
+                <p class="mt-2 text-xxs sm320:text-xs">{{ sampahMasuk['lain-lain'].total }} kg</p>
             </div>
         </div>
     </div>
@@ -111,18 +156,17 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
-import { ref, computed }   from "vue";
-import { useStore }        from 'vuex';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faWifi,faCoins,faMoneyBillWaveAlt,faRecycle } from '@fortawesome/free-solid-svg-icons'
+import { defineComponent }   from 'vue';
+import { ref, computed }     from "vue";
+import { useStore }          from 'vuex';
+import PopUpDetilSampahMasuk from '@/components/popUpDetilSampahMasuk.vue';
+import { FontAwesomeIcon }   from '@fortawesome/vue-fontawesome'
+import { faWifi,faCoins,faMoneyBillWaveAlt,faScroll,faTrophy,faWineBottle,faRecycle } from '@fortawesome/free-solid-svg-icons'
 
 export default defineComponent({
   components: {
     FontAwesomeIcon,
-    faCoins,
-    faMoneyBillWaveAlt,
-    faRecycle
+    PopUpDetilSampahMasuk
   },
   setup() {
     const store = useStore();
@@ -161,10 +205,20 @@ export default defineComponent({
       return store.state.dataSampahMasuk;
     });
 
+    const detilSampahMasuk = (kategori) => {
+      store.commit('setDetilSampahMasuk',{
+          show    : true,
+          kategori: kategori
+      });
+    }
+
     return {
       faWifi,
       faCoins,
       faMoneyBillWaveAlt,
+      faScroll,
+      faTrophy,
+      faWineBottle,
       faRecycle,
       currentTab,
       username,
@@ -172,7 +226,8 @@ export default defineComponent({
       bergabung,
       saldoUang,
       saldoEmas,
-      sampahMasuk
+      sampahMasuk,
+      detilSampahMasuk
     }
   },
 });

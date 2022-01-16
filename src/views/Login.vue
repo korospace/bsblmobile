@@ -94,9 +94,10 @@ export default defineComponent({
       axios
         .post(`${store.state.APIURL}/login/nasabah`, formLogin)
         .then((response) => {
-          usernameOrEmail.value = "";
           password.value = "";
+          usernameOrEmail.value = "";
           TokenService.saveToken(response.data.token);
+          store.commit('setDataAlert',{show:false,type:'',message:``});
           
           store.commit("setDataNasabah","");
           store.dispatch("getProfileNasabah");
