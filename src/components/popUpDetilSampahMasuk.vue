@@ -65,6 +65,7 @@ import { FontAwesomeIcon }           from '@fortawesome/vue-fontawesome'
 import { faTimes }                   from '@fortawesome/free-solid-svg-icons'
 import { ref, reactive, onMounted }  from "vue";
 import { useStore }                  from "vuex"
+import { useRouter }                 from 'vue-router';
 import { TokenService }              from "@/services/token.service";
 
 export default defineComponent({
@@ -75,6 +76,7 @@ export default defineComponent({
     },
     setup(){
         const store    = useStore();
+        const router   = useRouter();
         const loading  = ref(false);
         const notFound = ref(false);
         const data     = reactive({
@@ -100,9 +102,22 @@ export default defineComponent({
                 loading.value = false;
               })
               .catch((error) => {
-                data.list     = [];
-                notFound.value= true
-                loading.value = false;
+                if (error.response.status == 401) {
+                    if (error.response.data.messages == 'token expired') {
+                        store.commit("setDataAlert",{
+                            show   :true,
+                            type   :'warning',
+                            message:'waktu login sudah habis, silahkan login ulang'}
+                        );
+                    }
+
+                    router.push("/login");
+                }
+                else if (error.response.status == 404) {
+                    data.list     = [];
+                    notFound.value= true
+                    loading.value = false;
+                }
               })
         }
 
