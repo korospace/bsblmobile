@@ -1,7 +1,8 @@
 import { createApp } from 'vue'
+import { IonicVue }  from '@ionic/vue';
 import App           from './App.vue'
 import router        from './router';
-import { IonicVue }  from '@ionic/vue';
+import store         from './store'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/vue/css/core.css';
@@ -23,9 +24,8 @@ import '@ionic/vue/css/display.css';
 import './theme/variables.css';
 
 /* Global component */ 
-import Alert from "@/components/alert.vue";
-
-import store from './store'
+import Alert   from "@/components/alert.vue";
+import Loading from "@/components/loading.vue";
 
 const app = createApp(App)
   .use(store)
@@ -33,6 +33,7 @@ const app = createApp(App)
   .use(router);
 
 app.component('x-alert',Alert);
+app.component('x-loading',Loading);
 
 router.isReady().then(() => {
   app.mount('#app');
