@@ -2,6 +2,7 @@
   <ion-app>
     <!-- Gobal component -->
     <x-alert /> 
+    <x-loading /> 
     
     <ion-router-outlet />
   </ion-app>

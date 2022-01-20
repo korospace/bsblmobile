@@ -6,20 +6,16 @@
           style="background-color: rgba(0,0,0,0.2);">
             <transition name="bounce" appear>
                 <div
-                  class="w-full rounded-md bg-white shadow-2xl">
+                  class="w-full rounded-md bg-white shadow-2xl overflow-hidden">
                     <!-- header -->
                     <div class="p-4 border-b border-gray-200 flex justify-between items-center">
                         <p class="text-gray-600 capitalize text-md">
                             kategori {{ kategori }}
                         </p>
-                        <a class="" href="" @click.prevent="close">
-                            <font-awesome-icon
-                              :icon="faTimes" size="0.8x"
-                              class="text-gray-400"/>
-                        </a>
                     </div>
                     <!-- body -->
-                    <div class="text-gray-600 relative max-h-56 min-h-xxxs overflow-auto">
+                    <div
+                      class="text-gray-600 flex flex-col relative max-h-56 overflow-auto">
                         <table class="w-full relative z-20">
                             <thead>
                                 <tr class="bg-white sticky top-0">
@@ -28,7 +24,7 @@
                                     <th>Jumlah</th>
                                 </tr>
                             </thead>
-                            <tbody v-if="loading == false && data.list != []">
+                            <tbody v-if="!loading">
                                 <tr
                                   v-for="(x,i) in data.list" :key="x"
                                   class="text-center"
@@ -39,17 +35,26 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div
-                          class="absolute z-10 top-0 bottom-0 right-0 left-0 flex justify-center items-center">
-                            <svg v-if="loading" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%; display: block; shape-rendering: auto;" width="24px" height="24px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
-                                <circle cx="50" cy="50" fill="none" stroke="#84CC16" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
-                                <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
-                                </circle>
-                            </svg>
-                            <p v-if="notFound" class="text-gray-400 text-lg">
+                        <div class="flex-1 flex justify-center items-center">
+                            <div v-if="loading" class="py-8">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%; display: block; shape-rendering: auto;" width="24px" height="24px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                                    <circle cx="50" cy="50" fill="none" stroke="#84CC16" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
+                                    <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+                                    </circle>
+                                </svg>
+                            </div>
+                            <p v-if="notFound" class="py-8 text-gray-400 text-lg">
                               Data belum tersedia
                             </p>
                         </div>
+                    </div>
+                    <!-- footer -->
+                    <div class="mt-5 p-3 flex justify-end">
+                        <a
+                          class="ml-2 px-4 py-2 bg-gray-400 active:bg-gray-500 text-gray-100 tracking-widest rounded-md"
+                          href="" @click.prevent="close">
+                            close
+                        </a>
                     </div>
                 </div>
             </transition>
@@ -87,6 +92,13 @@ export default defineComponent({
             return store.state.dataDetilSampahMasuk.show;
         });
 
+        const close = () => {
+            store.commit('setDetilSampahMasuk',{
+                show    : false,
+                kategori: ''
+            });
+        }
+
         const getDetilSampahMasuk = (kategori) => {
             notFound.value= false
             loading.value = true;
@@ -111,7 +123,9 @@ export default defineComponent({
                         );
                     }
 
+                    TokenService.removeToken();
                     router.push("/login");
+                    close();
                 }
                 else if (error.response.status == 404) {
                     data.list     = [];
@@ -130,13 +144,6 @@ export default defineComponent({
 
             return kategori;
         });
-
-        const close = () => {
-            store.commit('setDetilSampahMasuk',{
-                show    : false,
-                kategori: ''
-            });
-        }
 
         return{
             faTimes,

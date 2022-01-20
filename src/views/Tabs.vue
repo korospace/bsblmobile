@@ -7,6 +7,7 @@
           slot="fixed" pull-factor="0.5" pull-min="100" pull-max="200" 
           @ionRefresh="doRefresh">
             <ion-refresher-content>
+              
             </ion-refresher-content>
         </ion-refresher>
 
@@ -33,7 +34,7 @@
 </template>
 
 <script>
-import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonPage, IonRouterOutlet, IonContent } from '@ionic/vue';
+import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonPage, IonRouterOutlet, IonContent, IonRefresher, IonRefresherContent } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import { useStore }        from 'vuex'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -48,6 +49,8 @@ export default defineComponent({
     IonTabButton, 
     IonPage, 
     IonRouterOutlet, 
+    IonRefresher, 
+    IonRefresherContent,
     FontAwesomeIcon,
     IonContent },
   setup() {

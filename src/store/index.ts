@@ -24,6 +24,10 @@ export default createStore({
         show     : false,
         kategori : '',
       },
+      showLoading: {
+        show: false,
+        text: 'tex'
+      },
       showForgotPass : false,
       currentDashboardTab : "saldo saya",
     }
@@ -37,6 +41,10 @@ export default createStore({
     setDataLogin: function(state: any, value) {
       state.dataLogin.username_or_email = value.username_or_email;
       state.dataLogin.password = value.password;
+    },
+    setShowLoading: function(state: any, value) {
+      state.showLoading.show = value.show;
+      state.showLoading.text = value.text;
     },
     setShowForgotPass: function(state: any, value) {
       state.showForgotPass = value;
@@ -66,13 +74,17 @@ export default createStore({
           }
       })
       .then(response => {
-        commit("setDataNasabah",response.data.data);
-        
         if (refresher) {
           refresher.complete();
         }
+
+        commit("setDataNasabah",response.data.data);
       })
       .catch(error => {
+        if (refresher) {
+          refresher.complete();
+        }
+
         // Unauthorize
         if (error.response.status == 401) {
           if (error.response.data.messages == 'token expired') {
@@ -83,8 +95,10 @@ export default createStore({
             );
           }
 
+          TokenService.removeToken()!;
           router.push("/login");
         }
+
       })
     },
     getSaldo: function ({ commit }) {

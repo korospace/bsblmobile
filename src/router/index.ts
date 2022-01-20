@@ -7,6 +7,8 @@ import Register           from '../views/Register.vue'
 import Otp                from '../views/Otp.vue'
 import Article            from '../views/Main/Article.vue'
 import Dashboard          from '../views/Main/Dashboard.vue'
+// import Saldo              from '@/components/dashboard.Saldo.vue'
+// import Transaksi          from '@/components/dashboard.Transaksi.vue'
 import Profile            from '../views/Main/Profile.vue'
 
 const routes: Array<RouteRecordRaw> = [
@@ -32,19 +34,31 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     component  : Tabs,
     redirect   : "/dashboard",
-    beforeEnter: checkAuth,
     children   : [
       {
         path: 'dashboard',
         component: Dashboard,
+        beforeEnter: checkAuth,
+        // children   : [
+        //   {
+        //     path: 'saldo',
+        //     component: Saldo,
+        //   },
+        //   {
+        //     path: 'transaksi',
+        //     component: Transaksi,
+        //   }
+        // ]
       },
       {
         path: 'profile',
         component: Profile,
+        beforeEnter: checkAuth,
       },
       {
         path: 'artikel',
         component: Article,
+        beforeEnter: checkAuth,
       }
     ]
   }

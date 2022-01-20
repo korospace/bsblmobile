@@ -98,11 +98,6 @@ export default defineComponent({
           usernameOrEmail.value = "";
           TokenService.saveToken(response.data.token);
           store.commit('setDataAlert',{show:false,type:'',message:``});
-          
-          store.commit("setDataNasabah","");
-          store.dispatch("getProfileNasabah");
-          store.dispatch("getSampahMasuk");
-          store.dispatch("getSaldo");
 
           loading.dismiss();
           router.push("/dashboard");
