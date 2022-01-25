@@ -12,8 +12,9 @@
             <div class="flex items-center">
               <img src="@/assets/images/banksampah-logo.png" alt="" class="loginLogo w-20">
               <p
-                class="text-lime-500 flex-1 capitalize text-center"
-                :class="{'opacity-0': !username}">
+                class="flex-1 capitalize text-center"
+                :class="{'opacity-0': !username}"
+                style="font-family:QuicksandSemiBold;background: linear-gradient(to right, #BFD765, #81A257);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
                   <span
                     class="text-sm">
                       Hi, {{ username }}
@@ -62,8 +63,8 @@
 </template>
 
 <script>
-import { defineComponent, ref, computed, onBeforeMount } from 'vue';
-import {IonPage, IonRefresher, IonRefresherContent} from '@ionic/vue';
+import {IonPage, IonContent, onIonViewWillEnter} from '@ionic/vue';
+import { defineComponent, ref, computed } from 'vue';
 import { useStore } from 'vuex'
 import Saldo        from '@/components/dashboard.Saldo.vue'
 import Transaksi    from '@/components/dashboard.Transaksi.vue'
@@ -72,8 +73,7 @@ export default defineComponent({
   name: 'Dashboard',
   components: {
     IonPage,
-    IonRefresher, 
-    IonRefresherContent,
+    IonContent,
     Saldo,
     Transaksi
   },
@@ -91,6 +91,17 @@ export default defineComponent({
     const username = computed(() => {
       return store.state.dataNasabah.username;
     });
+
+    onIonViewWillEnter(() => {
+      store.commit("setDataNasabah","");
+      store.dispatch("getProfileNasabah");
+      
+      store.commit("setDataSaldo","");
+      store.dispatch("getSaldo");
+
+      store.commit("setDataSampahMasuk","");
+      store.dispatch("getSampahMasuk");
+    })
 
     return { 
       currentTab,

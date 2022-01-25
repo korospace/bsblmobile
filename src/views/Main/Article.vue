@@ -11,27 +11,15 @@
 </template>
 
 <script lang="ts">
+import { IonPage,IonContent, } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import axios from 'axios'
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
-import { getApiURL } from '../../services/token.service';
-
-axios.get(`${getApiURL}/berita_acara/getitem?kategori=webinar`)
-.then((response) => {
-    console.log(response);
-})
-.catch((error) => {
-    console.log(error);
-})
 
 export default defineComponent({
   name: 'Home',
   components: {
     IonContent,
-    IonHeader,
     IonPage,
-    IonTitle,
-    IonToolbar
   },
   method: {
 

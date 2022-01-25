@@ -543,6 +543,8 @@ module.exports = {
     }),
     minHeight: {
       0: '0px',
+      xxxxxs: '6rem',
+      xxxxs: '10rem',
       xxxs: '14rem',
       xxs: '16rem',
       xs: '20rem',

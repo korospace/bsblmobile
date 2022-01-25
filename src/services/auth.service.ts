@@ -1,10 +1,10 @@
-import { getApiURL, TokenService } from "./token.service";
-import router      from "@/router";
-import createStore from "@/store";
-import axios       from "axios";
+import { TokenService } from "./token.service";
+import router           from "@/router";
+import createStore      from "@/store";
+import axios            from "axios";
 
 const checkAuth = function() {
-    axios.get(`${getApiURL}/nasabah/sessioncheck`,{
+    axios.get(`${createStore.state.APIURL}/nasabah/sessioncheck`,{
       headers: {
         token: TokenService.getToken()!
       }
@@ -19,6 +19,7 @@ const checkAuth = function() {
             message:'waktu login sudah habis, silahkan login ulang'}
           );
         }
+        
         TokenService.removeToken();
         router.push('/login');
       } 

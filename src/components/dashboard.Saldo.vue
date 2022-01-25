@@ -95,60 +95,19 @@
           v-if="sampahMasuk"
           class="grid grid-cols-4 gap-2 place-content-center px-6 mt-6 text-white">
             <div
-              @click="detilSampahMasuk(sampahMasuk.kertas.kategori);"
+              v-for="x in arrayCard" :key="x"
+              @click="detilSampahMasuk(sampahMasuk[x.name].kategori);"
               class="text-center rounded-lg py-1.5 sm320:py-3 bg-gradient-to-t from-lime-700 to-lime-400 transition transform active:scale-95">
                 <div class="px-5">
                   <font-awesome-icon
-                    :icon="faScroll" size="1x"
+                    :icon="x.icon" size="1x"
                     class=""/>
                 </div>
                 <p class="mt-2 text-xxs sm320:text-xs">
-                  {{ sampahMasuk.kertas.kategori }}
+                  {{ sampahMasuk[x.name].kategori }}
                 </p>
                 <p class="mt-2 border-b border-white opacity-40"></p>
-                <p class="mt-2 text-xxs sm320:text-xs">{{ sampahMasuk.kertas.total }} kg</p>
-            </div>
-            <div
-              @click="detilSampahMasuk(sampahMasuk.plastik.kategori);"
-              class="text-center rounded-lg py-1.5 sm320:py-3 bg-gradient-to-t from-lime-700 to-lime-400 transition transform active:scale-95">
-                <div class="px-5">
-                  <font-awesome-icon
-                    :icon="faWineBottle" size="1x"
-                    class=""/>
-                </div>
-                <p class="mt-2 text-xxs sm320:text-xs">
-                  {{ sampahMasuk.plastik.kategori }}
-                </p>
-                <p class="mt-2 border-b border-white opacity-40"></p>
-                <p class="mt-2 text-xxs sm320:text-xs">{{ sampahMasuk.plastik.total }} kg</p>
-            </div>
-            <div
-              @click="detilSampahMasuk(sampahMasuk.logam.kategori);"
-              class="text-center rounded-lg py-1.5 sm320:py-3 bg-gradient-to-t from-lime-700 to-lime-400 transition transform active:scale-95">
-                <div class="px-5">
-                  <font-awesome-icon
-                    :icon="faTrophy" size="1x"
-                    class=""/>
-                </div>
-                <p class="mt-2 text-xxs sm320:text-xs">
-                  {{ sampahMasuk.logam.kategori }}
-                </p>
-                <p class="mt-2 border-b border-white opacity-40"></p>
-                <p class="mt-2 text-xxs sm320:text-xs">{{ sampahMasuk.logam.total }} kg</p>
-            </div>
-            <div
-              @click="detilSampahMasuk(sampahMasuk['lain-lain'].kategori);"
-              class="text-center rounded-lg py-1.5 sm320:py-3 bg-gradient-to-t from-lime-700 to-lime-400 transition transform active:scale-95">
-                <div class="px-5">
-                  <font-awesome-icon
-                    :icon="faRecycle" size="1x"
-                    class=""/>
-                </div>
-                <p class="mt-2 text-xxs sm320:text-xs">
-                  {{ sampahMasuk['lain-lain'].kategori }}
-                </p>
-                <p class="mt-2 border-b border-white opacity-40"></p>
-                <p class="mt-2 text-xxs sm320:text-xs">{{ sampahMasuk['lain-lain'].total }} kg</p>
+                <p class="mt-2 text-xxs sm320:text-xs">{{ sampahMasuk[x.name].total }} kg</p>
             </div>
         </div>
     </div>
@@ -156,8 +115,7 @@
 </template>
 
 <script>
-import { defineComponent }   from 'vue';
-import { ref, computed }     from "vue";
+import { defineComponent, ref, computed }   from 'vue';
 import { useStore }          from 'vuex';
 import PopUpDetilSampahMasuk from '@/components/popUpDetilSampahMasuk.vue';
 import { FontAwesomeIcon }   from '@fortawesome/vue-fontawesome'
@@ -170,21 +128,30 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
+    const arrayCard = ref([
+      {name: 'kertas',    icon: faScroll},
+      {name: 'plastik',   icon: faTrophy},
+      {name: 'logam',     icon: faWineBottle},
+      {name: 'lain-lain', icon: faRecycle}
+    ]);
 
     const currentTab  = computed(() => {
       return store.state.currentDashboardTab;
     });
 
+    // -- Username --
     const username = computed(() => {
       return store.state.dataNasabah.username;
     });
 
+    // -- ID Nasabah --
     const idNasabah = computed(() => {
       const id = (store.state.dataNasabah.id) ? store.state.dataNasabah.id : "";
       
       return `${id.slice(0, 5)}&nbsp;&nbsp;&nbsp;${id.slice(5, 9)}&nbsp;&nbsp;&nbsp;${id.slice(9,99999999)}`;
     });
 
+    // -- Tanggal bergabung --
     const bergabung = computed(() => {
       const createdAt = (store.state.dataNasabah.created_at)?store.state.dataNasabah.created_at:0;
       const date      = new Date(parseInt(createdAt) * 1000);
@@ -192,19 +159,23 @@ export default defineComponent({
       return `${date.toLocaleString("en-US",{day: "numeric"})}/${date.toLocaleString("en-US",{month: "numeric"})}/${date.toLocaleString("en-US",{year: "numeric"})}`
     });
 
+    // -- Saldo Uang -- 
     const saldoUang = computed(() => {
       const uang = (store.state.dataSaldo.uang) ? store.state.dataSaldo.uang : ""; 
       return uang.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
     });
 
+    // -- Saldo Emas -- 
     const saldoEmas = computed(() => {
       return store.state.dataSaldo.emas;
     });
 
+    // -- Sampah masuk --
     const sampahMasuk = computed(() => {
       return store.state.dataSampahMasuk;
     });
 
+    // -- Open modal detil --
     const detilSampahMasuk = (kategori) => {
       store.commit('setDetilSampahMasuk',{
           show    : true,
@@ -226,6 +197,7 @@ export default defineComponent({
       bergabung,
       saldoUang,
       saldoEmas,
+      arrayCard,
       sampahMasuk,
       detilSampahMasuk
     }
