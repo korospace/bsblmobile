@@ -161,9 +161,6 @@
                             Tanggal lahir
                         </label>
                     </div>
-                    <small class="absolute mt-1 tracking-wide text-red-500">
-                        {{ errors.tgl_lahir }}
-                    </small>
                 </div>
                 
                 <!-- kelamin -->
@@ -185,9 +182,6 @@
                             kelamin
                         </label>
                     </div>
-                    <small class="absolute mt-1 tracking-wide text-red-500">
-                        {{ errors.kelamin }}
-                    </small>
                 </div>
                 
                 <!-- RT & RW -->
