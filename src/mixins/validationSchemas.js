@@ -1,6 +1,9 @@
 import * as Yup from 'yup';
 
-// -- form validation rules --
+/* eslint-disable-next-line */
+const emailRules = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+// -- registration rules --
 const registerSchema = Yup.object().shape({
     nama_lengkap: Yup.string()
         .required(' ')
@@ -45,4 +48,36 @@ const registerSchema = Yup.object().shape({
     kodepos: Yup.string().required(' ')
 });
 
-export {registerSchema};
+// -- edit profile rules --
+const profileSchema = Yup.object().shape({
+    nama_lengkap: Yup.string()
+        .required(' ')
+        .max(40, 'maksimal 40 karakter'),
+    username: Yup.string()
+        .required(' ')
+        .min(8, 'minimal 8 karakter')
+        .max(20, 'maksimal 20 karakter'),
+    email: Yup.string()
+        .required(' ')
+        .email('email tidak valid'),
+    // password: Yup.string()
+    //     .required(' ')
+    //     .min(8, 'minimal 8 karakter')
+    //     .max(20, 'maksimal 20 karakter'),
+    notelp: Yup.string()
+        .required(' ')
+        .max(14, 'maksimal 14 character')
+        .matches(/^\d+$/, 'nomor tidak valid'),
+    tgl_lahir: Yup.string()
+        .required(' '),
+    kelamin: Yup.string()
+        .required(' '),
+    alamat: Yup.string()
+        .required(' ')
+        .max(255, 'maksimal 255 karakter'),
+});
+
+export {
+    registerSchema,
+    profileSchema
+};
