@@ -14,17 +14,26 @@
         <ion-router-outlet></ion-router-outlet>
 
         <!-- // Tabs // -->
-        <ion-tab-bar slot="bottom">
-          <ion-tab-button tab="tab1" href="/dashboard">
-            <font-awesome-icon :icon="faHome" size="2x"/>
+        <ion-tab-bar style="box-shadow: 0px -2px 6px rgba(0,0,0,0.1);">  
+          <ion-tab-button tab="tab1" href="/artikel">
+            <font-awesome-icon class="opacity-70" :icon="faInfoCircle" size="2x"/>
+            info
           </ion-tab-button>
-            
-          <ion-tab-button tab="tab2" href="/artikel">
-            <font-awesome-icon :icon="faNewspaper" size="2x"/>
-          </ion-tab-button>
+
+          <div class="h-full flex justify-center items-end pb-1.5 relative">
+            <ion-tab-button
+              tab="tab2" 
+              href="/dashboard"
+              class="home bg-gradient-to-l from-lime-600 to-lime-400 h-12 rounded-2xl absolute -top-6"
+              style="box-shadow: 0px -2px 6px rgba(0,0,0,0.1);">
+                <font-awesome-icon :icon="faHome" size="2x"/>
+            </ion-tab-button>
+            <small>home</small>
+          </div>
           
           <ion-tab-button tab="tab3" href="/profile">
-            <font-awesome-icon :icon="faUser" size="2x"/>
+            <font-awesome-icon class="opacity-70" :icon="faUser" size="2x"/>
+            profile
           </ion-tab-button>
         </ion-tab-bar>
         
@@ -38,7 +47,7 @@ import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonPage, IonRouterOutlet, I
 import { defineComponent } from 'vue';
 import { useStore }        from 'vuex'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faHome, faNewspaper, faUser, } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faInfoCircle, faUser, } from '@fortawesome/free-solid-svg-icons'
 
 export default defineComponent({
   name: 'Tabs',
@@ -69,7 +78,7 @@ export default defineComponent({
 
     return {
       faHome,
-      faNewspaper,
+      faInfoCircle,
       faUser,
       doRefresh
     }
@@ -78,5 +87,19 @@ export default defineComponent({
 </script>
 
 <style scoped>
+  ion-tabs { contain: none; }
+  ion-tab-bar { contain: none }
+  
+  ion-tab-button::part(native){
+    overflow: visible;
+  }
+  
+  ion-tab-button{
+    --color-selected: #84CC16;
+  }
 
+  ion-tab-button.home{
+    /* --color: rgba(255,255,255,0.4); */
+    --color-selected: #fff;
+  }
 </style>

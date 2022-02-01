@@ -7,7 +7,7 @@
         v-slot="{ errors }"
         :validation-schema="profileSchema"
         @submit="doEditProfile"
-        class="min-h-full pb-6 relative bg-gray-100">
+        class="min-h-full pb-11 relative bg-gray-100">
           
           <!-- // header // -->
           <x-header :title="'personal informations'" />

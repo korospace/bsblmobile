@@ -2,7 +2,7 @@
   <transition name="fade">
     <div
       v-if="currentTab == 'saldo saya'"
-      class="tabcontent text-white pb-6">
+      class="tabcontent text-white pb-12">
 
         <pop-up-detil-sampah-masuk />
 
