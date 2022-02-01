@@ -14,8 +14,8 @@
               :class="{'hidden':username}"></div>
             <div
               id="idcard" 
-              class="rounded-md overflow-hidden">
-                <div id="bg-idcard" class="p-4" style="background: rgba(0,0,0,0.2);">
+              class="rounded-xl relative">
+                <div id="bg-idcard" class="p-4 rounded-xl" style="background: rgba(101, 163, 13, 0.2);">
                   <div class="flex justify-between">
                     <font-awesome-icon
                     :icon="faWifi" size="1x"
@@ -41,13 +41,19 @@
                     </div>
                   </div>
                 </div>
+
+                <!-- shadow -->
+                <div class="absolute left-3 right-3 h-2.5 bg-lime-500 rounded-b-lg">
+                </div>
+                <div class="absolute left-6 right-6 -bottom-5 h-2.5 bg-lime-300 rounded-b-lg">
+                </div>
             </div>
         </div>
 
         <!-- Saldo -->
-        <div id="saldo-container" class="flex px-6 mt-6">
+        <div id="saldo-container" class="flex px-6 mt-11">
           <div
-            class="flex-1 mr-1 bg-white flex flex-col items-center rounded-md py-3 px-5 overflow-hidden relative"
+            class="flex-1 mr-1 bg-white flex flex-col items-center rounded-md py-3 px-5 overflow-hidden relative shadow-xl"
             :class="{'animate-pulse':saldoUang == ''}">
               <div 
                 class="absolute z-10 top-0 bottom-0 right-0 left-0 bg-lime-400 rounded-md"
@@ -64,7 +70,7 @@
           </div>
 
           <div 
-            class="flex-1 ml-1 bg-white flex flex-col items-center rounded-md py-3 px-5 overflow-hidden relative"
+            class="flex-1 ml-1 bg-white flex flex-col items-center rounded-md py-3 px-5 overflow-hidden relative shadow-xl"
             :class="{'animate-pulse':!saldoUang}">
               <div 
                 class="absolute z-10 top-0 bottom-0 right-0 left-0 bg-lime-400 rounded-md"
@@ -97,7 +103,7 @@
             <div
               v-for="x in arrayCard" :key="x"
               @click="detilSampahMasuk(sampahMasuk[x.name].kategori);"
-              class="text-center rounded-lg py-1.5 sm320:py-3 bg-gradient-to-t from-lime-700 to-lime-400 transition transform active:scale-95">
+              class="text-center rounded-lg py-1.5 sm320:py-3 bg-gradient-to-t from-lime-700 to-lime-400 transition transform active:scale-95 shadow-lg">
                 <div class="px-5">
                   <font-awesome-icon
                     :icon="x.icon" size="1x"

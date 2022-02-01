@@ -210,24 +210,24 @@
                     <div class="text-lg text-gray-600 mb-6 relative">
                       <Field
                         @keyup="clearErrorExist" 
-                        type="password" name="new_password"
                         placeholder="Password baru" autocomplete="off" 
+                        type="password" name="new_password" v-model="newPass.value"
                         class="block py-2 px-3 w-full border-b-2 border-gray-400 focus:outline-none bg-gray-100 focus:bg-gray-200"
-                        :class="{'border-red-500':invalidNewPass.status}" />
+                        :class="{'border-red-500':newPass.status}" />
                       <small class="absolute transform -translate-y-1 tracking-wide text-red-500">
-                          {{ invalidNewPass.message }}
+                          {{ newPass.message }}
                       </small>
                     </div>
 
                     <div class="text-lg text-gray-600 mb-6 relative">
                       <Field
                         @keyup="clearErrorExist" 
-                        type="password" name="old_password"
                         placeholder="Password lama" autocomplete="off" 
+                        type="password" name="old_password" v-model="oldPass.value"
                         class="block py-2 px-3 w-full border-b-2 border-gray-400 focus:outline-none bg-gray-100 focus:bg-gray-200"
-                        :class="{'border-red-500':invalidOldPass.status}" />
+                        :class="{'border-red-500':oldPass.status}" />
                       <small class="absolute transform -translate-y-1 tracking-wide text-red-500">
-                          {{ invalidOldPass.message }}
+                          {{ oldPass.message }}
                       </small>
                     </div>
                 </div>
@@ -286,11 +286,13 @@ export default defineComponent({
     const emailIsExist    = ref(false);
     const usernameIsExist = ref(false);
     const notelplIsExist  = ref(false);
-    const invalidNewPass  = reactive({
+    const newPass  = reactive({
+      value: "",
       status: false,
       message: ""
     })
-    const invalidOldPass  = reactive({
+    const oldPass  = reactive({
+      value: "",
       status: false,
       message: ""
     })
@@ -316,12 +318,12 @@ export default defineComponent({
         notelplIsExist.value = false;
       }
       else if (event.target.name == 'new_password') {
-        invalidNewPass.status  = false;
-        invalidNewPass.message = '';
+        newPass.status  = false;
+        newPass.message = '';
       }
       else if (event.target.name == 'old_password') {
-        invalidOldPass.status  = false;
-        invalidOldPass.message = '';
+        oldPass.status  = false;
+        oldPass.message = '';
       }
     }
 
@@ -331,10 +333,10 @@ export default defineComponent({
       emailIsExist.value     = false;
       usernameIsExist.value  = false;
       notelplIsExist.value   = false;
-      invalidNewPass.status  = false;
-      invalidNewPass.message = '';
-      invalidOldPass.status  = false;
-      invalidOldPass.message = '';
+      newPass.status  = false;
+      newPass.message = '';
+      oldPass.status  = false;
+      oldPass.message = '';
 
       for ( const key in event ) {
         if (key == 'tgl_lahir') {
@@ -361,23 +363,24 @@ export default defineComponent({
       newProfileData["id"]  = dataNasabah.value.id; 
       newProfileData["nik"] = dataNasabah.value.nik;
 
+      // -- New Password Validation --
       if (formEditProfile.get('new_password')) {
         const newPass = formEditProfile.get('new_password');
         let isInvalid = false;
 
         if (newPass.length < 8 || newPass.length > 20) {
-          invalidNewPass.status  = true;
-          invalidNewPass.message = 'minimal 8 huruf dan maksimal 20 huruf';
+          newPass.status  = true;
+          newPass.message = 'minimal 8 huruf dan maksimal 20 huruf';
           isInvalid = true;
         }
         if (/\s/.test(newPass)) {
-          invalidNewPass.status  = true;
-          invalidNewPass.message = 'tidak boleh ada spasi';
+          newPass.status  = true;
+          newPass.message = 'tidak boleh ada spasi';
           isInvalid = true;
         }
         if (event.old_password === undefined) {
-          invalidOldPass.status  = true;
-          invalidOldPass.message = 'password lama harus di isi';
+          oldPass.status  = true;
+          oldPass.message = 'password lama harus di isi';
           isInvalid = true;
         }
         if (isInvalid) {
@@ -397,6 +400,8 @@ export default defineComponent({
           store.commit("setShowLoading",{show:false,text:""});
           store.commit("setDataNasabah",newProfileData);
           editMode.value = false;
+          newPass.value  = '';
+          oldPass.value  = '';
 
           store.commit('setDataAlert',{show:true,type:'success',message:`<b>Success!</b> profile berhasil diubah`});
 
@@ -419,8 +424,8 @@ export default defineComponent({
               notelplIsExist.value = true;
             }
             if (error.response.data.messages.old_password) {
-              invalidOldPass.status  = true;
-              invalidOldPass.message = error.response.data.messages.old_password;
+              oldPass.status  = true;
+              oldPass.message = error.response.data.messages.old_password;
             }
           }
           // Unauthorize
@@ -453,13 +458,18 @@ export default defineComponent({
         }
       })
       .then(() => {
-          store.commit("setShowLoading",{show:false,text:""});
-          TokenService.removeToken();
-          router.push('/login');
+        store.commit("setShowLoading",{show:false,text:""});
+        store.commit("setDataNasabah","");
+        TokenService.removeToken();
+        editMode.value = false;
+        router.push('/login');
       })
       .catch(error => {
-          console.log(error);
-          console.log('Lho kok eror');
+        store.commit("setShowLoading",{show:false,text:""});
+        store.commit("setDataNasabah","");
+        TokenService.removeToken();
+        editMode.value = false;
+        router.push('/login');
       })
     }
 
@@ -473,8 +483,8 @@ export default defineComponent({
       emailIsExist,
       usernameIsExist,
       notelplIsExist,
-      invalidNewPass,
-      invalidOldPass,
+      newPass,
+      oldPass,
       clearErrorExist,
       profileSchema,
       doEditProfile,
