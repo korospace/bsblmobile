@@ -4,6 +4,13 @@ import createStore      from "@/store";
 import axios            from "axios";
 
 const checkAuth = function() {
+  const isAuthenticated = TokenService.getToken() !== null;
+  
+  if (isAuthenticated == false) {
+    TokenService.removeToken();
+    router.push('/login');
+  } 
+  else {
     axios.get(`${createStore.state.APIURL}/nasabah/sessioncheck`,{
       headers: {
         token: TokenService.getToken()!
@@ -31,6 +38,7 @@ const checkAuth = function() {
         );
       }
     })
+  }
 }
 
 const privateRoute = function(to: any, from: any, next: any) {
