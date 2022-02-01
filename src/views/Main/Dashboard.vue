@@ -30,35 +30,37 @@
 
           </div>
 
-          <div class="pt-6 bg-gray-100 rounded-t-3xl shadow-xl">
-            <!-- Toggle Switch -->
-            <div class="px-6 mb-6">
-              <div
-                id="toggle-wraper"
-                class="w-full bg-gray-100 flex rounded-md relative px-1"
-                style="box-shadow: inset 0 0 4px 0px rgba(0, 0, 0, 0.3);">
-                  <button
-                    id="toggle"
-                    class="absolute left-0 transform h-full w-1/2 text-white capitalize tracking-widest bg-lime-600 transition duration-200 rounded-md"
-                    :class="{'translate-x-full':currentTab == 'transaksi'}">
-                      {{ currentTab }}
-                  </button>
-                  
-                  <button
-                    class="flex-1 py-3.5 text-gray-500 capitalize text-center outline-none"
-                    @click="switchTab('saldo saya')">
-                      saldo saya
-                  </button>
-                  <button
-                    class="flex-1 py-3.5 text-gray-500 capitalize text-center outline-none"
-                    @click="switchTab('transaksi')">
-                      transaksi
-                  </button>
+          <div 
+            class="pt-6 bg-gray-100 rounded-t-3xl" 
+            style="box-shadow: 0px -2px 10px rgba(0,0,0,0.2);">
+              <!-- Toggle Switch -->
+              <div class="px-6 mb-6">
+                <div
+                  id="toggle-wraper"
+                  class="w-full bg-gray-100 flex rounded-md relative px-1"
+                  style="box-shadow: inset 0 0 4px 0px rgba(0, 0, 0, 0.3);">
+                    <button
+                      id="toggle"
+                      class="absolute left-0 transform h-full w-1/2 text-white capitalize tracking-widest bg-lime-600 transition duration-200 rounded-md"
+                      :class="{'translate-x-full':currentTab == 'transaksi'}">
+                        {{ currentTab }}
+                    </button>
+                    
+                    <button
+                      class="flex-1 py-3.5 text-gray-500 capitalize text-center outline-none"
+                      @click="switchTab('saldo saya')">
+                        saldo saya
+                    </button>
+                    <button
+                      class="flex-1 py-3.5 text-gray-500 capitalize text-center outline-none"
+                      @click="switchTab('transaksi')">
+                        transaksi
+                    </button>
+                </div>
               </div>
-            </div>
-          
-            <saldo />
-            <transaksi />
+            
+              <saldo />
+              <transaksi />
           </div>
 
       </div>

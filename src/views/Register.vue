@@ -242,9 +242,9 @@
                 </div>
 
                 <!-- search kodepos -->
-                <div
-                  class="mt-10 p-2 rounded border-2 relative overflow-y-visible flex"
-                  @submit.prevent="searchKodePos">
+                <form 
+                  @submit.prevent="searchKodePos"
+                  class="mt-10 p-2 rounded border-2 relative overflow-y-visible flex">
                     <div class="p-0.5 rounded border relative flex items-center flex-1">
                         <font-awesome-icon
                           :icon="faSearch" size="1x" v-if="loadingSearch == false"
@@ -255,7 +255,7 @@
                             </circle>
                         </svg>
                         <input
-                          type="text" placeholder="masukan nama wilayah" v-model="searchKey"
+                          type="text" placeholder="masukan nama wilayah" v-model="searchKeyCom"
                           class="w-full py-1.5 pl-7 pr-1.5 text-xs text-gray-700 tracking-wide focus:outline-none">
                     </div>
 
@@ -266,9 +266,8 @@
                     </div>
 
                     <!-- list kodepos -->
-                    <div v-if="searchKey !== ''">
+                    <div v-if="allKodePos.list.length != 0">
                         <div
-                          v-if="allKodePos.list.length != 0"
                           class="max-h-28 mt-10 border rounded overflow-auto bg-white absolute left-2 right-2 z-20">
                             <div
                               v-for="(data,index) in allKodePos.list" :key="index"
@@ -280,7 +279,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
                 
                 <!-- kodepos -->
                 <div
@@ -376,10 +375,19 @@ export default defineComponent({
             }
         }
 
+        const searchKeyCom = computed({
+            get:() => searchKey.value,
+            set:(val) => {
+                if (val == '') {
+                    allKodePos.list = []
+                }
+                searchKey.value = val;
+            }
+        })
+
         // -- search kodepos --
         const searchKodePos = () => {
             if (searchKey.value == '') {
-                allKodePos.list = [];
                 return 0;
             } 
             else {
@@ -498,6 +506,7 @@ export default defineComponent({
             registerSchema,
             faSearch,
             searchKey,
+            searchKeyCom,
             searchKodePos,
             loadingSearch,
             allKodePos,
