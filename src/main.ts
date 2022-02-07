@@ -24,8 +24,8 @@ import '@ionic/vue/css/display.css';
 import './theme/variables.css';
 
 /* Global component */ 
-import Alert   from "@/components/alert.vue";
-import Loading from "@/components/loading.vue";
+import Alert         from "@/components/alert.vue";
+import Loading       from "@/components/loading.vue";
 
 const app = createApp(App)
   .use(store)

@@ -5,28 +5,24 @@
         id="container"
         class="min-h-full pb-6 relative bg-gradient-to-t from-lime-700 to-lime-400">
 
-        <!-- // header // -->
-          <div class="bg-white p-6 rounded-b-3xl flex items-center relative z-20">
-            <img src="@/assets/images/banksampah-logo.png" alt="" class="loginLogo w-20">
-            <p
-              class="flex-1 text-xl capitalize text-center"
-              style="font-family:QuicksandSemiBold;background: linear-gradient(to right, #BFD765, #81A257);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
-                Bank Sampah Budi Luhur
-            </p>
-          </div>
-
-          <!-- // article card // -->
-          <div class="mx-4 my-2">
-            <p class="text-gray-100">Artikel Terbaru</p>
-            <div class="rounded-lg shadow-lg bg-white">
-              <img class="w-full rounded-lg" src="@/assets/images/Card-Member.jpg">
-              <div class="px-6 py-4">
-                <div class="font-bold mb-1">Title</div>
-                <p class="text-gray-700 text-xs">
-                  Caption here
-                </p>
+          <!-- // header // -->
+          <x-header :title="'Berita Dan Info Sampah'" />
+          
+          <!-- // articles // -->
+          <div class="px-4 my-6 bg-red-100 relative">
+            
+            <!-- Template card - Jangan dihapus -->
+            <!-- <div class="rounded-xl overflow-hidden w-full">
+              <div class="w-full bg-white">
+                <img src="@/assets/images/default-thumbnail.jpg" alt="" class="loginLogo rounded-b-xl w-full">
               </div>
-            </div>
+              <div class="bg-white px-4 pt-3 pb-10 text-left text-sm" >
+                <span style="display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, nisi.
+                </span>
+              </div>
+            </div> -->
+
           </div>
 
           <!-- // info harga sampah terkini // -->
@@ -63,19 +59,41 @@
   </ion-page>
 </template>
 
-<script lang="ts">
-import { IonPage,IonContent, } from '@ionic/vue';
-import { defineComponent } from 'vue';
-import axios from 'axios'
+<script>
+  import { IonPage,IonContent,onIonViewWillEnter} from '@ionic/vue';
+  import { ref, computed, defineComponent } from 'vue';
+  import { useStore }        from 'vuex'
+  import xHeader             from "@/components/dashboard.header.vue";
 
-export default defineComponent({
-  name: 'Home',
-  components: {
-    IonContent,
-    IonPage,
-  },
-  method: {
+  export default defineComponent({
+    components: {
+      IonContent,
+      IonPage,
+      xHeader,
+    },
+    setup() {
+      const store = useStore();
 
-  }
-});
+      const articles = computed(() => {
+        return store.state.dataArticles;
+      });
+
+      onIonViewWillEnter(() => {
+        store.commit("setDataArticles","");
+        store.dispatch("getArticles");
+        // if (!articles.value) {
+        //   store.commit("setDataArticles","");
+        //   store.dispatch("getArticles");
+        // }
+      })
+
+      return { 
+        articles,
+      }
+    }
+  });
 </script>
+
+<style scoped>
+  
+</style>

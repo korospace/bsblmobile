@@ -3,7 +3,7 @@
     <ion-content :fullscreen="true">
       <div
         id="container"
-        class="min-h-full bg-gradient-to-l from-lime-600 to-lime-400">
+        class="min-h-full flex flex-col bg-gradient-to-l from-lime-600 to-lime-400">
           
           <!-- // header // -->
           <div class="px-4 py-6 rounded-b-3xl relative">
@@ -31,7 +31,7 @@
           </div>
 
           <div 
-            class="pt-6 bg-gray-100 rounded-t-3xl" 
+            class="pt-6 bg-gray-100 rounded-t-3xl flex-1" 
             style="box-shadow: 0px -2px 10px rgba(0,0,0,0.2);">
               <!-- Toggle Switch -->
               <div class="px-6 mb-6">
