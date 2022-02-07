@@ -19,6 +19,7 @@ export default createStore({
       },
       dataSaldo : "",
       dataNasabah : "",
+      dataArticles : "",
       dataSampahMasuk: "",
       dataDetilSampahMasuk: {
         show     : false,
@@ -58,7 +59,10 @@ export default createStore({
     setDataNasabah:  function(state: any, value) {
       state.dataNasabah = value;
     }, 
-    setDataSampahMasuk:  function(state: any, value) {
+    setDataArticles:  function(state: any, value) {
+      state.dataArticles = value;
+    }, 
+    setDataSampahMasuk:  function(state: any, value) {      
       state.dataSampahMasuk = value;
     }, 
     setDetilSampahMasuk: function(state: any, value) {
@@ -122,6 +126,15 @@ export default createStore({
       })
       .then(response => {
         commit("setDataSampahMasuk",response.data.data);
+      })
+      .catch(error => {
+        
+      })
+    },
+    getArticles: function ({ commit }) {
+      axios.get(`${this.state.APIURL}/artikel/getartikel?orderby=terbaru&limit=5`)
+      .then(response => {
+        commit("setDataArticles",response.data.data);
       })
       .catch(error => {
         

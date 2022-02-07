@@ -1,13 +1,6 @@
 /* Ionic Variables and Theming. For more info, please see:
 http://ionicframework.com/docs/theming/ */
 
-/* Wanna use tailwind? debug yourself! */
-/* 
-  @tailwind base;
-  @tailwind components;
-  @tailwind utilities; 
-*/
-
 @font-face {
   font-family: Quicksand;
   src: url("../assets/fonts/Quicksand-Medium.ttf"); 
