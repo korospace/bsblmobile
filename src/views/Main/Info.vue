@@ -9,7 +9,7 @@
           <x-header :title="'Berita Dan Info Sampah'" />
 
           <!-- artikel skeleton -->
-          <div class="mt-5 mb-10 px-4" v-if="articles == ''">
+          <div class="my-6 px-4" v-if="articles == ''">
             <div class="rounded-xl overflow-hidden w-full">
               <div class="w-full bg-white">
                 <div class="overflow-hidden bg-gray-400 animate-pulse rounded-b-xl">
@@ -17,9 +17,9 @@
                 </div>
               </div>
               <div class="bg-white p-4 py-5 text-left text-sm" >
-                <div class="h-4 rounded-sm w-full bg-gray-400 animate-pulse mb-3">
+                <div class="h-3 rounded-sm w-full bg-gray-400 animate-pulse mb-3">
                 </div>
-                <div class="h-4 rounded-sm w-full bg-gray-400 animate-pulse">
+                <div class="h-3 rounded-sm w-full bg-gray-400 animate-pulse">
                 </div>
               </div>
             </div>
@@ -33,21 +33,26 @@
            :slides-per-view="1.1">
               <template v-for="article in articles" :key="article.id">
                 <swiper-slide>
-                  <div class="px-4 my-6">
-                    <div class="rounded-xl overflow-hidden w-full bg-white">
-                      <div class="w-full bg-white relative">
-                        <img src="@/assets/images/default-thumbnail.webp" alt="" class="opacity-0 rounded-b-xl w-full">
-                        <div class="overflow-hidden bg-gray-400 rounded-b-xl absolute top-0 bottom-0 left-0 right-0">
-                          <img :src="article.thumbnail" alt="" class="w-full h-full">
+                  <router-link 
+                    :to="{ path: '/artikel', query: { slug:article.slug } }" 
+                    class="block px-4 my-6">
+                      <div class="rounded-xl overflow-hidden w-full bg-white">
+                        <div class="w-full bg-white relative">
+                          <img src="@/assets/images/default-thumbnail.webp" alt="" class="opacity-0 rounded-b-xl w-full">
+                          <div class="overflow-hidden bg-gray-400 rounded-b-xl absolute top-0 bottom-0 left-0 right-0">
+                            <img :src="article.thumbnail" alt="" class="w-full h-full">
+                          </div>
+                        </div>
+                        <div class="bg-white px-4 py-5">
+                          <div class="flex justify-between mb-2">
+                            <div class="text-gray-500 text-sm">{{ article.kategori }}</div>
+                          </div>
+                          <span class="text-gray-700 text-left text-md tracking-wide capitalize" style="display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;">
+                            {{article.title}}
+                          </span>
                         </div>
                       </div>
-                      <div class="bg-white px-4 py-5">
-                        <span class="text-gray-700 text-left text-sm tracking-wide capitalize" style="display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;">
-                          {{article.title}}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
+                  </router-link>
                 </swiper-slide>
               </template>
           </swiper>
