@@ -103,6 +103,8 @@ export default createStore({
             );
           }
 
+          commit("setDataNasabah","");
+          commit("setDataArticles","");
           TokenService.removeToken()!;
           router.push("/login");
         }

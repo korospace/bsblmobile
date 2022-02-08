@@ -27,7 +27,8 @@ const checkAuth = function() {
           );
         }
         
-        createStore.commit("setDataNasabah","")
+        createStore.commit("setDataNasabah","");
+        createStore.commit("setDataArticles","");
         TokenService.removeToken();
         router.push('/login');
       } 

@@ -26,34 +26,40 @@
           </div>
           
           <!-- // articles // -->
-          <swiper v-if="articles !== ''" class="w-full" :pagination="{ clickable: true }" :slides-per-view="1">
-            <template v-for="article in articles" :key="article.id">
-              <swiper-slide>
-                <div class="px-4 my-6" >
-                  <div class="rounded-xl overflow-hidden w-full bg-white">
-                    <div class="w-full bg-white relative">
-                      <img src="@/assets/images/default-thumbnail.jpg" alt="" class="opacity-0 rounded-b-xl w-full">
-                      <img :src="article.thumbnail" alt="" class="rounded-b-xl absolute top-0 h-full right-0">
-                    </div>
-                    <div class="bg-white px-4 pt-3 pb-10 text-left text-sm capitalize" >
-                      <span style="display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;">
-                        {{article.title}}
-                      </span>
+          <swiper
+           v-if="articles !== ''" 
+           class="w-full" 
+           :pagination="{ clickable: true }" 
+           :slides-per-view="1.1">
+              <template v-for="article in articles" :key="article.id">
+                <swiper-slide>
+                  <div class="px-4 my-6">
+                    <div class="rounded-xl overflow-hidden w-full bg-white">
+                      <div class="w-full bg-white relative">
+                        <img src="@/assets/images/default-thumbnail.webp" alt="" class="opacity-0 rounded-b-xl w-full">
+                        <div class="overflow-hidden bg-gray-400 rounded-b-xl absolute top-0 bottom-0 left-0 right-0">
+                          <img :src="article.thumbnail" alt="" class="w-full h-full">
+                        </div>
+                      </div>
+                      <div class="bg-white px-4 py-5">
+                        <span class="text-gray-700 text-left text-sm tracking-wide capitalize" style="display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;">
+                          {{article.title}}
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </swiper-slide>
-            </template>
+                </swiper-slide>
+              </template>
           </swiper>
 
           <!-- // info harga sampah terkini // -->
           <div class="mx-4 rounded-t-xl shadow-lg bg-white flex-1">
             <div 
-              class="font-bold text-md p-6 text-gray-600 border-b border-gray-200"
+              class="font-bold text-md px-4 py-6 text-gray-600 border-b border-gray-200"
               style="font-family:QuicksandSemiBold;">
                 Harga Sampah Terkini
             </div>
-            <div class="table p-6 w-full">
+            <div class="table px-4 py-6 w-full">
               <!-- skeleton jenis sampah -->
               <template
                 v-if="jenisSampah == ''">
@@ -91,6 +97,7 @@
                             Rp. {{ modifHarga(itemB.harga) }}
                           </div>
                       </div>
+                      <hr class="mt-2.5 opacity-60" style="background-image: linear-gradient(to right,rgba(0,0,0,0),rgba(0,0,0,.4),rgba(0,0,0,0))">
                   </div>
               </template>
             </div>
@@ -159,7 +166,7 @@
       };
 
       onIonViewWillEnter(() => {
-        if (!store.state.dataNasabah) {
+        if (articles.value == "") {
           store.commit("setDataArticles","");
           store.dispatch("getArticles");
           store.commit("setDataJenisSampah","");
