@@ -467,7 +467,6 @@ export default defineComponent({
       .catch(error => {
         store.commit("setShowLoading",{show:false,text:""});
         store.commit("setDataNasabah","");
-        store.commit("setDataArticles","");
         TokenService.removeToken();
         editMode.value = false;
         router.push('/login');

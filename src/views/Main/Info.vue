@@ -7,26 +7,47 @@
 
           <!-- // header // -->
           <x-header :title="'Berita Dan Info Sampah'" />
+
+          <!-- artikel skeleton -->
+          <div class="mt-5 mb-10 px-4" v-if="articles == ''">
+            <div class="rounded-xl overflow-hidden w-full">
+              <div class="w-full bg-white">
+                <div class="overflow-hidden bg-gray-400 animate-pulse rounded-b-xl">
+                  <img src="@/assets/images/default-thumbnail.webp" alt="" class="opacity-0 w-full">
+                </div>
+              </div>
+              <div class="bg-white p-4 py-5 text-left text-sm" >
+                <div class="h-4 rounded-sm w-full bg-gray-400 animate-pulse mb-3">
+                </div>
+                <div class="h-4 rounded-sm w-full bg-gray-400 animate-pulse">
+                </div>
+              </div>
+            </div>
+          </div>
           
           <!-- // articles // -->
-          <div class="px-4 my-6 bg-red-100 relative">
-            
-            <!-- Template card - Jangan dihapus -->
-            <!-- <div class="rounded-xl overflow-hidden w-full">
-              <div class="w-full bg-white">
-                <img src="@/assets/images/default-thumbnail.jpg" alt="" class="loginLogo rounded-b-xl w-full">
-              </div>
-              <div class="bg-white px-4 pt-3 pb-10 text-left text-sm" >
-                <span style="display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, nisi.
-                </span>
-              </div>
-            </div> -->
-
-          </div>
+          <swiper v-if="articles !== ''" class="w-full" :pagination="{ clickable: true }" :slides-per-view="1">
+            <template v-for="article in articles" :key="article.id">
+              <swiper-slide>
+                <div class="px-4 my-6" >
+                  <div class="rounded-xl overflow-hidden w-full bg-white">
+                    <div class="w-full bg-white relative">
+                      <img src="@/assets/images/default-thumbnail.jpg" alt="" class="opacity-0 rounded-b-xl w-full">
+                      <img :src="article.thumbnail" alt="" class="rounded-b-xl absolute top-0 h-full right-0">
+                    </div>
+                    <div class="bg-white px-4 pt-3 pb-10 text-left text-sm capitalize" >
+                      <span style="display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;">
+                        {{article.title}}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </swiper-slide>
+            </template>
+          </swiper>
 
           <!-- // info harga sampah terkini // -->
-          <div class="mx-4 rounded-t-3xl shadow-lg bg-white flex-1">
+          <div class="mx-4 rounded-t-xl shadow-lg bg-white flex-1">
             <div 
               class="font-bold text-md p-6 text-gray-600 border-b border-gray-200"
               style="font-family:QuicksandSemiBold;">
@@ -83,14 +104,20 @@
 <script>
   import { IonPage,IonContent,onIonViewWillEnter} from '@ionic/vue';
   import { ref, computed, defineComponent } from 'vue';
-  import { useStore }        from 'vuex'
-  import xHeader             from "@/components/dashboard.header.vue";
+  import { useStore }         from 'vuex'
+  import xHeader              from "@/components/dashboard.header.vue";
+  import {Swiper,SwiperSlide,Pagination} from 'swiper/vue';
+  import '../../../node_modules/swiper/swiper.min.css';
+  import '../../../node_modules/swiper/components/pagination/pagination.min.css';
 
   export default defineComponent({
     components: {
       IonContent,
       IonPage,
       xHeader,
+      Swiper,
+      SwiperSlide,
+      Pagination
     },
     setup() {
       const store = useStore();
