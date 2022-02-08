@@ -5,7 +5,7 @@ import Tabs               from '../views/Tabs.vue'
 import Login              from '../views/Login.vue'
 import Register           from '../views/Register.vue'
 import Otp                from '../views/Otp.vue'
-import Article            from '../views/Main/Article.vue'
+import Info               from '../views/Main/Info.vue'
 import Dashboard          from '../views/Main/Dashboard.vue'
 // import Saldo              from '@/components/dashboard.Saldo.vue'
 // import Transaksi          from '@/components/dashboard.Transaksi.vue'
@@ -56,8 +56,8 @@ const routes: Array<RouteRecordRaw> = [
         beforeEnter: checkAuth,
       },
       {
-        path: 'artikel',
-        component: Article,
+        path: 'info',
+        component: Info,
         beforeEnter: checkAuth,
       }
     ]

@@ -15,7 +15,7 @@
 
         <!-- // Tabs // -->
         <ion-tab-bar style="box-shadow: 0px -2px 6px rgba(0,0,0,0.1);">  
-          <ion-tab-button tab="tab1" href="/artikel">
+          <ion-tab-button tab="tab1" href="/info">
             <font-awesome-icon class="opacity-70" :icon="faInfoCircle" size="2x"/>
             info
           </ion-tab-button>
@@ -24,7 +24,7 @@
             <ion-tab-button
               tab="tab2" 
               href="/dashboard"
-              class="home bg-gradient-to-l from-lime-600 to-lime-400 h-12 rounded-2xl absolute -top-6"
+              class="home bg-gradient-to-l from-lime-600 to-lime-400 px-3 h-12 rounded-2xl absolute -top-6"
               style="box-shadow: 0px -2px 6px rgba(0,0,0,0.1);">
                 <font-awesome-icon :icon="faHome" size="2x"/>
             </ion-tab-button>
@@ -46,6 +46,7 @@
 import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonPage, IonRouterOutlet, IonContent, IonRefresher, IonRefresherContent } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import { useStore }        from 'vuex'
+import { useRouter }       from 'vue-router';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faHome, faInfoCircle, faUser, } from '@fortawesome/free-solid-svg-icons'
 
@@ -63,17 +64,38 @@ export default defineComponent({
     FontAwesomeIcon,
     IonContent },
   setup() {
+    const router= useRouter();
     const store = useStore();
 
     const doRefresh = (event) => {
-      store.commit("setDataNasabah","");
-      store.dispatch("getProfileNasabah",event.target);
-      
-      store.commit("setDataSaldo","");
-      store.dispatch("getSaldo");
+      const path = router.options.history.location;
 
-      store.commit("setDataSampahMasuk","");
-      store.dispatch("getSampahMasuk");
+      if (path == '/dashboard') {
+        if (store.state.currentDashboardTab == "saldo saya") {
+          store.commit("setDataNasabah","");
+          store.dispatch("getProfileNasabah",event.target);
+          
+          store.commit("setDataSaldo","");
+          store.dispatch("getSaldo");
+
+          store.commit("setDataSampahMasuk","");
+          store.dispatch("getSampahMasuk");
+        } 
+        else {
+          return 0;
+        }
+      }
+      else if (path == '/info') {
+        store.commit("setDataArticles","");
+        store.dispatch("getArticles",event.target);
+
+        store.commit("setDataJenisSampah","");
+        store.dispatch("getJenisSampah");
+      }
+      else if (path == '/profile') {
+        store.commit("setDataNasabah","");
+        store.dispatch("getProfileNasabah",event.target);
+      }
     };
 
     return {

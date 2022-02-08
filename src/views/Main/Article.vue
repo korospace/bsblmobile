@@ -76,11 +76,11 @@
 
 <script>
   import { IonPage,IonContent,onIonViewWillEnter} from '@ionic/vue';
-  import {Swiper,SwiperSlide} from 'swiper/vue';
   import { ref, computed, defineComponent } from 'vue';
   import { useStore }        from 'vuex'
   import xHeader             from "@/components/dashboard.header.vue";
 
+  import {Swiper,SwiperSlide} from 'swiper/vue';
   import '../../../node_modules/swiper/swiper.min.css';
 
   export default defineComponent({
