@@ -9,21 +9,36 @@
           <x-header :title="'Berita Dan Info Sampah'" />
           
           <!-- // articles // -->
-          <div class="px-4 my-6 bg-red-100 relative">
-            
-            <!-- Template card - Jangan dihapus -->
-            <!-- <div class="rounded-xl overflow-hidden w-full">
-              <div class="w-full bg-white">
-                <img src="@/assets/images/default-thumbnail.jpg" alt="" class="loginLogo rounded-b-xl w-full">
-              </div>
-              <div class="bg-white px-4 pt-3 pb-10 text-left text-sm" >
-                <span style="display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, nisi.
-                </span>
-              </div>
-            </div> -->
+          <swiper :pagination="{ clickable: true }" :slides-per-view="1">
+            <template v-for="article in articles" :key="article.id">
+              <swiper-slide>
+                <div class="px-4 my-6"  >
+                  <div class="rounded-xl overflow-hidden w-full bg-white">
+                    <div class="w-full bg-white">
+                      <img :src="article.thumbnail" alt="" class="loginLogo rounded-b-xl w-full">
+                    </div>
+                    <div class="bg-white px-4 pt-3 pb-10 text-left text-sm capitalize" >
+                      <span style="display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;">
+                        {{article.title}}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </swiper-slide>
+            </template>
+          </swiper>
 
-          </div>
+          <!-- Template card - Jangan dihapus -->
+          <!-- <div class="rounded-xl overflow-hidden w-full">
+            <div class="w-full bg-white">
+              <img src="@/assets/images/default-thumbnail.jpg" alt="" class="loginLogo rounded-b-xl w-full">
+            </div>
+            <div class="bg-white px-4 pt-3 pb-10 text-left text-sm" >
+              <span style="display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, nisi.
+              </span>
+            </div>
+          </div> -->
 
           <!-- // info harga sampah terkini // -->
           <div class="mx-4 my-4 py-4 rounded-lg shadow-lg bg-white">
@@ -61,15 +76,20 @@
 
 <script>
   import { IonPage,IonContent,onIonViewWillEnter} from '@ionic/vue';
+  import {Swiper,SwiperSlide} from 'swiper/vue';
   import { ref, computed, defineComponent } from 'vue';
   import { useStore }        from 'vuex'
   import xHeader             from "@/components/dashboard.header.vue";
+
+  import '../../../node_modules/swiper/swiper.min.css';
 
   export default defineComponent({
     components: {
       IonContent,
       IonPage,
       xHeader,
+      Swiper,
+      SwiperSlide
     },
     setup() {
       const store = useStore();
@@ -89,11 +109,25 @@
 
       return { 
         articles,
+        items : [
+          {
+            messages: "hello world",
+            title: "front"
+          },
+          {
+            messages: "hello server",
+            title: "back"
+          },
+          {
+            messages: "hello people",
+            title: "manage"
+          },
+          {
+            messages: "hello data",
+            title: "dba"
+          }
+        ]
       }
     }
   });
 </script>
-
-<style scoped>
-  
-</style>
