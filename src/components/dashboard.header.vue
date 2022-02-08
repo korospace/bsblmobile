@@ -3,7 +3,7 @@
         <img src="@/assets/images/banksampah-logo.png" alt="" class="loginLogo w-20">
         <p
           v-html="title"
-          class="flex-1 text-xl capitalize text-center"
+          class="flex-1 text-xl capitalize text-center ml-4"
           style="font-family:QuicksandSemiBold;background: linear-gradient(to right, #BFD765, #81A257);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
         </p>
     </div>

@@ -20,6 +20,7 @@ export default createStore({
       dataSaldo : "",
       dataNasabah : "",
       dataArticles : "",
+      dataJenisSampah: "",
       dataSampahMasuk: "",
       dataDetilSampahMasuk: {
         show     : false,
@@ -64,6 +65,9 @@ export default createStore({
     }, 
     setDataSampahMasuk:  function(state: any, value) {      
       state.dataSampahMasuk = value;
+    }, 
+    setDataJenisSampah:  function(state: any, value) {      
+      state.dataJenisSampah = value;
     }, 
     setDetilSampahMasuk: function(state: any, value) {
       state.dataDetilSampahMasuk.show     = value.show;
@@ -131,13 +135,28 @@ export default createStore({
         
       })
     },
-    getArticles: function ({ commit }) {
-      axios.get(`${this.state.APIURL}/artikel/getartikel?orderby=terbaru&limit=5`)
+    getJenisSampah: function ({ commit }) {
+      axios.get(`${this.state.APIURL}/sampah/getsampah`)
       .then(response => {
-        commit("setDataArticles",response.data.data);
+        commit("setDataJenisSampah",response.data.data);
       })
       .catch(error => {
         
+      })
+    },
+    getArticles: function ({ commit },refresher = "") {
+      axios.get(`${this.state.APIURL}/artikel/getartikel?orderby=terbaru&limit=5`)
+      .then(response => {
+        if (refresher) {
+          refresher.complete();
+        }
+
+        commit("setDataArticles",response.data.data);
+      })
+      .catch(error => {
+        if (refresher) {
+          refresher.complete();
+        }
       })
     },
   },
