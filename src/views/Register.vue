@@ -1,11 +1,12 @@
 <template>
     <ion-page>
         <ion-content>
-            <h1
+            <!-- <h1
               class="font-black text-center uppercase mt-12 text-3xl"
               style="font-family:QuicksandSemiBold;background: linear-gradient(to right, #BFD765, #81A257);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
                 register
-            </h1>
+            </h1> -->
+            <x-header :title="'register'" />
 
             <Form
               v-slot="{ errors }"
@@ -320,6 +321,7 @@ import { faSearch }                  from '@fortawesome/free-solid-svg-icons'
 import { ref,reactive }              from "vue";
 import { useRouter }                 from 'vue-router';
 import { useStore }                  from "vuex"
+import xHeader                       from "@/components/dashboard.header.vue";
 
 export default defineComponent({
     components: {
@@ -328,6 +330,7 @@ export default defineComponent({
         Field,
         FontAwesomeIcon,
         Form,
+        xHeader
     },
     setup(){
         const router        = useRouter();
