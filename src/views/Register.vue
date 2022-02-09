@@ -6,7 +6,7 @@
               style="font-family:QuicksandSemiBold;background: linear-gradient(to right, #BFD765, #81A257);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
                 register
             </h1> -->
-            <x-header :title="'register'" />
+            <x-header :title="'registrasi akun'" />
 
             <Form
               v-slot="{ errors }"

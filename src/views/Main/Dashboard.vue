@@ -3,7 +3,7 @@
     <ion-content :fullscreen="true">
       <div
         id="container"
-        class="min-h-full flex flex-col bg-gradient-to-l from-lime-600 to-lime-400">
+        class="min-h-full flex flex-col bg-gradient-to-t from-greenbsbl-old to-greenbsbl-young">
           
           <!-- // header // -->
           <div class="px-4 py-6 rounded-b-3xl relative">
@@ -31,17 +31,17 @@
           </div>
 
           <div 
-            class="pt-6 bg-gray-100 rounded-t-3xl flex-1" 
+            class="pt-6 bg-gray-100 rounded-t-3xl flex-1 flex flex-col" 
             style="box-shadow: 0px -2px 10px rgba(0,0,0,0.2);">
               <!-- Toggle Switch -->
               <div class="px-6 mb-6">
                 <div
                   id="toggle-wraper"
-                  class="w-full bg-gray-100 flex rounded-md relative px-1"
+                  class="w-full bg-gray-100 flex rounded-3xl relative px-1"
                   style="box-shadow: inset 0 0 4px 0px rgba(0, 0, 0, 0.3);">
                     <button
                       id="toggle"
-                      class="absolute left-0 transform h-full w-1/2 text-white capitalize tracking-widest bg-lime-600 transition duration-200 rounded-md"
+                      class="absolute left-0 transform h-full w-1/2 text-white capitalize tracking-widest bg-greenbsbl-old2 transition duration-200 rounded-3xl"
                       :class="{'translate-x-full':currentTab == 'transaksi'}">
                         {{ currentTab }}
                     </button>
@@ -98,17 +98,42 @@ export default defineComponent({
       return store.state.dataNasabah;
     });
 
+    const setCurrentDate = () => {
+      const currentUnixTime = new Date(new Date().getTime());
+      const currentDay   = currentUnixTime.toLocaleString("en-US",{day: "2-digit"});
+      const currentMonth = currentUnixTime.toLocaleString("en-US",{month: "2-digit"});
+      const currentYear  = currentUnixTime.toLocaleString("en-US",{year: "numeric"});
+
+      const previousUnixTime = new Date(currentUnixTime.getTime()-(86400*30*1000));
+      const previousDay   = previousUnixTime.toLocaleString("en-US",{day: "2-digit"});
+      const previousMonth = previousUnixTime.toLocaleString("en-US",{month: "2-digit"});
+      const previousYear  = previousUnixTime.toLocaleString("en-US",{year: "numeric"});
+
+      const start = `${previousDay}-${previousMonth}-${previousYear}`;
+      const end   = `${currentDay}-${currentMonth}-${currentYear}`;
+
+      store.commit("setHistoryTransDate",{
+        start,
+        end
+      });
+    }
+
     onIonViewWillEnter(() => {
       if (!dataNasabah.value) {
+        // Tab saldo
         store.commit("setDataNasabah","");
         store.dispatch("getProfileNasabah");
-        
         store.commit("setDataSaldo","");
         store.dispatch("getSaldo");
-  
         store.commit("setDataSampahMasuk","");
         store.dispatch("getSampahMasuk");
+
       }
+      
+      // Tab transaksi
+      setCurrentDate();
+      store.commit("setDataHistoryTrans","");
+      store.dispatch("getHistoryTrans");
     })
 
     return { 

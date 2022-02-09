@@ -15,7 +15,7 @@
             <div
               id="idcard" 
               class="rounded-xl relative">
-                <div id="bg-idcard" class="p-4 rounded-xl" style="background: rgba(101, 163, 13, 0.2);">
+                <div id="bg-idcard" class="p-4 rounded-xl" style="background: rgba(101, 163, 13, 0);">
                   <div class="flex justify-between">
                     <font-awesome-icon
                     :icon="faWifi" size="1x"
@@ -43,9 +43,9 @@
                 </div>
 
                 <!-- shadow -->
-                <div class="absolute left-3 right-3 h-2.5 bg-lime-500 rounded-b-lg">
+                <div class="absolute left-3 right-3 h-2.5 bg-greenbsbl-young2 rounded-b-lg">
                 </div>
-                <div class="absolute left-6 right-6 -bottom-5 h-2.5 bg-lime-300 rounded-b-lg">
+                <div class="absolute left-6 right-6 -bottom-5 h-2.5 bg-greenbsbl-young3 rounded-b-lg">
                 </div>
             </div>
         </div>
@@ -58,7 +58,7 @@
               <div 
                 class="absolute z-10 top-0 bottom-0 right-0 left-0 bg-lime-400 rounded-md"
                 :class="{'hidden':saldoUang != ''}"></div>
-              <div class="w-max rounded-lg p-5 bg-gradient-to-t from-lime-700 to-lime-400">
+              <div class="w-max rounded-lg p-5 bg-gradient-to-t from-greenbsbl-old to-greenbsbl-young">
                 <font-awesome-icon
                   :icon="faMoneyBillWaveAlt" size="1x"
                   class="text-white"/>
@@ -75,7 +75,7 @@
               <div 
                 class="absolute z-10 top-0 bottom-0 right-0 left-0 bg-lime-400 rounded-md"
                 :class="{'hidden':saldoUang}"></div>
-              <div class="w-max rounded-lg p-5 bg-gradient-to-t from-lime-700 to-lime-400">
+              <div class="w-max rounded-lg p-5 bg-gradient-to-t from-greenbsbl-old to-greenbsbl-young">
                 <font-awesome-icon
                   :icon="faCoins" size="1x"
                   class="text-white"/>
@@ -103,7 +103,7 @@
             <div
               v-for="x in arrayCard" :key="x"
               @click="detilSampahMasuk(sampahMasuk[x.name].kategori);"
-              class="text-center rounded-lg py-1.5 sm320:py-3 bg-gradient-to-t from-lime-700 to-lime-400 transition transform active:scale-95 shadow-lg">
+              class="text-center rounded-lg py-1.5 sm320:py-3 bg-gradient-to-t from-greenbsbl-old to-greenbsbl-young transition transform active:scale-95 shadow-lg">
                 <div class="px-5">
                   <font-awesome-icon
                     :icon="x.icon" size="1x"

@@ -8,6 +8,15 @@ export default createStore({
     return {
       APIURL   : "https://t-gadgetcors.herokuapp.com/https://bsbl.herokuapp.com",
       linkAdmin: "https://wa.me/6281287200602?text=Hallo%20Admin,%20saya%20ada%20kendala%20mengenai%20password",
+      dataSaldo : "",
+      dataNasabah : "",
+      dataArticles : "",
+      dataJenisSampah: "",
+      dataSampahMasuk: "",
+      showForgotPass : false,
+      dataHistoryTrans: "",
+      showFilterTransaksi: false,
+      currentDashboardTab : "saldo saya",
       dataAlert: {
         show   : false,
         type   : '',
@@ -17,21 +26,18 @@ export default createStore({
         username_or_email: '',
         password: ''
       },
-      dataSaldo : "",
-      dataNasabah : "",
-      dataArticles : "",
-      dataJenisSampah: "",
-      dataSampahMasuk: "",
-      dataDetilSampahMasuk: {
-        show     : false,
-        kategori : '',
-      },
       showLoading: {
         show: false,
         text: 'tex'
       },
-      showForgotPass : false,
-      currentDashboardTab : "saldo saya",
+      dataDetilSampahMasuk: {
+        show     : false,
+        kategori : '',
+      },
+      historyTransDate: {
+        start: "",
+        end: "",
+      }
     }
   },
   mutations: {
@@ -51,6 +57,9 @@ export default createStore({
     setShowForgotPass: function(state: any, value) {
       state.showForgotPass = value;
     },
+    setShowFilterTrans: function(state: any, value) {
+      state.showFilterTransaksi = value;
+    },
     setDashboardTab: function(state: any, value) {
       state.currentDashboardTab = value;
     },
@@ -68,6 +77,13 @@ export default createStore({
     }, 
     setDataJenisSampah:  function(state: any, value) {      
       state.dataJenisSampah = value;
+    }, 
+    setHistoryTransDate:  function(state: any, value) {      
+      state.historyTransDate.start = value.start;
+      state.historyTransDate.end   = value.end;
+    }, 
+    setDataHistoryTrans:  function(state: any, value) {      
+      state.dataHistoryTrans = value;
     }, 
     setDetilSampahMasuk: function(state: any, value) {
       state.dataDetilSampahMasuk.show     = value.show;
@@ -159,6 +175,58 @@ export default createStore({
         if (refresher) {
           refresher.complete();
         }
+      })
+    },
+    getHistoryTrans: function ({ commit },refresher = "") {
+      const dateStart = this.state.historyTransDate.start;
+      const dateEnd   = this.state.historyTransDate.end;
+
+      axios.get(`${this.state.APIURL}/transaksi/getdata?start=${dateStart}&end=${dateEnd}&orderby=terbaru`,{
+        headers: {
+            token: TokenService.getToken()!
+          }
+      })
+      .then(response => {
+        if (refresher) {
+          refresher.complete();
+        }
+
+        commit("setDataHistoryTrans",response.data.data);
+      })
+      .catch(error => {
+        if (refresher) {
+          refresher.complete();
+        }
+
+        // Unauthorize
+        if (error.response.status == 401) {
+          if (error.response.data.messages == 'token expired') {
+            commit("setDataAlert",{
+              show   :true,
+              type   :'warning',
+              message:'waktu login sudah habis, silahkan login ulang'}
+            );
+          }
+
+          commit("setDataNasabah","");
+          commit("setDataArticles","");
+          TokenService.removeToken()!;
+          router.push("/login");
+        }
+        else if(error.response.status == 404) {
+          commit("setDataAlert",{
+            show   :true,
+            type   :'warning',
+            message:'<b>Ups...</b> transaksi tidak ditemukan!'}
+          );
+
+          setTimeout(() => {
+            commit("setDataAlert",{show :false,type :'',message:''});  
+          }, 4000);
+
+          commit("setDataHistoryTrans",[]);
+        }
+
       })
     },
   },

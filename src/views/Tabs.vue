@@ -24,8 +24,8 @@
             <ion-tab-button
               tab="tab2" 
               href="/dashboard"
-              class="home bg-gradient-to-l from-lime-600 to-lime-400 px-3 h-12 rounded-2xl absolute -top-6"
-              style="box-shadow: 0px -2px 6px rgba(0,0,0,0.1);">
+              class="home px-3 h-12 rounded-2xl absolute -top-6"
+              style="box-shadow: 0px 0px 6px rgba(0,0,0,0.2);">
                 <font-awesome-icon :icon="faHome" size="2x"/>
             </ion-tab-button>
             <small>home</small>
@@ -67,6 +67,26 @@ export default defineComponent({
     const router= useRouter();
     const store = useStore();
 
+    const setCurrentDate = () => {
+      const currentUnixTime = new Date(new Date().getTime());
+      const currentDay   = currentUnixTime.toLocaleString("en-US",{day: "2-digit"});
+      const currentMonth = currentUnixTime.toLocaleString("en-US",{month: "2-digit"});
+      const currentYear  = currentUnixTime.toLocaleString("en-US",{year: "numeric"});
+
+      const previousUnixTime = new Date(currentUnixTime.getTime()-(86400*30*1000));
+      const previousDay   = previousUnixTime.toLocaleString("en-US",{day: "2-digit"});
+      const previousMonth = previousUnixTime.toLocaleString("en-US",{month: "2-digit"});
+      const previousYear  = previousUnixTime.toLocaleString("en-US",{year: "numeric"});
+
+      const start = `${previousDay}-${previousMonth}-${previousYear}`;
+      const end   = `${currentDay}-${currentMonth}-${currentYear}`;
+
+      store.commit("setHistoryTransDate",{
+        start,
+        end
+      });
+    }
+
     const doRefresh = (event) => {
       const path = router.options.history.location;
 
@@ -82,7 +102,9 @@ export default defineComponent({
           store.dispatch("getSampahMasuk");
         } 
         else {
-          return 0;
+          setCurrentDate();
+          store.commit("setDataHistoryTrans","");
+          store.dispatch("getHistoryTrans",event.target);
         }
       }
       else if (path == '/info') {
@@ -117,11 +139,15 @@ export default defineComponent({
   }
   
   ion-tab-button{
-    --color-selected: #84CC16;
+    --color-selected: #7AA842;
   }
 
   ion-tab-button.home{
     /* --color: rgba(255,255,255,0.4); */
+    --color: rgba(122, 168, 66, 0.6);
     --color-selected: #fff;
+  }
+  ion-tab-button.home[aria-selected=true] {
+    background: linear-gradient(to right, #C1D966, #537629);
   }
 </style>
