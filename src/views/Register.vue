@@ -267,8 +267,9 @@
                     </div>
 
                     <!-- list kodepos -->
-                    <div v-if="allKodePos.list.length != 0">
+                    <div v-if="searchKey != ''">
                         <div
+                          v-if="allKodePos.list.length > 0"
                           class="max-h-28 mt-10 border rounded overflow-auto bg-white absolute left-2 right-2 z-20">
                             <div
                               v-for="(data,index) in allKodePos.list" :key="index"
@@ -398,11 +399,17 @@ export default defineComponent({
                 axios
                   .get(`https://kodepos.vercel.app/search/?q=${searchKey.value}`)
                   .then((response) => {
-                    allKodePos.list = response.data.data;
+                    if (response.data.messages == 'No data can be returned.') {
+                        allKodePos.list = [];
+                    } 
+                    else {
+                        allKodePos.list = response.data.data;
+                    }
+                    
                     loadingSearch.value = false;
                   })
                   .catch((error) => {
-                    searchKey.value = "";
+                    allKodePos.list = [];
                     loadingSearch.value = false;
                   })
             }
@@ -416,6 +423,7 @@ export default defineComponent({
             kotaVal.value      = data.city;
             provinsiVal.value  = data.province;
             searchKey.value    = "";
+            allKodePos.list    = [];
         }
 
         // -- loading spinner --
