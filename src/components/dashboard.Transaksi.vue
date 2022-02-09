@@ -1,32 +1,162 @@
 <template>
     <transition name="fade">
-        <div v-if="currentTab == 'transaksi'">
+        <div
+          v-if="currentTab == 'transaksi'"
+          class="flex-1 flex flex-col">
 
+            <pop-up-filter-history-trans />
             
+            <!-- // info harga sampah terkini // -->
+            <div class="mt-6 mx-4 rounded-t-3xl shadow-lg bg-white flex-1">
+                <div 
+                  class="px-4 pt-6 pb-4 border-b border-gray-200">
+                    <div
+                     class="font-bold text-md text-gray-500 text-center"
+                     style="font-family:QuicksandSemiBold;">
+                        Histori Transaksi</div>
+                    
+                    <div class="mt-2.5 flex justify-center items-center ml-2.5 text-gray-500 text-sm">
+                        <span class="mr-2">{{ historyTransDate.start }}</span> 
+                        <font-awesome-icon :icon="faArrowRight" size="0.8x" class=""/> 
+                        <span class="ml-2">{{ historyTransDate.end }}</span> 
+                    </div>
+                    <div class="flex items-center mt-6">
+                        <div 
+                          @click="openFilter"
+                          class="bg-gray-100 text-gray-500 w-max px-2 py-1 shadow-md rounded-md">
+                            <font-awesome-icon
+                              :icon="faSlidersH" size="0.4x"
+                              class=""/>
+                        </div>
+                    </div>
+                </div>
+                <div class="table px-4 pb-10 w-full">
+                    <!-- skeleton -->
+                    <template
+                      v-if="Array.isArray(historyTransaksi) == false">
+                        <div
+                          v-for="item in [1,2,3,4,5,6]" :key="item"
+                          class="flex justify-between border-b border-gray-200 px-2 py-3 animate-pulse">
+                            <div>
+                                <div class="h-3 w-20 bg-gray-400 rounded-sm mb-2.5">
+                                </div>
+                                <div class="h-2.5 w-20 bg-gray-400 rounded-sm">
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-end">
+                                <div class="h-3 w-20 bg-gray-400 rounded-sm mb-2.5">
+                                </div>
+                                <div class="h-2.5 w-12 bg-gray-400 rounded-sm">
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+
+                    <template
+                      v-else-if="Array.isArray(historyTransaksi)">
+                        <div
+                          v-for="item in historyTransaksi" :key="item"
+                          class="flex justify-between border-b border-gray-200 px-2 py-3">
+                            <div>
+                                <p class="text-sm tracking-wide text-gray-800">
+                                    {{ item.id_transaksi }}
+                                </p>
+                                <p class="text-xs text-gray-400 mt-2">
+                                    {{ dateParse(item.date) }}
+                                </p>
+                            </div>
+                            <div v-if="item.jenis_transaksi == 'konversi saldo'">
+                                <div class="text-yellow-400 text-sm">
+                                    <span class="mr-2">{{ modifUang(item.total_pindah) }}</span>
+                                    <font-awesome-icon :icon="faExchangeAlt" size="1x"/>
+                                    <span class="ml-2">{{ modifUang(item.hasil_konversi) }}</span>
+                                </div>
+                                <div class="mt-2 text-xs text-gray-400 text-widest text-right">IDR -> gram</div>
+                            </div>
+                            <div v-else-if="item.jenis_transaksi == 'penyetoran sampah'">
+                                <div class="text-lime-500 text-sm">
+                                    <font-awesome-icon :icon="faPlus" size="0.8x"/>
+                                    <span class="ml-1">{{ modifUang(item.total_uang_setor) }}</span>
+                                </div>
+                                <div class="mt-2 text-xs text-gray-400 text-widest text-right">IDR</div>
+                            </div>
+                            <div v-else>
+                                <div class="text-red-600 text-sm">
+                                    <font-awesome-icon :icon="faMinus" size="0.8x"/>
+                                    <font-awesome-icon size="0.8x"/>
+                                    <span v-if="item.jenis_saldo == 'uang'" class="ml-2">
+                                        {{ modifUang(item.total_tarik) }}
+                                    </span>
+                                    <span v-else class="ml-1">
+                                        {{ item.total_tarik }}
+                                    </span>
+                                </div>
+                                <div class="mt-2 text-xs text-gray-400 text-widest text-right">IDR</div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
 
         </div>
     </transition>
 </template>
 
-<script lang="ts">
-import { ref, reactive, computed, onMounted }   from "vue";
+<script>
+import { ref, reactive, computed }   from "vue";
 import { defineComponent } from 'vue';
 import { useStore }        from 'vuex';
-
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import popUpFilterHistoryTrans from '@/components/popUpFilterHistoryTrans.vue';
+import { faExchangeAlt,faPlus,faMinus,faSlidersH,faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
 export default defineComponent({
     components: {
-        
+        FontAwesomeIcon,
+        popUpFilterHistoryTrans
     },
     setup() {
-        const store   = useStore();
+        const store = useStore();
         
         const currentTab = computed(() => {
             return store.state.currentDashboardTab;
         });
 
+        const historyTransaksi = computed(() => {
+            return store.state.dataHistoryTrans;
+        })
+
+        const historyTransDate = computed(() => {
+            return store.state.historyTransDate;
+        })
+
+        const dateParse = (val) => {
+            const date  = new Date(parseInt(val) * 1000);
+            const day   = date.toLocaleString("en-US",{day: "numeric"});
+            const month = date.toLocaleString("en-US",{month: "long"});
+            const year  = date.toLocaleString("en-US",{year: "numeric"});
+            const time  = date.toLocaleString("en-US",{hour: '2-digit', minute: '2-digit'});
+
+            return `${day} ${month}, ${year}`;
+        }
+
+        const modifUang = (value) => {
+            const newVal = parseFloat(value);
+            return newVal.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
+        };
+
+        const openFilter = () => {
+            store.commit('setShowFilterTrans',true);
+        }
+
         return {
             currentTab,
+            historyTransaksi,
+            dateParse,
+            faExchangeAlt,faPlus,faMinus,faSlidersH,faArrowRight,
+            modifUang,
+            historyTransDate,
+            openFilter,
         }
     },
 })
