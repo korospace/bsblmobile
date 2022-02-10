@@ -144,7 +144,7 @@
           </div>
 
           <div class="px-4 pb-4">
-            <a :href="baseApi+'/transaksi/cetaktransaksi/'+detilTransaksi.id_transaksi" target="_blank" class="block text-center w-full bg-gradient-to-r from-greenbsbl-old to-greenbsbl-young active:from-greenbsbl-old2 active:to-greenbsbl-young text-white mt-4 py-3 rounded">
+            <a :href="baseApi+'/transaksi/cetaktransaksi/'+detilTransaksi.id_transaksi+'?token='+TokenService.getToken()" target="_blank" class="block text-center w-full bg-gradient-to-r from-greenbsbl-old to-greenbsbl-young active:from-greenbsbl-old2 active:to-greenbsbl-young text-white mt-4 py-3 rounded">
               CETAK
             </a>
           </div>
@@ -243,6 +243,7 @@
       })
 
       return { 
+        TokenService,
         detilTransaksi,
         modifTanggal,
         modifUang,
