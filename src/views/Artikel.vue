@@ -2,13 +2,7 @@
   <ion-page>
     <ion-content :fullscreen="true">
       <!-- back -->
-      <div class="shadow-lg px-2 py-4 bg-white sticky top-0 z-10">
-        <router-link to="/info" class="py-2 px-4 bg-gray-100 block w-max rounded shadow">
-          <font-awesome-icon
-            :icon="faAngleLeft" size="2x"
-            class="text-gray-400"/>
-        </router-link>
-      </div>
+      <header-back path="/info" />
 
       <!-- Thumbnail -->
       <div class="">
@@ -119,8 +113,9 @@
   import { useRouter } from 'vue-router';
   import { useStore }  from 'vuex'
   import axios         from 'axios';
+  import HeaderBack    from '@/components/headerBack.vue'
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-  import { faAngleLeft,faUserEdit,faCalendar } from '@fortawesome/free-solid-svg-icons'
+  import { faUserEdit,faCalendar } from '@fortawesome/free-solid-svg-icons'
   import {Swiper,SwiperSlide,Pagination} from 'swiper/vue';
   import '../../node_modules/swiper/swiper.min.css';
   import '../../node_modules/swiper/components/pagination/pagination.min.css';
@@ -129,6 +124,7 @@
     components: {
       IonContent,
       IonPage,
+      HeaderBack,
       FontAwesomeIcon,
       Swiper,
       SwiperSlide,
@@ -188,7 +184,7 @@
         })
 
         return { 
-          faAngleLeft,faUserEdit,faCalendar,
+          faUserEdit,faCalendar,
           detilArtikel,
           artikelLain,
           getNewArtikel

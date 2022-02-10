@@ -6,16 +6,16 @@
           style="background-color: rgba(0,0,0,0.2);">
             <transition name="bounce" appear>
                 <div
-                  class="px-10 pt-10 pb-6 rounded-md bg-white shadow-2xl flex flex-col justify-center items-center">
+                  class="px-5 py-4 rounded-md bg-white shadow-2xl flex justify-center items-center">
                     <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%; display: block; shape-rendering: auto;" width="44px" height="44px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%; display: block; shape-rendering: auto;" width="30px" height="30px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
                             <circle cx="50" cy="50" fill="none" stroke="#84CC16" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
                             <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
                             </circle>
                         </svg>
                     </span>
                     <p
-                      class="mt-4 tracking-wide text-lg"
+                      class="ml-2 tracking-wide text-md"
                       style="font-family:'QuicksandSemiBold';background: linear-gradient(to right, #BFD765, #81A257);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
                         {{ loadingText }}
                     </p>

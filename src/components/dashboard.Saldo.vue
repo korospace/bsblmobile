@@ -10,7 +10,7 @@
         <div id="idcard-container" class="px-6 relative" :class="{'animate-pulse':!username}">
             <div 
               id="idcard-skeleton" 
-              class="absolute z-10 top-0 bottom-0 right-6 left-6 bg-lime-400 rounded-md"
+              class="absolute z-10 top-0 bottom-0 right-6 left-6 bg-lime-600 rounded-md"
               :class="{'hidden':username}"></div>
             <div
               id="idcard" 
@@ -56,7 +56,7 @@
             class="flex-1 mr-1 bg-white flex flex-col items-center rounded-md py-3 px-5 overflow-hidden relative shadow-xl"
             :class="{'animate-pulse':saldoUang == ''}">
               <div 
-                class="absolute z-10 top-0 bottom-0 right-0 left-0 bg-lime-400 rounded-md"
+                class="absolute z-10 top-0 bottom-0 right-0 left-0 bg-lime-600 rounded-md"
                 :class="{'hidden':saldoUang != ''}"></div>
               <div class="w-max rounded-lg p-5 bg-gradient-to-t from-greenbsbl-old to-greenbsbl-young">
                 <font-awesome-icon
@@ -73,7 +73,7 @@
             class="flex-1 ml-1 bg-white flex flex-col items-center rounded-md py-3 px-5 overflow-hidden relative shadow-xl"
             :class="{'animate-pulse':!saldoUang}">
               <div 
-                class="absolute z-10 top-0 bottom-0 right-0 left-0 bg-lime-400 rounded-md"
+                class="absolute z-10 top-0 bottom-0 right-0 left-0 bg-lime-600 rounded-md"
                 :class="{'hidden':saldoUang}"></div>
               <div class="w-max rounded-lg p-5 bg-gradient-to-t from-greenbsbl-old to-greenbsbl-young">
                 <font-awesome-icon
@@ -94,7 +94,7 @@
           class="grid grid-cols-4 gap-2 place-content-center px-6 mt-6 text-white animate-pulse">
             <div
               v-for="data in [1,2,3,4]" :key="data"
-              class="text-center rounded-lg h-28 bg-lime-400">
+              class="text-center rounded-lg h-28 bg-lime-600">
             </div>
         </div>
         <div

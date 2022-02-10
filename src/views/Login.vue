@@ -24,13 +24,13 @@
             Password salah
           </small>
 
-          <button class="w-full mt-8 py-3 text-center text-white text-xl tracking-widest bg-gradient-to-r from-lime-600 to-lime-400 active:from-lime-500 active:to-lime-400 rounded-md">
+          <button class="w-full mt-8 py-3 text-center text-white text-xl tracking-widest bg-gradient-to-r from-greenbsbl-old to-greenbsbl-young active:from-greenbsbl-old2 active:to-greenbsbl-young rounded-md">
             LOGIN
           </button>
           
           <center class="mt-8 pb-8">
             <span class="">belum punya akun? </span>
-            <router-link to="/register" class="text-lime-500 active:text-lime-600">
+            <router-link to="/register" class="text-lime-600 active:text-lime-600">
               daftar disini
             </router-link>
             <p
@@ -89,7 +89,7 @@ export default defineComponent({
         return 0;
       }
 
-      loading.present();
+      store.commit("setShowLoading",{show:true,text:"Login"});
 
       axios
         .post(`${store.state.APIURL}/login/nasabah`, formLogin)
@@ -99,11 +99,11 @@ export default defineComponent({
           TokenService.saveToken(response.data.token);
           store.commit('setDataAlert',{show:false,type:'',message:``});
 
-          loading.dismiss();
+          store.commit("setShowLoading",{show:false,text:""});
           router.push("/dashboard");
         })
         .catch((error) => {
-          loading.dismiss();
+          store.commit("setShowLoading",{show:false,text:""});
 
           // bad request
           if (error.response.status == 404) {

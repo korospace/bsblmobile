@@ -3,7 +3,7 @@
     <ion-content :fullscreen="true">
       <div 
         id="container"
-        class="min-h-full flex flex-col relative bg-gradient-to-t from-lime-700 to-lime-400">
+        class="min-h-full flex flex-col relative bg-gradient-to-t from-greenbsbl-old to-greenbsbl-young">
 
           <!-- // header // -->
           <x-header :title="'Berita Dan Info Sampah'" />

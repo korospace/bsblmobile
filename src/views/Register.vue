@@ -298,12 +298,12 @@
                     <Field type="hidden" v-model="provinsiVal" name="provinsi" />
                 </div>
 
-                <button class="w-full bg-gradient-to-r from-lime-600 to-lime-400 active:from-lime-500 active:to-lime-400 text-white mt-10 py-3 rounded">
+                <button class="w-full bg-gradient-to-r from-greenbsbl-old to-greenbsbl-young active:from-greenbsbl-old2 active:to-greenbsbl-young text-white mt-10 py-3 rounded">
                     DAFTAR
                 </button>
                 <center class="mt-8 pb-4 tracking-wide">
                     <p class="text-md text-gray-600">sudah memiliki akun?</p>
-                    <router-link class="text-xs text-lime-500" to="/login">login sekarang</router-link>
+                    <router-link class="text-xs text-lime-600" to="/login">login sekarang</router-link>
                 </center>
             </Form>
         </ion-content>

@@ -127,13 +127,11 @@ export default defineComponent({
         store.dispatch("getSaldo");
         store.commit("setDataSampahMasuk","");
         store.dispatch("getSampahMasuk");
-
+        // Tab transaksi
+        setCurrentDate();
+        store.commit("setDataHistoryTrans","");
+        store.dispatch("getHistoryTrans");
       }
-      
-      // Tab transaksi
-      setCurrentDate();
-      store.commit("setDataHistoryTrans","");
-      store.dispatch("getHistoryTrans");
     })
 
     return { 
