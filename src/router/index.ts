@@ -6,6 +6,7 @@ import Login              from '../views/Login.vue'
 import Register           from '../views/Register.vue'
 import Otp                from '../views/Otp.vue'
 import Artikel            from '../views/Artikel.vue'
+import CetakTransaksi     from '../views/CetakTransaksi.vue'
 import Info               from '../views/Main/Info.vue'
 import Dashboard          from '../views/Main/Dashboard.vue'
 // import Saldo              from '@/components/dashboard.Saldo.vue'
@@ -35,6 +36,12 @@ const routes: Array<RouteRecordRaw> = [
     name: 'artikel',
     path: '/artikel',
     component: Artikel,
+    beforeEnter: checkAuth,
+  },
+  {
+    name: 'cetakTransaksi',
+    path: '/cetakTransaksi',
+    component: CetakTransaksi,
     beforeEnter: checkAuth,
   },
   {

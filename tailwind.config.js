@@ -25,6 +25,7 @@ module.exports = {
       yellow: colors.amber,
       green: colors.emerald,
       lime: colors.lime,
+      slate: colors.slate,
       'greenbsbl-young': '#C1D966',
       'greenbsbl-young2': '#97D28B',
       'greenbsbl-young3': '#C0E6B8',

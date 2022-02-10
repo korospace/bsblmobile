@@ -54,8 +54,9 @@
 
                     <template
                       v-else-if="Array.isArray(historyTransaksi)">
-                        <div
+                        <router-link
                           v-for="item in historyTransaksi" :key="item"
+                          :to="{ path: '/cetakTransaksi', query: { id:item.id_transaksi } }"
                           class="flex justify-between border-b border-gray-200 px-2 py-3">
                             <div>
                                 <p class="text-sm tracking-wide text-gray-800">
@@ -93,7 +94,7 @@
                                 </div>
                                 <div class="mt-2 text-xs text-gray-400 text-widest text-right">IDR</div>
                             </div>
-                        </div>
+                        </router-link>
                     </template>
                 </div>
             </div>
