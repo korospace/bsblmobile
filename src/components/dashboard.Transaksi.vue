@@ -5,9 +5,35 @@
           class="flex-1 flex flex-col">
 
             <pop-up-filter-history-trans />
+
+            <div class="mt-6 mx-4 rounded-3xl shadow-lg bg-white p-2">
+                <div
+                  class="font-bold text-md text-gray-500 text-center py-2"
+                  style="font-family:QuicksandSemiBold;">
+                    Penyetoran sampah</div>
+                <div
+                  class="font-bold text-sm text-gray-500 text-center pb-2 border-b border-gray-200">
+                    {{ dataGrafikSetorDate }}</div>
+
+                <div class="relative mt-4">
+                    <div
+                      v-if="dataGrafikSetorKg==''"
+                      class="absolute z-10 top-0 bottom-0 left-0 right-0 bg-white flex justify-center items-center">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%; display: block; shape-rendering: auto;" width="40px" height="40px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                                <circle cx="50" cy="50" fill="none" stroke="#84CC16" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
+                                <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+                                </circle>
+                            </svg>
+                        </span>
+                    </div>
+                    
+                    <LineChart :chartData="grafikData" :options="grafikOptions" />
+                </div>
+            </div>
             
             <!-- // info harga sampah terkini // -->
-            <div class="mt-6 mx-4 rounded-t-3xl shadow-lg bg-white flex-1">
+            <div class="mt-8 mx-4 rounded-t-3xl shadow-lg bg-white flex-1">
                 <div 
                   class="px-4 pt-6 pb-4 border-b border-gray-200">
                     <div
@@ -111,16 +137,105 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import popUpFilterHistoryTrans from '@/components/popUpFilterHistoryTrans.vue';
 import { faExchangeAlt,faPlus,faMinus,faSlidersH,faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
+import { Chart, registerables } from 'chart.js';
+import { LineChart }   from 'vue-chart-3';
+Chart.register(...registerables);
+
 export default defineComponent({
     components: {
         FontAwesomeIcon,
-        popUpFilterHistoryTrans
+        popUpFilterHistoryTrans,
+        LineChart,
     },
     setup() {
         const store = useStore();
         
         const currentTab = computed(() => {
             return store.state.currentDashboardTab;
+        });
+
+        const dataGrafikSetorDate = computed(() => {
+            return store.state.dataGrafikSetor.date;
+        });
+
+        const dataGrafikSetorId = computed(() => {
+            return store.state.dataGrafikSetor.dataId;
+        });
+
+        const dataGrafikSetorKg = computed(() => {
+            return store.state.dataGrafikSetor.dataKg;
+        });
+
+        const grafikData = computed(() => ({
+            labels: dataGrafikSetorId.value,
+            datasets: [
+                {
+                    data: dataGrafikSetorKg.value,
+                    fill: true,
+                    label: "Kg",
+                    tension: 0.4,
+                    pointRadius: 0,
+                    borderColor: "#c1d966",
+                    borderWidth: 2,
+                    minBarLength: 6,
+                    maxBarThickness: 6,
+                    backgroundColor: 'rgba(193,217,102,0.3)',
+                    // backgroundColor: createGradient,
+                },
+            ],
+        }));
+
+        const grafikOptions = ref({
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: true,
+                }
+            },
+            scales: {
+                y: {
+                    grid: {
+                        drawBorder: false,
+                        display: true,
+                        drawOnChartArea: true,
+                        drawTicks: false,
+                        borderDash: [5, 5]
+                    },
+                    ticks: {
+                        display: true,
+                        padding: 10,
+                        color: '#b2b9bf',
+                        beginAtZero: true,
+                        font: {
+                            size: 11,
+                            family: "Open Sans",
+                            style: 'normal',
+                            lineHeight: 2
+                        },
+                    }
+                },
+                x: {
+                    grid: {
+                        drawBorder: false,
+                        display: false,
+                        drawOnChartArea: false,
+                        drawTicks: false,
+                        borderDash: [5, 5]
+                    },
+                    ticks: {
+                        display: true,
+                        color: '#b2b9bf',
+                        padding: 0,
+                        font: {
+                            size: 11,
+                            family: "Open Sans",
+                            style: 'normal',
+                            lineHeight: 2
+                        },
+                    }
+                }
+            }
         });
 
         const historyTransaksi = computed(() => {
@@ -156,8 +271,12 @@ export default defineComponent({
             dateParse,
             faExchangeAlt,faPlus,faMinus,faSlidersH,faArrowRight,
             modifUang,
+            dataGrafikSetorDate,
+            dataGrafikSetorKg,
             historyTransDate,
             openFilter,
+            grafikData,
+            grafikOptions,
         }
     },
 })

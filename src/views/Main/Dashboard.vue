@@ -128,6 +128,8 @@ export default defineComponent({
         store.commit("setDataSampahMasuk","");
         store.dispatch("getSampahMasuk");
         // Tab transaksi
+        store.commit("setDataGrafikSetor","");
+        store.dispatch("getDataGrafikSetor");
         setCurrentDate();
         store.commit("setDataHistoryTrans","");
         store.dispatch("getHistoryTrans");
