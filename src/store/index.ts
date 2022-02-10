@@ -31,14 +31,19 @@ export default createStore({
         show: false,
         text: 'tex'
       },
-      dataDetilSampahMasuk: {
-        show     : false,
-        kategori : '',
+      dataGrafikSetor: {
+        date: "",
+        dataId: "",
+        dataKg: "",
       },
       historyTransDate: {
         start: "",
         end: "",
-      }
+      },
+      dataDetilSampahMasuk: {
+        show     : false,
+        kategori : '',
+      },
     }
   },
   mutations: {
@@ -78,6 +83,11 @@ export default createStore({
     }, 
     setDataJenisSampah:  function(state: any, value) {      
       state.dataJenisSampah = value;
+    }, 
+    setDataGrafikSetor:  function(state: any, value) {      
+      state.dataGrafikSetor.date = value.date;
+      state.dataGrafikSetor.dataId = value.dataId;
+      state.dataGrafikSetor.dataKg = value.dataKg;
     }, 
     setHistoryTransDate:  function(state: any, value) {      
       state.historyTransDate.start = value.start;
@@ -178,11 +188,13 @@ export default createStore({
         }
       })
     },
-    getHistoryTrans: function ({ commit },refresher = "") {
-      const dateStart = this.state.historyTransDate.start;
-      const dateEnd   = this.state.historyTransDate.end;
+    getDataGrafikSetor: function ({ commit },refresher = "") {
+      const currentUnixTime = new Date(new Date().getTime());
+      const currMonth = currentUnixTime.toLocaleString("en-US",{month: "2-digit"});
+      const currYear  = currentUnixTime.toLocaleString("en-US",{year: "numeric"});
+      const currMonthString = currentUnixTime.toLocaleString("id-ID",{month: "long"});
 
-      axios.get(`${this.state.APIURL}/transaksi/getdata?start=${dateStart}&end=${dateEnd}&orderby=terbaru`,{
+      axios.get(`${this.state.APIURL}/transaksi/getdata?start=01-${currMonth}-${currYear}&end=31-${currMonth}-${currYear}`,{
         headers: {
             token: TokenService.getToken()!
           }
@@ -192,7 +204,32 @@ export default createStore({
           refresher.complete();
         }
 
-        commit("setDataHistoryTrans",response.data.data);
+        const arrayId = [""] as any;
+        const arrayKg = [0] as any;
+        const allTransaksi = response.data.data;
+        
+        allTransaksi.forEach((t: any) => {
+          if (t.jenis_transaksi == 'penyetoran sampah') {
+            const date  = new Date(parseInt(t.date) * 1000);
+            const day   = date.toLocaleString("en-US",{day: "numeric"});
+            const month = date.toLocaleString("id-ID",{month: "long"});
+
+            if (month == currMonthString) {
+              arrayId.push("Tanggal "+day);
+              arrayKg.push(t.total_kg_setor);
+            }
+          } 
+        });
+
+        for (let i = arrayId.length; i < 8; i++) {
+          arrayId.push('');
+        }
+
+        commit("setDataGrafikSetor",{
+          date: `${currMonthString} ${currYear}`,
+          dataId: arrayId,
+          dataKg: arrayKg,
+        });
       })
       .catch(error => {
         if (refresher) {
@@ -215,19 +252,29 @@ export default createStore({
           router.push("/login");
         }
         else if(error.response.status == 404) {
-          commit("setDataAlert",{
-            show   :true,
-            type   :'warning',
-            message:'<b>Ups...</b> transaksi tidak ditemukan!'}
-          );
+          commit("setDataGrafikSetor",{
+            date: `${currMonthString} ${currYear}`,
+            data: [],
+          });
+        }
+      })
+    },
+    getHistoryTrans: function ({ commit }) {
+      const dateStart = this.state.historyTransDate.start;
+      const dateEnd   = this.state.historyTransDate.end;
 
-          setTimeout(() => {
-            commit("setDataAlert",{show :false,type :'',message:''});  
-          }, 4000);
-
+      axios.get(`${this.state.APIURL}/transaksi/getdata?start=${dateStart}&end=${dateEnd}&orderby=terbaru`,{
+        headers: {
+            token: TokenService.getToken()!
+          }
+      })
+      .then(response => {
+        commit("setDataHistoryTrans",response.data.data);
+      })
+      .catch(error => {
+        if(error.response.status == 404) {
           commit("setDataHistoryTrans",[]);
         }
-
       })
     },
   },
