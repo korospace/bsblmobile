@@ -102,9 +102,13 @@ export default defineComponent({
           store.dispatch("getSampahMasuk");
         } 
         else {
+          store.commit("setDataGrafikSetor",{
+            date:"",dataId:"",dataKg:""
+          });
+          store.dispatch("getDataGrafikSetor",event.target);
           setCurrentDate();
           store.commit("setDataHistoryTrans","");
-          store.dispatch("getHistoryTrans",event.target);
+          store.dispatch("getHistoryTrans");
         }
       }
       else if (path == '/info') {
@@ -116,7 +120,7 @@ export default defineComponent({
       }
       else if (path == '/profile') {
         store.commit("setDataNasabah","");
-        store.dispatch("getProfileNasabah",event.target);
+        store.dispatch("getProfileNasabah");
       }
     };
 
