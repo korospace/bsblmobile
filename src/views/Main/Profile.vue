@@ -72,7 +72,7 @@
                 </small>
                 <div class="mt-1.5 mb-6 text-lg text-gray-600 relative">
                   <div class="flex capitalize" :class="{'hidden':editMode}">
-                    <div class="bg-gradient-to-t from-lime-700 to-lime-400 pl-1 opacity-70"></div>
+                    <div class="bg-gradient-to-t from-greenbsbl-old to-greenbsbl-young pl-1 opacity-70"></div>
                     <div class="py-2 px-3">{{ dataNasabah.nama_lengkap }}</div>
                   </div>
 
@@ -92,7 +92,7 @@
                 </small>
                 <div class="mt-1.5 text-lg text-gray-600 mb-6 relative">
                   <div class="flex" :class="{'hidden':editMode}">
-                    <div class="bg-gradient-to-t from-lime-700 to-lime-400 pl-1 opacity-70"></div>
+                    <div class="bg-gradient-to-t from-greenbsbl-old to-greenbsbl-young pl-1 opacity-70"></div>
                     <div class="py-2 px-3">{{ dataNasabah.username }}</div>
                   </div>
 
@@ -116,7 +116,7 @@
                 </small>
                 <div class="mt-1.5 text-lg text-gray-600 mb-6">
                   <div class="flex" :class="{'hidden':editMode}">
-                    <div class="bg-gradient-to-t from-lime-700 to-lime-400 pl-1 opacity-70"></div>
+                    <div class="bg-gradient-to-t from-greenbsbl-old to-greenbsbl-young pl-1 opacity-70"></div>
                     <div class="py-2 px-3">{{ dataNasabah.tgl_lahir }}</div>
                   </div>
 
@@ -133,7 +133,7 @@
                 </small>
                 <div class="mt-1.5 text-lg text-gray-600 mb-6">
                   <div class="flex" :class="{'hidden':editMode}">
-                    <div class="bg-gradient-to-t from-lime-700 to-lime-400 pl-1 opacity-70"></div>
+                    <div class="bg-gradient-to-t from-greenbsbl-old to-greenbsbl-young pl-1 opacity-70"></div>
                     <div class="py-2 px-3">{{ dataNasabah.kelamin }}</div>
                   </div>
 
@@ -152,7 +152,7 @@
                 </small>
                 <div class="mt-1.5 text-lg text-gray-600 mb-6 relative">
                   <div class="flex" :class="{'hidden':editMode}">
-                    <div class="bg-gradient-to-t from-lime-700 to-lime-400 pl-1 opacity-70"></div>
+                    <div class="bg-gradient-to-t from-greenbsbl-old to-greenbsbl-young pl-1 opacity-70"></div>
                     <div class="py-2 px-3">{{ dataNasabah.notelp }}</div>
                   </div>
 
@@ -175,7 +175,7 @@
                   NIK
                 </small>
                 <div v-if="!editMode" class="flex mt-1.5 text-lg text-gray-600 capitalize mb-6 relative">
-                  <div class="bg-gradient-to-t from-lime-700 to-lime-400 pl-1 opacity-70"></div>
+                  <div class="bg-gradient-to-t from-greenbsbl-old to-greenbsbl-young pl-1 opacity-70"></div>
                   <div class="py-2 px-3">{{ dataNasabah.nik }}</div>
                 </div>
 
@@ -185,7 +185,7 @@
                 </small>
                 <div class="mt-1.5 text-lg text-gray-600 mb-10 relative">
                   <div class="flex" :class="{'hidden':editMode}">
-                    <div class="bg-gradient-to-t from-lime-700 to-lime-400 pl-1 opacity-70"></div>
+                    <div class="bg-gradient-to-t from-greenbsbl-old to-greenbsbl-young pl-1 opacity-70"></div>
                     <div class="py-2 px-3">{{ dataNasabah.alamat }}</div>
                   </div>
 
@@ -259,7 +259,7 @@
 
 <script>
 import { ref, reactive, computed, defineComponent } from 'vue';
-import { IonContent, IonPage  } from '@ionic/vue';
+import { IonContent, IonPage, onIonViewWillEnter  } from '@ionic/vue';
 import { TokenService }    from '@/services/token.service';
 import axios               from 'axios';
 import { useStore }        from 'vuex'
@@ -474,6 +474,13 @@ export default defineComponent({
         router.push('/login');
       })
     }
+
+    onIonViewWillEnter(() => {
+      if (!dataNasabah.value) {
+        store.commit("setDataNasabah","");
+        store.dispatch("getProfileNasabah");
+      }
+    })
 
     return { 
       dataNasabah,
