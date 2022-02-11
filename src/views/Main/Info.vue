@@ -29,7 +29,6 @@
           <swiper
            v-if="articles !== ''" 
            class="w-full" 
-           :pagination="{ clickable: true }" 
            :slides-per-view="1.1">
               <template v-for="article in articles" :key="article.id">
                 <swiper-slide>
@@ -87,16 +86,16 @@
               <template
                 v-if="jenisSampah !== ''">
                   <div
-                    v-for="(itemA,name,noA) in jenisSampah" :key="itemA"
+                    v-for="(itemA,name) in jenisSampah" :key="itemA"
                     class="mb-4">
                       <div class="text-gray-700 text-md uppercase font-bold">
-                        {{ ++noA }}. {{ name }}
+                        {{ name }}
                       </div>
                       <div
                         v-for="(itemB,noB) in itemA" :key="itemB"
                         class="text-sm text-gray-700 capitalize pl-4 py-2 flex justify-between">
                           <div>
-                            {{ noA }}.{{ ++noB }} {{ itemB.jenis }}
+                            {{ ++noB }} {{ itemB.jenis }}
                           </div>
                           <div>
                             Rp. {{ modifHarga(itemB.harga) }}
@@ -118,9 +117,8 @@
   import { ref, computed, defineComponent } from 'vue';
   import { useStore }         from 'vuex'
   import xHeader              from "@/components/dashboard.header.vue";
-  import {Swiper,SwiperSlide,Pagination} from 'swiper/vue';
+  import {Swiper,SwiperSlide} from 'swiper/vue';
   import '../../../node_modules/swiper/swiper.min.css';
-  import '../../../node_modules/swiper/components/pagination/pagination.min.css';
 
   export default defineComponent({
     components: {
@@ -129,7 +127,6 @@
       xHeader,
       Swiper,
       SwiperSlide,
-      Pagination
     },
     setup() {
       const store = useStore();

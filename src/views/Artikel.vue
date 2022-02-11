@@ -76,7 +76,6 @@
       <swiper
         v-if="articles !== ''" 
         class="w-full" 
-        :pagination="{ clickable: true }" 
         :slides-per-view="1.1">
           <template v-for="item in artikelLain" :key="item.id">
             <swiper-slide>
@@ -116,9 +115,8 @@
   import HeaderBack    from '@/components/headerBack.vue'
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
   import { faUserEdit,faCalendar } from '@fortawesome/free-solid-svg-icons'
-  import {Swiper,SwiperSlide,Pagination} from 'swiper/vue';
+  import {Swiper,SwiperSlide} from 'swiper/vue';
   import '../../node_modules/swiper/swiper.min.css';
-  import '../../node_modules/swiper/components/pagination/pagination.min.css';
 
   export default defineComponent({
     components: {
@@ -128,7 +126,6 @@
       FontAwesomeIcon,
       Swiper,
       SwiperSlide,
-      Pagination
     },
     setup() {
         const router = useRouter();

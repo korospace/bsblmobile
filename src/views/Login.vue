@@ -171,4 +171,11 @@ export default defineComponent({
     transform: translate(-50%, -50%);
     border-radius: 14px;
   }
+
+  ion-item{
+    --border-color: #C1D966;
+  }
+  ion-label{
+    --color: rgba(62, 67, 75, 0.6) !important;
+  }
 </style>

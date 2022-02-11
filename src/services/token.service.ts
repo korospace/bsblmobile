@@ -14,6 +14,16 @@ const TokenService = {
     }
 };
 
+const IntroService = {
+    getIntroStatus() {
+        return localStorage.getItem('introStatus');
+    },
+
+    saveIntroStatus(introStatus: any) {
+        localStorage.setItem('introStatus', introStatus);
+    },
+};
+
 const loggedIn = (() => {
     if(TokenService.getToken() != null ) {
         return true;
@@ -23,4 +33,4 @@ const loggedIn = (() => {
 });
 
 
-export { TokenService, loggedIn };
+export { TokenService, IntroService, loggedIn };
