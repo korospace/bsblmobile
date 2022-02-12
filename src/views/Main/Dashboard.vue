@@ -11,7 +11,7 @@
             <!-- Icon -->
             <div class="flex items-center">
               <div class="bg-gray-400 rounded-full w-max shadow-xl overflow-hidden">
-                <img src="@/assets/images/Person-Logo.png" alt="" class="loginLogo w-14">
+                <img src="@/assets/images/Person-Logo.webp" alt="" class="loginLogo w-14">
               </div>
               <p
                 class="flex-1 capitalize text-white ml-4"

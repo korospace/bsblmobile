@@ -23,7 +23,7 @@
           <div v-if="detilTransaksi !==''">
             <!-- header -->
             <div class="flex justify-between items-center px-4 py-5">
-              <img src="@/assets/images/banksampah-logo.png" alt="" class="loginLogo w-16">
+              <img src="@/assets/images/banksampah-logo.webp" alt="" class="loginLogo w-16">
 
               <p
                 class="ml-2 text-xl text-gray-700"
