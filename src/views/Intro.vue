@@ -25,7 +25,7 @@
                 </p>
                 <button
                   @click="showPage1 = !showPage1; showPage2 = !showPage2"
-                  class="absolute right-8 bottom-5 rounded-3xl px-4 py-2 bg-gray-600 shadow-md">
+                  class="absolute right-8 bottom-5 rounded-3xl px-4 py-2 bg-gray-600 text-gray-300 shadow-md">
                     next
                 </button>
             </div>
@@ -45,12 +45,12 @@
                 </p>
                 <button
                   @click="showPage1 = !showPage1; showPage2 = !showPage2"
-                  class="absolute left-8 bottom-5 rounded-3xl px-4 py-2 bg-gray-600 shadow-md">
+                  class="absolute left-8 bottom-5 rounded-3xl px-4 py-2 bg-gray-600 text-gray-300 shadow-md">
                     back
                 </button>
                 <button
                   @click="showPage2 = !showPage2; showPage3 = !showPage3"
-                  class="absolute right-8 bottom-5 rounded-3xl px-4 py-2 bg-gray-600 shadow-md">
+                  class="absolute right-8 bottom-5 rounded-3xl px-4 py-2 bg-gray-600 text-gray-300 shadow-md">
                     next
                 </button>
             </div>
