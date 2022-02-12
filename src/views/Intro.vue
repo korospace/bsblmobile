@@ -9,7 +9,7 @@
           <img
             class="transition-all duration-1000"
             :class="{'w-3/4 relative top-auto right-auto animate-pulse':removeLogo1==false,' w-12 xs:w-20 absolute top-2 right-2':removeLogo1==true}" 
-            src="@/assets/images/banksampah-logo.png" alt="">
+            src="@/assets/images/banksampah-logo.webp" alt="">
       </div>
 
       <div class="w-full h-full relative flex">
@@ -19,13 +19,13 @@
           :class="{'-translate-x-0':showPage1,'-translate-x-full':!showPage1}">
             <div 
               class="page1 w-full h-full flex flex-col justify-center relative z-10">
-                <img class="w-full" src="@/assets/images/intro-person1.png" alt="">
+                <img class="w-full" src="@/assets/images/intro-person1.webp" alt="">
                 <p class="text-justify px-8 py-8 text-white">
                   Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio minus illum mollitia in pariatur. Fugiat eius reprehenderit officiis expedita tempora accusantium ratione eos ad qui, amet facere voluptas magnam corporis?
                 </p>
                 <button
                   @click="showPage1 = !showPage1; showPage2 = !showPage2"
-                  class="absolute right-8 bottom-5 rounded-3xl px-4 py-2 bg-gray-600 text-gray-300 shadow-md">
+                  class="absolute right-8 bottom-5 rounded-3xl px-4 py-2 bg-gray-500 text-gray-300 shadow-md">
                     next
                 </button>
             </div>
@@ -39,18 +39,18 @@
           :class="{'translate-x-0':showPage2,'translate-x-full':!showPage2,'translate-x-0':!showPage3,'-translate-x-full':showPage3}">
             <div 
               class="page2 w-full h-full flex flex-col justify-center relative z-10">
-                <img class="w-full" src="@/assets/images/intro-person2.png" alt="">
+                <img class="w-full" src="@/assets/images/intro-person2.webp" alt="">
                 <p class="text-justify px-8 py-8 text-white">
                   Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio minus illum mollitia in pariatur. Fugiat eius reprehenderit officiis expedita tempora accusantium ratione eos ad qui, amet facere voluptas magnam corporis?
                 </p>
                 <button
                   @click="showPage1 = !showPage1; showPage2 = !showPage2"
-                  class="absolute left-8 bottom-5 rounded-3xl px-4 py-2 bg-gray-600 text-gray-300 shadow-md">
+                  class="absolute left-8 bottom-5 rounded-3xl px-4 py-2 bg-gray-500 text-gray-300 shadow-md">
                     back
                 </button>
                 <button
                   @click="showPage2 = !showPage2; showPage3 = !showPage3"
-                  class="absolute right-8 bottom-5 rounded-3xl px-4 py-2 bg-gray-600 text-gray-300 shadow-md">
+                  class="absolute right-8 bottom-5 rounded-3xl px-4 py-2 bg-gray-500 text-gray-300 shadow-md">
                     next
                 </button>
             </div>
@@ -65,7 +65,7 @@
             <div 
               class="page3 w-full h-full flex flex-col justify-center px-8 pb-8 relative z-10">
                 <div class="px-8">
-                  <img class="w-full" src="@/assets/images/intro-person3.png" alt="">
+                  <img class="w-full" src="@/assets/images/intro-person3.webp" alt="">
                 </div>
                 <p class="text-justify mt-8 text-white">
                   Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio minus illum mollitia in pariatur. Fugiat eius reprehenderit officiis expedita tempora accusantium ratione eos ad qui, amet facere voluptas magnam corporis?
@@ -156,17 +156,17 @@ export default defineComponent({
   }
 
   .page1{
-    background: url('../assets/images/intro-wave-1.jpg') no-repeat center center fixed; 
+    background: url('../assets/images/intro-wave-1.webp') no-repeat center center fixed; 
     background-size: 100% auto;
   }
 
   .page2{
-    background: url('../assets/images/intro-wave-2.jpg') no-repeat center center fixed; 
+    background: url('../assets/images/intro-wave-2.webp') no-repeat center center fixed; 
     background-size: 100% auto;
   }
 
   .page3{
-    background: url('../assets/images/intro-wave-3.jpg') no-repeat center center fixed; 
+    background: url('../assets/images/intro-wave-3.webp') no-repeat center center fixed; 
     background-size: 100% auto;
   }
 </style>

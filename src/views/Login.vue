@@ -4,7 +4,7 @@
         <ion-card class="center w-11/12">
           <ion-card-header>
               <center>
-                <img src="../assets/images/banksampah-logo.png" alt="" class="loginLogo w-28">
+                <img src="../assets/images/banksampah-logo.webp" alt="" class="loginLogo w-28">
               </center>
           </ion-card-header>
           
@@ -158,7 +158,7 @@ export default defineComponent({
 </script>
 <style scoped>
   .ion-page {
-    background: url('../assets/images/Login.jpg') no-repeat center center fixed !important;
+    background: url('../assets/images/Login.webp') no-repeat center center fixed !important;
     background-size: cover !important;
   }
   .center {

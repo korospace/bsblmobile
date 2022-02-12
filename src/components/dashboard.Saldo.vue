@@ -21,7 +21,7 @@
                     :icon="faWifi" size="1x"
                     class=""/>
 
-                    <img src="@/assets/images/banksampah-logo.png" alt="" class="loginLogo w-10 opacity-80">
+                    <img src="@/assets/images/banksampah-logo.webp" alt="" class="loginLogo w-10 opacity-80">
                   </div>
 
                   <p class="mt-4" v-html="idNasabah"></p>
@@ -227,6 +227,6 @@ export default defineComponent({
   }
 
   #idcard{
-    background: url('../assets/images/Card-Member.jpg') no-repeat center center;
+    background: url('../assets/images/Card-Member.webp') no-repeat center center;
   }
 </style>

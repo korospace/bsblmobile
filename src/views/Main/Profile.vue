@@ -16,7 +16,7 @@
           <div
             class="flex flex-col items-center mt-10">
               <div class="bg-gray-400 rounded-full w-max shadow-md overflow-hidden">
-                <img src="@/assets/images/Person-Logo.png" alt="" class="loginLogo w-20">
+                <img src="@/assets/images/Person-Logo.webp" alt="" class="loginLogo w-20">
               </div>
               <div
                 class="ml-4 mt-4 flex flex-col items-center"
@@ -504,7 +504,5 @@ export default defineComponent({
 </script>
 
 <style scoped>
-  #containerImgProfile{
-    background: url('../../assets/images/Card-Member.jpg') no-repeat center center;
-  }
+  
 </style>
