@@ -1,6 +1,6 @@
 <template>
     <div class="bg-white p-6 rounded-b-3xl flex items-center relative z-20 shadow-lg">
-        <img src="@/assets/images/banksampah-logo.png" alt="" class="loginLogo w-20">
+        <img src="@/assets/images/banksampah-logo.webp" alt="" class="loginLogo w-20">
         <p
           v-html="title"
           class="flex-1 text-xl capitalize text-center"
