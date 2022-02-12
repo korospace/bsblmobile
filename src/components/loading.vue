@@ -16,7 +16,7 @@
                     </span>
                     <p
                       class="ml-2 tracking-wide text-md"
-                      style="font-family:'QuicksandSemiBold';background: linear-gradient(to right, #BFD765, #81A257);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
+                      style="font-family:'QuicksandSemiBold';background: linear-gradient(to right, #C1D966, #537629);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
                         {{ loadingText }}
                     </p>
                 </div>
