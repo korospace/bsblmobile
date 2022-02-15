@@ -29,13 +29,13 @@
           </button>
           
           <center class="mt-8 pb-8">
-            <span class="">belum punya akun? </span>
-            <router-link to="/register" class="text-lime-600 active:text-lime-600">
+            <span class="text-lg xs:text-xl">belum punya akun? </span>
+            <router-link to="/register" class="text-lg xs:text-xl text-lime-600 active:text-lime-600">
               daftar disini
             </router-link>
             <p
              @click="showPopupForgotPass"
-             class="mt-2 text-xs max-w-max underline underline-offset-8 opacity-80">
+             class="mt-2 text-xs xs:text-lg max-w-max underline underline-offset-8 opacity-80">
               lupa password
             </p>
           </center>

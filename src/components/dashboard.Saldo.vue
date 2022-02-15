@@ -15,7 +15,7 @@
             <div
               id="idcard" 
               class="rounded-xl relative">
-                <div id="bg-idcard" class="p-4 rounded-xl" style="background: rgba(101, 163, 13, 0);">
+                <div id="bg-idcard" class="p-4 xs:p-8 rounded-xl" style="background: rgba(101, 163, 13, 0);">
                   <div class="flex justify-between">
                     <font-awesome-icon
                     :icon="faWifi" size="1x"
@@ -24,18 +24,18 @@
                     <img src="@/assets/images/banksampah-logo.webp" alt="" class="loginLogo w-10 opacity-80">
                   </div>
 
-                  <p class="mt-4" v-html="idNasabah"></p>
+                  <p class="mt-4 text-lg xs:text-2xl" v-html="idNasabah"></p>
 
                   <div class="flex mt-8">
                     <div class="mr-6">
-                      <p class="text-xs tracking-widest opacity-80">Username</p>
-                      <p class="text-lg mt-2">
+                      <p class="text-xs xs:text-lg tracking-widest opacity-80">Username</p>
+                      <p class="text-lg xs:text-2xl mt-2">
                         {{ username }}
                       </p>
                     </div>
                     <div>
-                      <p class="text-xs tracking-widest opacity-80">Tgl Bergabung</p>
-                      <p class="text-lg mt-2">
+                      <p class="text-xs xs:text-lg tracking-widest opacity-80">Tgl Bergabung</p>
+                      <p class="text-lg xs:text-2xl mt-2">
                         {{ bergabung }}
                       </p>
                     </div>
@@ -61,10 +61,12 @@
               <div class="w-max rounded-lg p-5 bg-gradient-to-t from-greenbsbl-old to-greenbsbl-young">
                 <font-awesome-icon
                   :icon="faMoneyBillWaveAlt" size="1x"
-                  class="text-white"/>
+                  class="text-white text-xl xs:text-3xl"/>
               </div>
-              <p class="w-full mt-4 text-center text-gray-600 border-b border-gray-200 pb-2">Uang</p>
-              <p class="text-gray-600 mt-4">
+              <p class="w-full mt-4 text-center text-gray-600 text-lg xs:text-2xl border-b border-gray-200 pb-2">
+                Uang
+              </p>
+              <p class="text-gray-600 mt-4 text-lg xs:text-2xl">
                 Rp.{{ saldoUang }}
               </p>
           </div>
@@ -78,10 +80,12 @@
               <div class="w-max rounded-lg p-5 bg-gradient-to-t from-greenbsbl-old to-greenbsbl-young">
                 <font-awesome-icon
                   :icon="faCoins" size="1x"
-                  class="text-white"/>
+                  class="text-white text-xl xs:text-3xl"/>
               </div>
-              <p class="w-full mt-4 text-center text-gray-600 border-b border-gray-200 pb-2">Emas</p>
-              <p class="text-gray-600 mt-4">
+              <p class="w-full mt-4 text-center text-gray-600 text-lg xs:text-2xl border-b border-gray-200 pb-2">
+                Emas
+              </p>
+              <p class="text-gray-600 mt-4 text-lg xs:text-2xl">
                 {{ saldoEmas }} g
               </p>
           </div>
@@ -107,13 +111,13 @@
                 <div class="px-5">
                   <font-awesome-icon
                     :icon="x.icon" size="1x"
-                    class=""/>
+                    class="text-lg xxs:text-xl xs:text-3xl"/>
                 </div>
-                <p class="mt-2 text-xxs sm320:text-xs">
+                <p class="mt-2 text-xxs xs:text-lg">
                   {{ sampahMasuk[x.name].kategori }}
                 </p>
                 <p class="mt-2 border-b border-white opacity-40"></p>
-                <p class="mt-2 text-xxs sm320:text-xs">{{ sampahMasuk[x.name].total }} kg</p>
+                <p class="mt-2 text-xxs xs:text-lg">{{ sampahMasuk[x.name].total }} kg</p>
             </div>
         </div>
     </div>
