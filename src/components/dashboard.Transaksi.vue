@@ -6,7 +6,7 @@
 
             <pop-up-filter-history-trans />
 
-            <div class="mt-6 mx-4 rounded-3xl shadow-lg bg-white p-2">
+            <div class="mx-6 rounded-3xl shadow-lg bg-white p-2">
                 <div
                   class="font-bold text-md text-gray-500 text-center py-2"
                   style="font-family:QuicksandSemiBold;">
@@ -33,7 +33,7 @@
             </div>
             
             <!-- // info harga sampah terkini // -->
-            <div class="mt-8 mx-4 rounded-t-3xl shadow-lg bg-white flex-1">
+            <div class="mt-8 mx-6 rounded-t-3xl shadow-lg bg-white flex-1">
                 <div 
                   class="px-4 pt-6 pb-4 border-b border-gray-200">
                     <div
@@ -56,7 +56,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="table px-4 pb-10 w-full">
+                <div class="table px-4 pb-10 w-full min-h-xs">
                     <!-- skeleton -->
                     <template
                       v-if="Array.isArray(historyTransaksi) == false">
