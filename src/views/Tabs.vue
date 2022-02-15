@@ -14,26 +14,26 @@
         <ion-router-outlet></ion-router-outlet>
 
         <!-- // Tabs // -->
-        <ion-tab-bar style="box-shadow: 0px -2px 6px rgba(0,0,0,0.1);">  
+        <ion-tab-bar class="xs:py-2" style="box-shadow: 0px -2px 6px rgba(0,0,0,0.1);">  
           <ion-tab-button tab="tab1" href="/info">
-            <font-awesome-icon class="opacity-70" :icon="faInfoCircle" size="2x"/>
-            info
+            <font-awesome-icon class="opacity-70 text-xl xs:text-3xl" :icon="faInfoCircle" size="2x"/>
+            <span class="mt-0.5 text-xs xs:text-sm">info</span>
           </ion-tab-button>
 
-          <div class="h-full flex justify-center items-end pb-1.5 relative">
+          <div class="h-full flex justify-center items-end xs:mx-8 pb-2 xs:pb-0.5 relative">
             <ion-tab-button
               tab="tab2" 
               href="/dashboard"
-              class="home px-3 h-12 rounded-2xl absolute -top-6"
+              class="home px-3 h-12 xs:h-16 rounded-2xl absolute -top-6 xs:-top-10"
               style="box-shadow: 0px 0px 6px rgba(0,0,0,0.2);">
-                <font-awesome-icon :icon="faHome" size="2x"/>
+                <font-awesome-icon class="text-xl xs:text-3xl" :icon="faHome" size="2x"/>
             </ion-tab-button>
-            <small>home</small>
+            <span class="text-xs xs:text-sm">home</span>
           </div>
           
           <ion-tab-button tab="tab3" href="/profile">
-            <font-awesome-icon class="opacity-70" :icon="faUser" size="2x"/>
-            profile
+            <font-awesome-icon class="opacity-70 text-xl xs:text-3xl" :icon="faUser" size="2x"/>
+            <span class="mt-0.5 text-xs xs:text-sm">profile</span>
           </ion-tab-button>
         </ion-tab-bar>
         
@@ -148,6 +148,7 @@ export default defineComponent({
 
   ion-tab-button.home{
     /* --color: rgba(255,255,255,0.4); */
+    background: white;
     --color: rgba(122, 168, 66, 0.6);
     --color-selected: #fff;
   }
