@@ -34,7 +34,7 @@
             class="pt-6 bg-gray-100 rounded-t-3xl flex-1 flex flex-col" 
             style="box-shadow: 0px -2px 10px rgba(0,0,0,0.2);">
               <!-- Toggle Switch -->
-              <div class="px-6 mb-6">
+              <div class="px-6 mb-12">
                 <div
                   id="toggle-wraper"
                   class="w-full bg-gray-100 flex rounded-3xl relative px-1"
