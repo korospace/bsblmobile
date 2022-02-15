@@ -2,7 +2,7 @@
     <transition name="fade">
         <div
           v-if="showForgotPass"
-          class="fixed z-50 top-0 bottom-0 left-0 right-0 px-3 flex justify-center items-center"
+          class="absolute z-50 top-0 bottom-0 left-0 right-0 px-3 flex justify-center items-center"
           style="background-color: rgba(0,0,0,0.2);">
             <transition name="bounce" appear>
                 <form
@@ -10,14 +10,14 @@
                   class="w-full rounded-md bg-white shadow-2xl">
                     <!-- body -->
                     <div class="px-4">
-                        <h1 class="text-center opacity-70 text-lg sm360:text-xl pt-8" style="font-family:QuicksandSemiBold;">
+                        <h1 class="text-center opacity-70 text-lg sm360:text-xl pt-8 text-gray-900" style="font-family:QuicksandSemiBold;">
                             LUPA PASSWORD?
                         </h1>
-                        <p class="mt-2.5 text-xs sm360:text-sm text-center opacity-70">
+                        <p class="mt-2.5 text-xs sm360:text-sm text-center text-gray-600">
                             Masukan email yang terdaftar. Password akan dikirim ke email anda
                         </p>
 
-                        <input type="text" name="email" v-model="emailVal" class="mt-10 w-full rounded text-lime-500 border border-lime-400 p-2 focus:outline-none focus:border-lime-500" autocomplete="off">
+                        <input type="text" name="email" v-model="emailVal" class="mt-10 w-full rounded text-lime-500 border border-lime-400 p-2 bg-white focus:outline-none focus:border-lime-500" autocomplete="off">
 
                         <div class="flex justify-center mt-5">
                             <button class="px-4 py-2 bg-gradient-to-r from-lime-600 to-lime-400 active:from-lime-500 active:to-lime-400 text-white tracking-widest rounded-md">

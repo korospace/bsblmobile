@@ -11,18 +11,18 @@
             <!-- Icon -->
             <div class="flex items-center">
               <div class="bg-gray-400 rounded-full w-max shadow-xl overflow-hidden">
-                <img src="@/assets/images/Person-Logo.webp" alt="" class="loginLogo w-14">
+                <img src="@/assets/images/Person-Logo.webp" alt="" class="loginLogo w-14 xs:w-20">
               </div>
               <p
                 class="flex-1 capitalize text-white ml-4"
                 :class="{'opacity-0': !dataNasabah.username}"
                 style="font-family:QuicksandSemiBold;">
                   <span
-                    class="text-sm">
+                    class="text-sm xs:text-lg">
                       Hi, {{ dataNasabah.username }}
                   </span> 
                   <br>
-                  <span class="text-lg">
+                  <span class="text-lg xs:text-2xl">
                     Selamat datang !
                   </span>
               </p>
