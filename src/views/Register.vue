@@ -301,9 +301,9 @@
                 <button class="w-full bg-gradient-to-r from-greenbsbl-old to-greenbsbl-young active:from-greenbsbl-old2 active:to-greenbsbl-young text-white mt-10 py-3 rounded">
                     DAFTAR
                 </button>
-                <center class="mt-8 pb-4 tracking-wide">
+                <center class="mt-8 pb-4 tracking-wide text-lg xs:text-xl">
                     <p class="text-md text-gray-600">sudah memiliki akun?</p>
-                    <router-link class="text-xs text-lime-600" to="/login">login sekarang</router-link>
+                    <router-link class="text-xs xs:text-lg text-lime-600 underline" to="/login">login sekarang</router-link>
                 </center>
             </Form>
         </ion-content>

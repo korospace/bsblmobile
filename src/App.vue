@@ -23,5 +23,13 @@ export default defineComponent({
 </script>
 
 <style>
-
+  ion-router-outlet{
+    display: flex !important;
+    justify-content: center !important;
+  }
+  ion-router-outlet div.ion-page{
+    margin: auto;
+    width: 100% !important;
+    max-width: 640px !important;
+  }
 </style>

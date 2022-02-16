@@ -2,9 +2,9 @@
     <transition name="slide" appear>
         <div
           v-if="showAlert"
-          class="fixed z-20 left-0 right-0 top-8 px-2">
+          class="sticky z-20 left-0 right-0 top-8 px-2 flex justify-center">
             <div
-              class="w-full rounded-lg text-white flex justify-between items-center"
+              class="w-full max-w-640 rounded-lg text-white flex justify-between items-center"
               :class="{'bg-red-500':alertType=='danger','bg-green-500':alertType=='success','bg-yellow-500':alertType=='warning','bg-blue-500':alertType=='info'}">
                 <span class="p-3 text-sm" v-html="alertMessage"></span>
                 <span class=" p-3" @click="closeAlert">

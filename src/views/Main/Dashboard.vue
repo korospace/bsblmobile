@@ -11,18 +11,18 @@
             <!-- Icon -->
             <div class="flex items-center">
               <div class="bg-gray-400 rounded-full w-max shadow-xl overflow-hidden">
-                <img src="@/assets/images/Person-Logo.webp" alt="" class="loginLogo w-14">
+                <img src="@/assets/images/Person-Logo.webp" alt="" class="loginLogo w-14 xs:w-20">
               </div>
               <p
                 class="flex-1 capitalize text-white ml-4"
                 :class="{'opacity-0': !dataNasabah.username}"
                 style="font-family:QuicksandSemiBold;">
                   <span
-                    class="text-sm">
+                    class="text-sm xs:text-lg">
                       Hi, {{ dataNasabah.username }}
                   </span> 
                   <br>
-                  <span class="text-lg">
+                  <span class="text-lg xs:text-2xl">
                     Selamat datang !
                   </span>
               </p>
@@ -34,7 +34,7 @@
             class="pt-6 bg-gray-100 rounded-t-3xl flex-1 flex flex-col" 
             style="box-shadow: 0px -2px 10px rgba(0,0,0,0.2);">
               <!-- Toggle Switch -->
-              <div class="px-6 mb-6">
+              <div class="px-6 mb-12">
                 <div
                   id="toggle-wraper"
                   class="w-full bg-gray-100 flex rounded-3xl relative px-1"
