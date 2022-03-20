@@ -199,7 +199,7 @@
       };
 
       const baseApi = computed(() => {
-        return store.state.BASEAPI;
+        return store.state.APIURL;
       })
 
       onIonViewWillEnter(() => {
