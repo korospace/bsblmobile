@@ -159,7 +159,7 @@
                         <label 
                           for="tgl_lahir" 
                           class="absolute top-0 text-lg text-gray-400 bg-transparent p-4 duration-300 origin-0">
-                            Tanggal lahir
+                            Tanggal Lahir
                         </label>
                     </div>
                 </div>
@@ -180,7 +180,7 @@
                         <label 
                         for="kelamin" 
                         class="absolute top-0 text-lg text-gray-400 bg-transparent p-4 duration-300 origin-0 transform scale-75 -translate-y-4 z-0 ml-3 px-1.5 py-0 bg-white text-gray-600">
-                            kelamin
+                            Jenis Kelamin
                         </label>
                     </div>
                 </div>

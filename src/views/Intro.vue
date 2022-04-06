@@ -22,10 +22,10 @@
                   </button>
                 </div>
                 <p class="w-full mt-5 text-2xl xs:text-3xl text-left text-white capitalize" style="font-family:QuicksandSemiBold">
-                  Lorem ipsum dolor sit amet.
+                  Memilah sampah menabung emas
                 </p>
-                <p class="w-full mt-5 text-sm xss:text-md xs:text-xl sm:text-2xl text-left text-white">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, ullam!
+                <p class="w-full mt-5 text-md xs:text-xl sm:text-2xl text-left text-white">
+                  Tukarkan sampahmu menjadi uang tunai atau emas. disini!
                 </p>
 
                 <router-link
@@ -40,7 +40,7 @@
                   to="/login" 
                   @click="updateIntroStatus"
                   class="mt-5 tracking-widest text-sm xss:text-lg xs:text-2xl text-gray-100 underline opacity-80">
-                    login
+                    LOGIN
                 </router-link>
             </div>
             <div class="absolute z-0 bottom-0 left-0 right-0 h-1/2 bg-greenbsbl-old">
@@ -67,10 +67,10 @@
                   </button>
                 </div>
                 <p class="w-full mt-10 text-2xl xs:text-3xl text-left text-white capitalize" style="font-family:QuicksandSemiBold">
-                  Lorem ipsum dolor sit amet.
+                  Bawa sendiri atau bisa kami jemput
                 </p>
                 <p class="w-full mt-5 text-sm xss:text-md xs:text-xl sm:text-2xl text-left text-white">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, ullam!
+                  Beritahu kami lokasi anda, armada kami akan siap menjemput sampahmu
                 </p>
 
                 <router-link
@@ -85,7 +85,7 @@
                   to="/login" 
                   @click="updateIntroStatus"
                   class="mt-5 tracking-widest text-sm xss:text-lg xs:text-2xl text-gray-100 underline opacity-80">
-                    login
+                    LOGIN
                 </router-link>
             </div>
             <div class="absolute z-0 bottom-0 left-0 right-0 h-1/2 bg-greenbsbl-old">
@@ -107,10 +107,10 @@
                   </button>
                 </div>
                 <p class="w-full mt-10 text-2xl xs:text-3xl text-left text-white capitalize" style="font-family:QuicksandSemiBold">
-                  Lorem ipsum dolor sit amet.
+                  Bergerak tanpa tapi, lakukan tanpa nanti
                 </p>
-                <p class="w-full mt-5 text-sm xss:text-md xs:text-xl sm:text-2xl text-left text-white">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, ullam!
+                <p class="w-full mt-5 text-md xs:text-xl sm:text-2xl text-left text-white">
+                  Kami menerima panggilan untuk mensosialisasikan pilah sampah dimana saja
                 </p>
 
                 <router-link
@@ -125,7 +125,7 @@
                   to="/login" 
                   @click="updateIntroStatus"
                   class="mt-5 tracking-widest text-sm xss:text-lg xs:text-2xl text-gray-100 underline opacity-80">
-                    login
+                    LOGIN
                 </router-link>
             </div>
             <div class="absolute z-0 bottom-0 left-0 right-0 h-1/2 bg-greenbsbl-old">
