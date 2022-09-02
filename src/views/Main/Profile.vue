@@ -365,20 +365,20 @@ export default defineComponent({
 
       // -- New Password Validation --
       if (formEditProfile.get('new_password')) {
-        const newPass = formEditProfile.get('new_password');
+        const newPassval = formEditProfile.get('new_password');
         let isInvalid = false;
 
-        if (newPass.length < 8 || newPass.length > 20) {
+        if (newPassval.length < 8 || newPassval.length > 20) {
           newPass.status  = true;
           newPass.message = 'minimal 8 huruf dan maksimal 20 huruf';
           isInvalid = true;
         }
-        if (/\s/.test(newPass)) {
+        if (/\s/.test(newPassval)) {
           newPass.status  = true;
           newPass.message = 'tidak boleh ada spasi';
           isInvalid = true;
         }
-        if (event.old_password === undefined) {
+        if (event.old_password == undefined || event.old_password == "") {
           oldPass.status  = true;
           oldPass.message = 'password lama harus di isi';
           isInvalid = true;
