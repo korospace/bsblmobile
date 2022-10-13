@@ -252,6 +252,14 @@
                   class="w-full bg-gradient-to-r from-lime-600 to-lime-400 active:from-lime-500 active:to-lime-400 text-white py-3 rounded">
                     SIMPAN
                 </button>
+                <div :class="{'hidden':!editMode}" class="mt-5 mb-2 text-center w-full ">
+                  <a 
+                    href="" 
+                    class="text-gray-600 opacity-80 active:opacity-100 transition-all underline" 
+                    @click.prevent="editMode = !editMode">
+                      batal
+                  </a>
+                </div>
             </div>
           </div>
 
@@ -318,7 +326,7 @@ export default defineComponent({
     })
 
     const tglLahirEditMode = computed(() => {
-      const tglLahir = (dataNasabah.value.tgl_lahir != "00-00-000" && dataNasabah.value.tgl_lahir != undefined) ? dataNasabah.value.tgl_lahir.split('-') : "";
+      const tglLahir = (dataNasabah.value.tgl_lahir != "" && dataNasabah.value.tgl_lahir != undefined) ? dataNasabah.value.tgl_lahir.split('-') : "";
       const newTgl   = (tglLahir.length != 0) ? `${tglLahir[2]}-${tglLahir[1]}-${tglLahir[0]}` : ""
       return newTgl;
     })
